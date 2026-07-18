@@ -1,0 +1,40 @@
+documents:
+  - id: real-world-bug-hunting-2019
+    path: data/raw/books/bug-bounty/real-world-bug-hunting-2019.pdf
+    title: Real-World Bug Hunting
+    author: Peter Yaworski
+    publication_year: 2019
+    document_type: case_study_book
+    domain: web_bug_bounty
+    chunk_profile: case_study
+    freshness_warning: false
+
+  - id: penetration-testing-hands-on-2014
+    path: data/raw/books/general-pentest/penetration-testing-hands-on-2014.pdf
+    title: Penetration Testing - A Hands-On Introduction to Hacking
+    author: Georgia Weidman
+    publication_year: 2014
+    document_type: training_book
+    domain: general_pentest
+    chunk_profile: technical_book
+    freshness_warning: true
+
+  - id: red-team-field-manual-v2-2022
+    path: data/raw/books/reference-manuals/red-team-field-manual-v2-2022.pdf
+    title: Red Team Field Manual v2
+    author: Ben Clark and Nick Downer
+    publication_year: 2022
+    document_type: command_reference
+    domain: red_team_reference
+    chunk_profile: command_reference
+    freshness_warning: true
+
+  - id: modern-web-penetration-testing-2016
+    path: data/raw/books/web-security/modern-web-penetration-testing-2016.pdf
+    title: Mastering Modern Web Penetration Testing
+    author: Prakhar Prasad
+    publication_year: 2016
+    document_type: technical_book
+    domain: web_security
+    chunk_profile: technical_book
+    freshness_warning: true
