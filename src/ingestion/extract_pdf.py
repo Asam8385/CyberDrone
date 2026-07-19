@@ -23,6 +23,19 @@ DEFAULT_MANIFEST_PATH = (
 
 EXTRACTED_ROOT = PROJECT_ROOT / "data" / "extracted"
 
+
+
+REQUIRED_DOCUMENT_FIELDS = {
+    "id",
+    "path",
+    "title",
+    "publication_year",
+    "document_type",
+    "domain",
+    "chunk_profile",
+}
+
+
 COMMAND_PREFIXES = (
     # Shell prompts
     "$ ",
@@ -244,3 +257,137 @@ def calculate_sha256(path : Path) -> str :
    preventing you from uploading duplicate chunks into 
    your AI vector database and wasting money
     """
+   
+   digest = hashlib.sha256()
+
+   with path.open('rb') as file:
+      for block in iter(lambda: file.read(1024 * 1024), b""): # in here file.read() automatically move the pointer , only iter call function until the sentinental value reach
+         digest.update(block)
+   
+   return digest.hexdigest()
+
+
+def clean_text_value(text: str) -> str:
+   """
+    Perform only safe normalization.
+
+    Do not join hyphenated lines or collapse all whitespace here.
+    Those operations can damage commands and HTTP requests.
+    """
+   return (
+        text.replace("\x00", "")
+        .replace("\r\n", "\n")
+        .replace("\r", "\n")
+    )
+
+
+def bbox_to_list(value: Any) -> list[float]:
+    """
+    Safely normalizes and rounds bounding box coordinates from a PDF parser.
+
+    Why this is used:
+    -----------------
+    PDF parsing engines frequently extract raw coordinate text in messy, non-uniform 
+    formats (e.g., highly precise strings like ["45.1234567", "102.9876543"]). This 
+    function is implemented to intercept that raw layout data and transform it into 
+    a standardized, database-ready format before storage.
+
+    Benefits:
+    ---------
+    1. Pipeline Resilience: Acts as a safety gate. By catching 'TypeError' and 
+       'ValueError' internally, it prevents corrupt text layout records from 
+       crashing entire multi-hour document extraction loops.
+    2. Database Memory Savings: Truncating long float fractions down to 3 decimal 
+       places significantly cuts down on structural data storage overhead across 
+       millions of document token chunks.
+    3. UI Layout Consistency: Guarantees that downstream rendering engines (like 
+       frontend PDF highlighting viewers) receive a predictable list of float primitives, 
+       eliminating runtime casting operations.
+
+    Args:
+        value (Any): Raw bounding box coordinates from the PDF engine. Expected 
+            to be an iterable sequence of four elements: [x_min, y_min, x_max, y_max].
+
+    Returns:
+        list[float]: A clean list of floats rounded to 3 decimal places. Returns 
+            an empty list `[]` if input data is falsy, missing, or unparseable.
+    """
+
+    if not value:
+       return []
+    
+    try:
+       return [round(float(item) , 3) for item in value]
+    except (TypeError , ValueError):
+       return []
+    
+
+def calculate_area(bbox: Any) -> float:
+   """
+   This function calculates the mathematical area 
+   (the total physical space covered) of a bounding box on a 
+   PDF page.
+
+   It acts as a utility to measure how large a specific 
+   paragraph, code block, or image container is.
+   """
+   try:
+      return max(0.0 , pymupdf.Rect(bbox).get_area())
+   except (TypeError , ValueError):
+      return 0.0
+
+
+def load_manifest(path : Path) -> list[dict[str, Any]]:
+   if not path.exists():
+      raise FileNotFoundError(f"Manifest not found: {path}")
+   
+   with path.open("r" , encoding="utf-8") as file:
+      manifest = yaml.safe_load(file) or {}
+
+   documents = manifest.get("documents")
+
+   if not isinstance(documents, list) or not documents:
+      raise ValueError(
+         "The manifest must contain a non-empty 'documents' list."
+      )
+   
+   seen_ids : set[str] = set()
+
+   for index , document in enumerate(documents):
+      if not isinstance(document , dict):
+         raise(
+            f"Document entry {index} must be a YAML mapping."
+         )
+      
+      missing = REQUIRED_DOCUMENT_FIELDS - document.keys()
+
+
+      if missing:
+         raise ValueError(
+                   f"Document entry {index} is missing: "
+                   f"{', '.join(sorted(missing))}"
+               )
+
+      document_id = str(document["id"])
+
+      if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", document_id):
+            raise ValueError(
+                f"Invalid document ID '{document_id}'. "
+                "Use lowercase letters, numbers and hyphens."
+            )
+      
+      if document_id in seen_ids:
+            raise ValueError(
+                f"Duplicate document ID: {document_id}"
+            )
+      
+      seen_ids.add(document_id)
+
+   return documents
+
+
+
+
+
+
+
