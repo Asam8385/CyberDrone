@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "document_id": "modern-web-penetration-testing-2016",
+  "detection_mode": "toc",
+  "body_font_size": 10.5,
+  "heading_event_count": 241,
+  "section_count": 241,
+  "indexable_section_count": 172,
+  "non_indexable_section_count": 69,
+  "sections_with_code_count": 53,
+  "short_section_count": 61,
+  "fallback_anchor_count": 214,
+  "low_confidence_anchor_count": 214,
+  "warnings": []
+}

@@ -14,7 +14,7 @@ import yaml
 
 SCHEMA_VERSION = "1.0"
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 DEFAULT_MANIFEST_PATH = (
     PROJECT_ROOT

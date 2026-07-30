@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "document_id": "real-world-bug-hunting-2019",
+  "detection_mode": "toc",
+  "body_font_size": 10.0,
+  "heading_event_count": 264,
+  "section_count": 264,
+  "indexable_section_count": 258,
+  "non_indexable_section_count": 6,
+  "sections_with_code_count": 27,
+  "short_section_count": 1,
+  "fallback_anchor_count": 4,
+  "low_confidence_anchor_count": 4,
+  "warnings": []
+}

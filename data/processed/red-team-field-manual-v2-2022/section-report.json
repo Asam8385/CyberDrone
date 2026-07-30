@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "document_id": "red-team-field-manual-v2-2022",
+  "detection_mode": "toc",
+  "body_font_size": 15.0,
+  "heading_event_count": 242,
+  "section_count": 242,
+  "indexable_section_count": 156,
+  "non_indexable_section_count": 86,
+  "sections_with_code_count": 82,
+  "short_section_count": 85,
+  "fallback_anchor_count": 208,
+  "low_confidence_anchor_count": 208,
+  "warnings": [
+    "Could not resolve TOC entry 'Operating System Information' on page 30.",
+    "Could not resolve TOC entry 'Reserved Private Ranges' on page 124.",
+    "Could not resolve TOC entry 'Subnetting' on page 124.",
+    "Could not resolve TOC entry 'DNSRecon & NMap Reverse DNS' on page 130.",
+    "Could not resolve TOC entry 'John The Ripper' on page 162.",
+    "Could not resolve TOC entry 'Send HTTP Message' on page 181.",
+    "Could not resolve TOC entry 'Exfil Command Output on a Linux Machine Over ICMP' on page 184.",
+    "Could not resolve TOC entry 'FPipe Tunnel' on page 189.",
+    "Could not resolve TOC entry 'Socat Tunnel' on page 189.",
+    "Could not resolve TOC entry 'SSL Encapsulated Netcat TunneL (STunnel)' on page 189."
+  ]
+}

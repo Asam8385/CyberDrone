@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "document_id": "penetration-testing-hands-on-2014",
+  "detection_mode": "font",
+  "body_font_size": 10.0,
+  "heading_event_count": 520,
+  "section_count": 520,
+  "indexable_section_count": 493,
+  "non_indexable_section_count": 27,
+  "sections_with_code_count": 108,
+  "short_section_count": 26,
+  "fallback_anchor_count": 0,
+  "low_confidence_anchor_count": 0,
+  "warnings": []
+}
