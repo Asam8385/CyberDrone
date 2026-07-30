@@ -1,0 +1,1689 @@
+[
+  {
+    "toc_id": "toc-0001",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Cover",
+    "page_number": 1
+  },
+  {
+    "toc_id": "toc-0002",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Copyright",
+    "page_number": 3
+  },
+  {
+    "toc_id": "toc-0003",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Credits",
+    "page_number": 4
+  },
+  {
+    "toc_id": "toc-0004",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "About the Author",
+    "page_number": 5
+  },
+  {
+    "toc_id": "toc-0005",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "About the Reviewer",
+    "page_number": 6
+  },
+  {
+    "toc_id": "toc-0006",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "www.PacktPub.com",
+    "page_number": 7
+  },
+  {
+    "toc_id": "toc-0007",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Table of Contents",
+    "page_number": 8
+  },
+  {
+    "toc_id": "toc-0008",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Preface",
+    "page_number": 16
+  },
+  {
+    "toc_id": "toc-0009",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 1: Common Security Protocols",
+    "page_number": 24
+  },
+  {
+    "toc_id": "toc-0010",
+    "parent_toc_id": "toc-0009",
+    "level": 2,
+    "title": "SOP",
+    "page_number": 24
+  },
+  {
+    "toc_id": "toc-0011",
+    "parent_toc_id": "toc-0010",
+    "level": 3,
+    "title": "Demonstration of the same-origin policy in Google Chrome",
+    "page_number": 25
+  },
+  {
+    "toc_id": "toc-0012",
+    "parent_toc_id": "toc-0010",
+    "level": 3,
+    "title": "Switching origins",
+    "page_number": 26
+  },
+  {
+    "toc_id": "toc-0013",
+    "parent_toc_id": "toc-0010",
+    "level": 3,
+    "title": "Quirks with Internet Explorer",
+    "page_number": 27
+  },
+  {
+    "toc_id": "toc-0014",
+    "parent_toc_id": "toc-0010",
+    "level": 3,
+    "title": "Cross-domain messaging",
+    "page_number": 27
+  },
+  {
+    "toc_id": "toc-0015",
+    "parent_toc_id": "toc-0010",
+    "level": 3,
+    "title": "AJAX and the same-origin policy",
+    "page_number": 28
+  },
+  {
+    "toc_id": "toc-0016",
+    "parent_toc_id": "toc-0009",
+    "level": 2,
+    "title": "CORS",
+    "page_number": 29
+  },
+  {
+    "toc_id": "toc-0017",
+    "parent_toc_id": "toc-0016",
+    "level": 3,
+    "title": "CORS headers",
+    "page_number": 30
+  },
+  {
+    "toc_id": "toc-0018",
+    "parent_toc_id": "toc-0016",
+    "level": 3,
+    "title": "Pre-flight request",
+    "page_number": 30
+  },
+  {
+    "toc_id": "toc-0019",
+    "parent_toc_id": "toc-0016",
+    "level": 3,
+    "title": "Simple request",
+    "page_number": 31
+  },
+  {
+    "toc_id": "toc-0020",
+    "parent_toc_id": "toc-0009",
+    "level": 2,
+    "title": "URL encoding – percent encoding",
+    "page_number": 31
+  },
+  {
+    "toc_id": "toc-0021",
+    "parent_toc_id": "toc-0020",
+    "level": 3,
+    "title": "Unrestricted characters",
+    "page_number": 32
+  },
+  {
+    "toc_id": "toc-0022",
+    "parent_toc_id": "toc-0020",
+    "level": 3,
+    "title": "Restricted characters",
+    "page_number": 32
+  },
+  {
+    "toc_id": "toc-0023",
+    "parent_toc_id": "toc-0020",
+    "level": 3,
+    "title": "Encoding table",
+    "page_number": 33
+  },
+  {
+    "toc_id": "toc-0024",
+    "parent_toc_id": "toc-0020",
+    "level": 3,
+    "title": "Encoding unrestricted characters",
+    "page_number": 34
+  },
+  {
+    "toc_id": "toc-0025",
+    "parent_toc_id": "toc-0009",
+    "level": 2,
+    "title": "Double encoding",
+    "page_number": 34
+  },
+  {
+    "toc_id": "toc-0026",
+    "parent_toc_id": "toc-0025",
+    "level": 3,
+    "title": "Introducing double encoding",
+    "page_number": 34
+  },
+  {
+    "toc_id": "toc-0027",
+    "parent_toc_id": "toc-0025",
+    "level": 3,
+    "title": "IIS 5.0 directory traversal code execution – CVE-2001-0333",
+    "page_number": 35
+  },
+  {
+    "toc_id": "toc-0028",
+    "parent_toc_id": "toc-0025",
+    "level": 3,
+    "title": "Using double encoding to evade XSS filters",
+    "page_number": 36
+  },
+  {
+    "toc_id": "toc-0029",
+    "parent_toc_id": "toc-0009",
+    "level": 2,
+    "title": "Base64 encoding",
+    "page_number": 37
+  },
+  {
+    "toc_id": "toc-0030",
+    "parent_toc_id": "toc-0029",
+    "level": 3,
+    "title": "Character set of Base64 encoding",
+    "page_number": 37
+  },
+  {
+    "toc_id": "toc-0031",
+    "parent_toc_id": "toc-0029",
+    "level": 3,
+    "title": "The encoding process",
+    "page_number": 38
+  },
+  {
+    "toc_id": "toc-0032",
+    "parent_toc_id": "toc-0029",
+    "level": 3,
+    "title": "Padding in Base64",
+    "page_number": 39
+  },
+  {
+    "toc_id": "toc-0033",
+    "parent_toc_id": "toc-0009",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 40
+  },
+  {
+    "toc_id": "toc-0034",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 2: Information Gathering",
+    "page_number": 42
+  },
+  {
+    "toc_id": "toc-0035",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Information gathering techniques",
+    "page_number": 42
+  },
+  {
+    "toc_id": "toc-0036",
+    "parent_toc_id": "toc-0035",
+    "level": 3,
+    "title": "Active techniques",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0037",
+    "parent_toc_id": "toc-0035",
+    "level": 3,
+    "title": "Passive techniques",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0038",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Enumerating Domains, Files, and Resources",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0039",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Fierce",
+    "page_number": 44
+  },
+  {
+    "toc_id": "toc-0040",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "theHarvester",
+    "page_number": 49
+  },
+  {
+    "toc_id": "toc-0041",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "SubBrute",
+    "page_number": 50
+  },
+  {
+    "toc_id": "toc-0042",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "CeWL",
+    "page_number": 51
+  },
+  {
+    "toc_id": "toc-0043",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "DirBuster",
+    "page_number": 53
+  },
+  {
+    "toc_id": "toc-0044",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "WhatWeb",
+    "page_number": 55
+  },
+  {
+    "toc_id": "toc-0045",
+    "parent_toc_id": "toc-0044",
+    "level": 3,
+    "title": "Maltego",
+    "page_number": 55
+  },
+  {
+    "toc_id": "toc-0046",
+    "parent_toc_id": "toc-0044",
+    "level": 3,
+    "title": "Wolfram Alpha",
+    "page_number": 59
+  },
+  {
+    "toc_id": "toc-0047",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Shodan",
+    "page_number": 60
+  },
+  {
+    "toc_id": "toc-0048",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "DNSdumpster",
+    "page_number": 64
+  },
+  {
+    "toc_id": "toc-0049",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Reverse IP Lookup – YouGetSignal",
+    "page_number": 65
+  },
+  {
+    "toc_id": "toc-0050",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Pentest-Tools",
+    "page_number": 66
+  },
+  {
+    "toc_id": "toc-0051",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Google Advanced Search",
+    "page_number": 66
+  },
+  {
+    "toc_id": "toc-0052",
+    "parent_toc_id": "toc-0034",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 72
+  },
+  {
+    "toc_id": "toc-0053",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 3: Cross-Site Scripting",
+    "page_number": 74
+  },
+  {
+    "toc_id": "toc-0054",
+    "parent_toc_id": "toc-0053",
+    "level": 2,
+    "title": "Reflected XSS",
+    "page_number": 75
+  },
+  {
+    "toc_id": "toc-0055",
+    "parent_toc_id": "toc-0054",
+    "level": 3,
+    "title": "Demonstrating reflected XSS vulnerability",
+    "page_number": 75
+  },
+  {
+    "toc_id": "toc-0056",
+    "parent_toc_id": "toc-0054",
+    "level": 3,
+    "title": "Reflected XSS – case study 1",
+    "page_number": 76
+  },
+  {
+    "toc_id": "toc-0057",
+    "parent_toc_id": "toc-0054",
+    "level": 3,
+    "title": "Reflected XSS – case study 2",
+    "page_number": 78
+  },
+  {
+    "toc_id": "toc-0058",
+    "parent_toc_id": "toc-0053",
+    "level": 2,
+    "title": "Stored XSS",
+    "page_number": 81
+  },
+  {
+    "toc_id": "toc-0059",
+    "parent_toc_id": "toc-0058",
+    "level": 3,
+    "title": "Demonstrating stored XSS",
+    "page_number": 81
+  },
+  {
+    "toc_id": "toc-0060",
+    "parent_toc_id": "toc-0058",
+    "level": 3,
+    "title": "Stored XSS through Markdown",
+    "page_number": 83
+  },
+  {
+    "toc_id": "toc-0061",
+    "parent_toc_id": "toc-0058",
+    "level": 3,
+    "title": "Stored XSS through APIs",
+    "page_number": 84
+  },
+  {
+    "toc_id": "toc-0062",
+    "parent_toc_id": "toc-0058",
+    "level": 3,
+    "title": "Stored XSS through spoofed IP addresses",
+    "page_number": 87
+  },
+  {
+    "toc_id": "toc-0063",
+    "parent_toc_id": "toc-0053",
+    "level": 2,
+    "title": "Flash-based XSS – ExternalInterface.call()",
+    "page_number": 90
+  },
+  {
+    "toc_id": "toc-0064",
+    "parent_toc_id": "toc-0053",
+    "level": 2,
+    "title": "HttpOnly and secure cookie flags",
+    "page_number": 93
+  },
+  {
+    "toc_id": "toc-0065",
+    "parent_toc_id": "toc-0053",
+    "level": 2,
+    "title": "DOM-based XSS",
+    "page_number": 94
+  },
+  {
+    "toc_id": "toc-0066",
+    "parent_toc_id": "toc-0053",
+    "level": 2,
+    "title": "XSS exploitation – The BeEF",
+    "page_number": 97
+  },
+  {
+    "toc_id": "toc-0067",
+    "parent_toc_id": "toc-0066",
+    "level": 3,
+    "title": "Setting Up BeEF",
+    "page_number": 97
+  },
+  {
+    "toc_id": "toc-0068",
+    "parent_toc_id": "toc-0066",
+    "level": 3,
+    "title": "Demonstration of the BeEF hook and its components",
+    "page_number": 99
+  },
+  {
+    "toc_id": "toc-0069",
+    "parent_toc_id": "toc-0068",
+    "level": 4,
+    "title": "Logs",
+    "page_number": 101
+  },
+  {
+    "toc_id": "toc-0070",
+    "parent_toc_id": "toc-0068",
+    "level": 4,
+    "title": "Commands",
+    "page_number": 101
+  },
+  {
+    "toc_id": "toc-0071",
+    "parent_toc_id": "toc-0068",
+    "level": 4,
+    "title": "Rider",
+    "page_number": 103
+  },
+  {
+    "toc_id": "toc-0072",
+    "parent_toc_id": "toc-0068",
+    "level": 4,
+    "title": "Xssrays",
+    "page_number": 103
+  },
+  {
+    "toc_id": "toc-0073",
+    "parent_toc_id": "toc-0068",
+    "level": 4,
+    "title": "IPec",
+    "page_number": 103
+  },
+  {
+    "toc_id": "toc-0074",
+    "parent_toc_id": "toc-0068",
+    "level": 4,
+    "title": "Network",
+    "page_number": 104
+  },
+  {
+    "toc_id": "toc-0075",
+    "parent_toc_id": "toc-0053",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 104
+  },
+  {
+    "toc_id": "toc-0076",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 4: Cross-Site Request Forgery",
+    "page_number": 106
+  },
+  {
+    "toc_id": "toc-0077",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "Introducing CSRF",
+    "page_number": 107
+  },
+  {
+    "toc_id": "toc-0078",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "Exploiting POST-request based CSRF",
+    "page_number": 109
+  },
+  {
+    "toc_id": "toc-0079",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "How developers prevent CSRF?",
+    "page_number": 109
+  },
+  {
+    "toc_id": "toc-0080",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "PayPal's CSRF vulnerability to change phone numbers",
+    "page_number": 110
+  },
+  {
+    "toc_id": "toc-0081",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "Exploiting CSRF in JSON requests",
+    "page_number": 113
+  },
+  {
+    "toc_id": "toc-0082",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "Using XSS to steal anti-CSRF tokens",
+    "page_number": 115
+  },
+  {
+    "toc_id": "toc-0083",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "Exploring pseudo anti-CSRF tokens",
+    "page_number": 116
+  },
+  {
+    "toc_id": "toc-0084",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "Flash comes to the rescue",
+    "page_number": 117
+  },
+  {
+    "toc_id": "toc-0085",
+    "parent_toc_id": "toc-0084",
+    "level": 3,
+    "title": "Rosetta Flash",
+    "page_number": 120
+  },
+  {
+    "toc_id": "toc-0086",
+    "parent_toc_id": "toc-0084",
+    "level": 3,
+    "title": "Defeating XMLHTTPRequest-based CSRF protection",
+    "page_number": 121
+  },
+  {
+    "toc_id": "toc-0087",
+    "parent_toc_id": "toc-0076",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 122
+  },
+  {
+    "toc_id": "toc-0088",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 5: Exploiting SQL Injection",
+    "page_number": 124
+  },
+  {
+    "toc_id": "toc-0089",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Installation of SQLMap under Kali Linux",
+    "page_number": 125
+  },
+  {
+    "toc_id": "toc-0090",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Introduction to SQLMap",
+    "page_number": 126
+  },
+  {
+    "toc_id": "toc-0091",
+    "parent_toc_id": "toc-0090",
+    "level": 3,
+    "title": "Injection techniques",
+    "page_number": 129
+  },
+  {
+    "toc_id": "toc-0092",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Dumping the data – in an error-based scenario",
+    "page_number": 130
+  },
+  {
+    "toc_id": "toc-0093",
+    "parent_toc_id": "toc-0092",
+    "level": 3,
+    "title": "Interacting with the wizard",
+    "page_number": 133
+  },
+  {
+    "toc_id": "toc-0094",
+    "parent_toc_id": "toc-0092",
+    "level": 3,
+    "title": "Dump everything!",
+    "page_number": 135
+  },
+  {
+    "toc_id": "toc-0095",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "SQLMap and URL rewriting",
+    "page_number": 135
+  },
+  {
+    "toc_id": "toc-0096",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Speeding up the process!",
+    "page_number": 136
+  },
+  {
+    "toc_id": "toc-0097",
+    "parent_toc_id": "toc-0096",
+    "level": 3,
+    "title": "Multi-threading",
+    "page_number": 136
+  },
+  {
+    "toc_id": "toc-0098",
+    "parent_toc_id": "toc-0096",
+    "level": 3,
+    "title": "NULL connection",
+    "page_number": 137
+  },
+  {
+    "toc_id": "toc-0099",
+    "parent_toc_id": "toc-0096",
+    "level": 3,
+    "title": "HTTP persistent connections",
+    "page_number": 137
+  },
+  {
+    "toc_id": "toc-0100",
+    "parent_toc_id": "toc-0096",
+    "level": 3,
+    "title": "Output prediction",
+    "page_number": 137
+  },
+  {
+    "toc_id": "toc-0101",
+    "parent_toc_id": "toc-0096",
+    "level": 3,
+    "title": "Basic optimization flags",
+    "page_number": 138
+  },
+  {
+    "toc_id": "toc-0102",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Dumping the data – in blind and \ntime-based scenarios",
+    "page_number": 138
+  },
+  {
+    "toc_id": "toc-0103",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Reading and writing files",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0104",
+    "parent_toc_id": "toc-0103",
+    "level": 3,
+    "title": "Checking privileges",
+    "page_number": 141
+  },
+  {
+    "toc_id": "toc-0105",
+    "parent_toc_id": "toc-0103",
+    "level": 3,
+    "title": "Reading files",
+    "page_number": 141
+  },
+  {
+    "toc_id": "toc-0106",
+    "parent_toc_id": "toc-0103",
+    "level": 3,
+    "title": "Writing files",
+    "page_number": 142
+  },
+  {
+    "toc_id": "toc-0107",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Handling injections in a POST request",
+    "page_number": 145
+  },
+  {
+    "toc_id": "toc-0108",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "SQL injection inside a login-based portal",
+    "page_number": 148
+  },
+  {
+    "toc_id": "toc-0109",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "SQL shell",
+    "page_number": 148
+  },
+  {
+    "toc_id": "toc-0110",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Command shell",
+    "page_number": 150
+  },
+  {
+    "toc_id": "toc-0111",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Evasion – tamper scripts",
+    "page_number": 151
+  },
+  {
+    "toc_id": "toc-0112",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Configuring with proxies",
+    "page_number": 155
+  },
+  {
+    "toc_id": "toc-0113",
+    "parent_toc_id": "toc-0088",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 156
+  },
+  {
+    "toc_id": "toc-0114",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 6: File Upload Vulnerabilities",
+    "page_number": 158
+  },
+  {
+    "toc_id": "toc-0115",
+    "parent_toc_id": "toc-0114",
+    "level": 2,
+    "title": "Introducing file upload vulnerability",
+    "page_number": 159
+  },
+  {
+    "toc_id": "toc-0116",
+    "parent_toc_id": "toc-0114",
+    "level": 2,
+    "title": "Remote code execution",
+    "page_number": 160
+  },
+  {
+    "toc_id": "toc-0117",
+    "parent_toc_id": "toc-0116",
+    "level": 3,
+    "title": "Multi-functional web shells",
+    "page_number": 162
+  },
+  {
+    "toc_id": "toc-0118",
+    "parent_toc_id": "toc-0116",
+    "level": 3,
+    "title": "Netcat accessible reverse shell",
+    "page_number": 165
+  },
+  {
+    "toc_id": "toc-0119",
+    "parent_toc_id": "toc-0114",
+    "level": 2,
+    "title": "The return of XSS",
+    "page_number": 166
+  },
+  {
+    "toc_id": "toc-0120",
+    "parent_toc_id": "toc-0119",
+    "level": 3,
+    "title": "SWF – the flash",
+    "page_number": 166
+  },
+  {
+    "toc_id": "toc-0121",
+    "parent_toc_id": "toc-0119",
+    "level": 3,
+    "title": "SVG images",
+    "page_number": 168
+  },
+  {
+    "toc_id": "toc-0122",
+    "parent_toc_id": "toc-0114",
+    "level": 2,
+    "title": "Denial of Service",
+    "page_number": 169
+  },
+  {
+    "toc_id": "toc-0123",
+    "parent_toc_id": "toc-0122",
+    "level": 3,
+    "title": "Malicious JPEG file – pixel flood",
+    "page_number": 169
+  },
+  {
+    "toc_id": "toc-0124",
+    "parent_toc_id": "toc-0122",
+    "level": 3,
+    "title": "Malicious GIF file – frame flood",
+    "page_number": 169
+  },
+  {
+    "toc_id": "toc-0125",
+    "parent_toc_id": "toc-0122",
+    "level": 3,
+    "title": "Malicious zTXT field of PNG files",
+    "page_number": 169
+  },
+  {
+    "toc_id": "toc-0126",
+    "parent_toc_id": "toc-0114",
+    "level": 2,
+    "title": "Bypassing upload protections",
+    "page_number": 170
+  },
+  {
+    "toc_id": "toc-0127",
+    "parent_toc_id": "toc-0126",
+    "level": 3,
+    "title": "Case-sensitive blacklist extension check bypass",
+    "page_number": 170
+  },
+  {
+    "toc_id": "toc-0128",
+    "parent_toc_id": "toc-0114",
+    "level": 2,
+    "title": "MIME content type verification bypass",
+    "page_number": 172
+  },
+  {
+    "toc_id": "toc-0129",
+    "parent_toc_id": "toc-0128",
+    "level": 3,
+    "title": "Apache's htaccess trick to execute benign files as PHP",
+    "page_number": 174
+  },
+  {
+    "toc_id": "toc-0130",
+    "parent_toc_id": "toc-0129",
+    "level": 4,
+    "title": "SetHandler method",
+    "page_number": 175
+  },
+  {
+    "toc_id": "toc-0131",
+    "parent_toc_id": "toc-0129",
+    "level": 4,
+    "title": "The AddType method",
+    "page_number": 175
+  },
+  {
+    "toc_id": "toc-0132",
+    "parent_toc_id": "toc-0128",
+    "level": 3,
+    "title": "Bypassing image content verification",
+    "page_number": 176
+  },
+  {
+    "toc_id": "toc-0133",
+    "parent_toc_id": "toc-0114",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 179
+  },
+  {
+    "toc_id": "toc-0134",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 7: Metasploit and Web",
+    "page_number": 180
+  },
+  {
+    "toc_id": "toc-0135",
+    "parent_toc_id": "toc-0134",
+    "level": 2,
+    "title": "Discovering Metasploit modules",
+    "page_number": 181
+  },
+  {
+    "toc_id": "toc-0136",
+    "parent_toc_id": "toc-0134",
+    "level": 2,
+    "title": "Interacting with Msfconsole",
+    "page_number": 183
+  },
+  {
+    "toc_id": "toc-0137",
+    "parent_toc_id": "toc-0134",
+    "level": 2,
+    "title": "Using Auxiliary Modules related to Web Applications",
+    "page_number": 185
+  },
+  {
+    "toc_id": "toc-0138",
+    "parent_toc_id": "toc-0134",
+    "level": 2,
+    "title": "Understanding WMAP – Metasploit's Web Application Security Scanner",
+    "page_number": 190
+  },
+  {
+    "toc_id": "toc-0139",
+    "parent_toc_id": "toc-0134",
+    "level": 2,
+    "title": "Generating Web backdoor payload with Metasploit",
+    "page_number": 194
+  },
+  {
+    "toc_id": "toc-0140",
+    "parent_toc_id": "toc-0134",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 201
+  },
+  {
+    "toc_id": "toc-0141",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 8: XML Attacks",
+    "page_number": 202
+  },
+  {
+    "toc_id": "toc-0142",
+    "parent_toc_id": "toc-0141",
+    "level": 2,
+    "title": "XML 101 – the basics",
+    "page_number": 203
+  },
+  {
+    "toc_id": "toc-0143",
+    "parent_toc_id": "toc-0142",
+    "level": 3,
+    "title": "XML elements",
+    "page_number": 203
+  },
+  {
+    "toc_id": "toc-0144",
+    "parent_toc_id": "toc-0142",
+    "level": 3,
+    "title": "XML Attributes",
+    "page_number": 204
+  },
+  {
+    "toc_id": "toc-0145",
+    "parent_toc_id": "toc-0142",
+    "level": 3,
+    "title": "XML DTD and entities",
+    "page_number": 204
+  },
+  {
+    "toc_id": "toc-0146",
+    "parent_toc_id": "toc-0145",
+    "level": 4,
+    "title": "Internal DTD",
+    "page_number": 204
+  },
+  {
+    "toc_id": "toc-0147",
+    "parent_toc_id": "toc-0145",
+    "level": 4,
+    "title": "External DTD",
+    "page_number": 205
+  },
+  {
+    "toc_id": "toc-0148",
+    "parent_toc_id": "toc-0142",
+    "level": 3,
+    "title": "Entities",
+    "page_number": 206
+  },
+  {
+    "toc_id": "toc-0149",
+    "parent_toc_id": "toc-0148",
+    "level": 4,
+    "title": "Entity declaration",
+    "page_number": 206
+  },
+  {
+    "toc_id": "toc-0150",
+    "parent_toc_id": "toc-0141",
+    "level": 2,
+    "title": "XXE attack",
+    "page_number": 207
+  },
+  {
+    "toc_id": "toc-0151",
+    "parent_toc_id": "toc-0150",
+    "level": 3,
+    "title": "Reading files",
+    "page_number": 209
+  },
+  {
+    "toc_id": "toc-0152",
+    "parent_toc_id": "toc-0151",
+    "level": 4,
+    "title": "PHP Base64 conversion URI as an alternative",
+    "page_number": 210
+  },
+  {
+    "toc_id": "toc-0153",
+    "parent_toc_id": "toc-0150",
+    "level": 3,
+    "title": "SSRF through XXE",
+    "page_number": 211
+  },
+  {
+    "toc_id": "toc-0154",
+    "parent_toc_id": "toc-0150",
+    "level": 3,
+    "title": "Remote code execution",
+    "page_number": 213
+  },
+  {
+    "toc_id": "toc-0155",
+    "parent_toc_id": "toc-0150",
+    "level": 3,
+    "title": "Denial of Service through XXE",
+    "page_number": 214
+  },
+  {
+    "toc_id": "toc-0156",
+    "parent_toc_id": "toc-0141",
+    "level": 2,
+    "title": "XML quadratic blowup",
+    "page_number": 215
+  },
+  {
+    "toc_id": "toc-0157",
+    "parent_toc_id": "toc-0156",
+    "level": 3,
+    "title": "XML billion laughs",
+    "page_number": 216
+  },
+  {
+    "toc_id": "toc-0158",
+    "parent_toc_id": "toc-0156",
+    "level": 3,
+    "title": "The quadratic blowup",
+    "page_number": 217
+  },
+  {
+    "toc_id": "toc-0159",
+    "parent_toc_id": "toc-0158",
+    "level": 4,
+    "title": "WordPress 3.9 quadratic blowup vulnerability – Case Study",
+    "page_number": 217
+  },
+  {
+    "toc_id": "toc-0160",
+    "parent_toc_id": "toc-0141",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 218
+  },
+  {
+    "toc_id": "toc-0161",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 9: Emerging Attack Vectors",
+    "page_number": 220
+  },
+  {
+    "toc_id": "toc-0162",
+    "parent_toc_id": "toc-0161",
+    "level": 2,
+    "title": "Server Side Request Forgery",
+    "page_number": 220
+  },
+  {
+    "toc_id": "toc-0163",
+    "parent_toc_id": "toc-0162",
+    "level": 3,
+    "title": "Demonstrating SSRF",
+    "page_number": 221
+  },
+  {
+    "toc_id": "toc-0164",
+    "parent_toc_id": "toc-0162",
+    "level": 3,
+    "title": "Protocol Handlers for SSRF URLs",
+    "page_number": 224
+  },
+  {
+    "toc_id": "toc-0165",
+    "parent_toc_id": "toc-0162",
+    "level": 3,
+    "title": "Case Study – MailChimp port scan SSRF",
+    "page_number": 226
+  },
+  {
+    "toc_id": "toc-0166",
+    "parent_toc_id": "toc-0165",
+    "level": 4,
+    "title": "Open port – with non-HTTP service",
+    "page_number": 226
+  },
+  {
+    "toc_id": "toc-0167",
+    "parent_toc_id": "toc-0165",
+    "level": 4,
+    "title": "Open port – with HTTP service",
+    "page_number": 227
+  },
+  {
+    "toc_id": "toc-0168",
+    "parent_toc_id": "toc-0165",
+    "level": 4,
+    "title": "Closed port – with HTTP service",
+    "page_number": 227
+  },
+  {
+    "toc_id": "toc-0169",
+    "parent_toc_id": "toc-0161",
+    "level": 2,
+    "title": "Insecure Direct Object Reference",
+    "page_number": 228
+  },
+  {
+    "toc_id": "toc-0170",
+    "parent_toc_id": "toc-0169",
+    "level": 3,
+    "title": "The basics of IDOR",
+    "page_number": 228
+  },
+  {
+    "toc_id": "toc-0171",
+    "parent_toc_id": "toc-0169",
+    "level": 3,
+    "title": "Case studies",
+    "page_number": 229
+  },
+  {
+    "toc_id": "toc-0172",
+    "parent_toc_id": "toc-0171",
+    "level": 4,
+    "title": "IDOR in Flipkart to delete saved shipping addresses",
+    "page_number": 230
+  },
+  {
+    "toc_id": "toc-0173",
+    "parent_toc_id": "toc-0171",
+    "level": 4,
+    "title": "IDOR in HackerOne to leak private response template data",
+    "page_number": 231
+  },
+  {
+    "toc_id": "toc-0174",
+    "parent_toc_id": "toc-0161",
+    "level": 2,
+    "title": "DOM clobbering",
+    "page_number": 234
+  },
+  {
+    "toc_id": "toc-0175",
+    "parent_toc_id": "toc-0174",
+    "level": 3,
+    "title": "Case study – breaking GitHub's Gist comment system through DOM clobbering",
+    "page_number": 236
+  },
+  {
+    "toc_id": "toc-0176",
+    "parent_toc_id": "toc-0161",
+    "level": 2,
+    "title": "Relative Path Overwrite",
+    "page_number": 237
+  },
+  {
+    "toc_id": "toc-0177",
+    "parent_toc_id": "toc-0176",
+    "level": 3,
+    "title": "Controlling CSS",
+    "page_number": 240
+  },
+  {
+    "toc_id": "toc-0178",
+    "parent_toc_id": "toc-0176",
+    "level": 3,
+    "title": "Internet Explorer",
+    "page_number": 241
+  },
+  {
+    "toc_id": "toc-0179",
+    "parent_toc_id": "toc-0161",
+    "level": 2,
+    "title": "UI redressing",
+    "page_number": 243
+  },
+  {
+    "toc_id": "toc-0180",
+    "parent_toc_id": "toc-0161",
+    "level": 2,
+    "title": "PHP Object Injection",
+    "page_number": 247
+  },
+  {
+    "toc_id": "toc-0181",
+    "parent_toc_id": "toc-0180",
+    "level": 3,
+    "title": "PHP serialization",
+    "page_number": 248
+  },
+  {
+    "toc_id": "toc-0182",
+    "parent_toc_id": "toc-0180",
+    "level": 3,
+    "title": "PHP magic functions",
+    "page_number": 249
+  },
+  {
+    "toc_id": "toc-0183",
+    "parent_toc_id": "toc-0180",
+    "level": 3,
+    "title": "Object injection",
+    "page_number": 250
+  },
+  {
+    "toc_id": "toc-0184",
+    "parent_toc_id": "toc-0161",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 252
+  },
+  {
+    "toc_id": "toc-0185",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 10: OAuth 2.0 Security",
+    "page_number": 254
+  },
+  {
+    "toc_id": "toc-0186",
+    "parent_toc_id": "toc-0185",
+    "level": 2,
+    "title": "Introducing the OAuth 2.0 model",
+    "page_number": 255
+  },
+  {
+    "toc_id": "toc-0187",
+    "parent_toc_id": "toc-0186",
+    "level": 3,
+    "title": "OAuth 2.0 roles",
+    "page_number": 255
+  },
+  {
+    "toc_id": "toc-0188",
+    "parent_toc_id": "toc-0187",
+    "level": 4,
+    "title": "Resource owner",
+    "page_number": 256
+  },
+  {
+    "toc_id": "toc-0189",
+    "parent_toc_id": "toc-0187",
+    "level": 4,
+    "title": "Client",
+    "page_number": 256
+  },
+  {
+    "toc_id": "toc-0190",
+    "parent_toc_id": "toc-0187",
+    "level": 4,
+    "title": "Resource server",
+    "page_number": 257
+  },
+  {
+    "toc_id": "toc-0191",
+    "parent_toc_id": "toc-0187",
+    "level": 4,
+    "title": "Authorization server",
+    "page_number": 257
+  },
+  {
+    "toc_id": "toc-0192",
+    "parent_toc_id": "toc-0186",
+    "level": 3,
+    "title": "The application",
+    "page_number": 257
+  },
+  {
+    "toc_id": "toc-0193",
+    "parent_toc_id": "toc-0192",
+    "level": 4,
+    "title": "Redirect URI",
+    "page_number": 258
+  },
+  {
+    "toc_id": "toc-0194",
+    "parent_toc_id": "toc-0192",
+    "level": 4,
+    "title": "Access token",
+    "page_number": 258
+  },
+  {
+    "toc_id": "toc-0195",
+    "parent_toc_id": "toc-0192",
+    "level": 4,
+    "title": "Client ID",
+    "page_number": 258
+  },
+  {
+    "toc_id": "toc-0196",
+    "parent_toc_id": "toc-0192",
+    "level": 4,
+    "title": "Client secret",
+    "page_number": 258
+  },
+  {
+    "toc_id": "toc-0197",
+    "parent_toc_id": "toc-0185",
+    "level": 2,
+    "title": "Receiving grants",
+    "page_number": 259
+  },
+  {
+    "toc_id": "toc-0198",
+    "parent_toc_id": "toc-0197",
+    "level": 3,
+    "title": "Authorization grant",
+    "page_number": 259
+  },
+  {
+    "toc_id": "toc-0199",
+    "parent_toc_id": "toc-0197",
+    "level": 3,
+    "title": "Implicit grant",
+    "page_number": 262
+  },
+  {
+    "toc_id": "toc-0200",
+    "parent_toc_id": "toc-0185",
+    "level": 2,
+    "title": "Exploiting OAuth for fun and profit",
+    "page_number": 262
+  },
+  {
+    "toc_id": "toc-0201",
+    "parent_toc_id": "toc-0200",
+    "level": 3,
+    "title": "Open redirect – the malformed URL",
+    "page_number": 263
+  },
+  {
+    "toc_id": "toc-0202",
+    "parent_toc_id": "toc-0200",
+    "level": 3,
+    "title": "Hijacking the OAuth flow – fiddling with redirect URI",
+    "page_number": 264
+  },
+  {
+    "toc_id": "toc-0203",
+    "parent_toc_id": "toc-0202",
+    "level": 4,
+    "title": "Directory traversal tricks",
+    "page_number": 264
+  },
+  {
+    "toc_id": "toc-0204",
+    "parent_toc_id": "toc-0202",
+    "level": 4,
+    "title": "Domain tricks",
+    "page_number": 265
+  },
+  {
+    "toc_id": "toc-0205",
+    "parent_toc_id": "toc-0202",
+    "level": 4,
+    "title": "Flow hijack through open redirect on client",
+    "page_number": 266
+  },
+  {
+    "toc_id": "toc-0206",
+    "parent_toc_id": "toc-0200",
+    "level": 3,
+    "title": "Force a malicious app installation",
+    "page_number": 267
+  },
+  {
+    "toc_id": "toc-0207",
+    "parent_toc_id": "toc-0185",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 268
+  },
+  {
+    "toc_id": "toc-0208",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 11: API Testing Methodology",
+    "page_number": 270
+  },
+  {
+    "toc_id": "toc-0209",
+    "parent_toc_id": "toc-0208",
+    "level": 2,
+    "title": "Understanding REST APIs",
+    "page_number": 270
+  },
+  {
+    "toc_id": "toc-0210",
+    "parent_toc_id": "toc-0209",
+    "level": 3,
+    "title": "REST API concepts",
+    "page_number": 270
+  },
+  {
+    "toc_id": "toc-0211",
+    "parent_toc_id": "toc-0210",
+    "level": 4,
+    "title": "URIs",
+    "page_number": 271
+  },
+  {
+    "toc_id": "toc-0212",
+    "parent_toc_id": "toc-0210",
+    "level": 4,
+    "title": "URI format",
+    "page_number": 271
+  },
+  {
+    "toc_id": "toc-0213",
+    "parent_toc_id": "toc-0210",
+    "level": 4,
+    "title": "Modelling of resource",
+    "page_number": 271
+  },
+  {
+    "toc_id": "toc-0214",
+    "parent_toc_id": "toc-0209",
+    "level": 3,
+    "title": "Stitching things together",
+    "page_number": 271
+  },
+  {
+    "toc_id": "toc-0215",
+    "parent_toc_id": "toc-0209",
+    "level": 3,
+    "title": "REST API and HTTP",
+    "page_number": 272
+  },
+  {
+    "toc_id": "toc-0216",
+    "parent_toc_id": "toc-0215",
+    "level": 4,
+    "title": "Request methods",
+    "page_number": 273
+  },
+  {
+    "toc_id": "toc-0217",
+    "parent_toc_id": "toc-0215",
+    "level": 4,
+    "title": "Response codes",
+    "page_number": 273
+  },
+  {
+    "toc_id": "toc-0218",
+    "parent_toc_id": "toc-0215",
+    "level": 4,
+    "title": "Headers",
+    "page_number": 274
+  },
+  {
+    "toc_id": "toc-0219",
+    "parent_toc_id": "toc-0208",
+    "level": 2,
+    "title": "Setting up the testing environment",
+    "page_number": 275
+  },
+  {
+    "toc_id": "toc-0220",
+    "parent_toc_id": "toc-0219",
+    "level": 3,
+    "title": "Analyzing the API",
+    "page_number": 275
+  },
+  {
+    "toc_id": "toc-0221",
+    "parent_toc_id": "toc-0220",
+    "level": 4,
+    "title": "Basic HTTP authentication",
+    "page_number": 275
+  },
+  {
+    "toc_id": "toc-0222",
+    "parent_toc_id": "toc-0220",
+    "level": 4,
+    "title": "Access token",
+    "page_number": 276
+  },
+  {
+    "toc_id": "toc-0223",
+    "parent_toc_id": "toc-0220",
+    "level": 4,
+    "title": "Cookies",
+    "page_number": 276
+  },
+  {
+    "toc_id": "toc-0224",
+    "parent_toc_id": "toc-0219",
+    "level": 3,
+    "title": "Tools",
+    "page_number": 277
+  },
+  {
+    "toc_id": "toc-0225",
+    "parent_toc_id": "toc-0224",
+    "level": 4,
+    "title": "Burp Suite",
+    "page_number": 277
+  },
+  {
+    "toc_id": "toc-0226",
+    "parent_toc_id": "toc-0224",
+    "level": 4,
+    "title": "REST API clients",
+    "page_number": 277
+  },
+  {
+    "toc_id": "toc-0227",
+    "parent_toc_id": "toc-0224",
+    "level": 4,
+    "title": "Custom API explorers",
+    "page_number": 278
+  },
+  {
+    "toc_id": "toc-0228",
+    "parent_toc_id": "toc-0208",
+    "level": 2,
+    "title": "Learning the API",
+    "page_number": 278
+  },
+  {
+    "toc_id": "toc-0229",
+    "parent_toc_id": "toc-0228",
+    "level": 3,
+    "title": "Developer documentation",
+    "page_number": 278
+  },
+  {
+    "toc_id": "toc-0230",
+    "parent_toc_id": "toc-0228",
+    "level": 3,
+    "title": "Understanding requests/responses",
+    "page_number": 280
+  },
+  {
+    "toc_id": "toc-0231",
+    "parent_toc_id": "toc-0228",
+    "level": 3,
+    "title": "Learning scopes",
+    "page_number": 281
+  },
+  {
+    "toc_id": "toc-0232",
+    "parent_toc_id": "toc-0228",
+    "level": 3,
+    "title": "Learning roles",
+    "page_number": 283
+  },
+  {
+    "toc_id": "toc-0233",
+    "parent_toc_id": "toc-0208",
+    "level": 2,
+    "title": "Basic methodology to test developer APIs",
+    "page_number": 284
+  },
+  {
+    "toc_id": "toc-0234",
+    "parent_toc_id": "toc-0233",
+    "level": 3,
+    "title": "Listing endpoints",
+    "page_number": 284
+  },
+  {
+    "toc_id": "toc-0235",
+    "parent_toc_id": "toc-0233",
+    "level": 3,
+    "title": "Firing different request methods",
+    "page_number": 284
+  },
+  {
+    "toc_id": "toc-0236",
+    "parent_toc_id": "toc-0233",
+    "level": 3,
+    "title": "Exploiting API bugs",
+    "page_number": 285
+  },
+  {
+    "toc_id": "toc-0237",
+    "parent_toc_id": "toc-0236",
+    "level": 4,
+    "title": "Scope based testing",
+    "page_number": 285
+  },
+  {
+    "toc_id": "toc-0238",
+    "parent_toc_id": "toc-0236",
+    "level": 4,
+    "title": "Roles based testing",
+    "page_number": 287
+  },
+  {
+    "toc_id": "toc-0239",
+    "parent_toc_id": "toc-0236",
+    "level": 4,
+    "title": "Insecure direct object reference testing",
+    "page_number": 289
+  },
+  {
+    "toc_id": "toc-0240",
+    "parent_toc_id": "toc-0208",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 290
+  },
+  {
+    "toc_id": "toc-0241",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Index",
+    "page_number": 292
+  }
+]

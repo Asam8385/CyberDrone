@@ -1,0 +1,1766 @@
+[
+  {
+    "toc_id": "toc-0001",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Using the Red Team Field Manual (RTFM)",
+    "page_number": 13
+  },
+  {
+    "toc_id": "toc-0002",
+    "parent_toc_id": "toc-0001",
+    "level": 2,
+    "title": "RTFM How-To",
+    "page_number": 14
+  },
+  {
+    "toc_id": "toc-0003",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Open Source Intelligence (OSINT)",
+    "page_number": 16
+  },
+  {
+    "toc_id": "toc-0004",
+    "parent_toc_id": "toc-0003",
+    "level": 2,
+    "title": "Network",
+    "page_number": 17
+  },
+  {
+    "toc_id": "toc-0005",
+    "parent_toc_id": "toc-0004",
+    "level": 3,
+    "title": "Network Resources",
+    "page_number": 17
+  },
+  {
+    "toc_id": "toc-0006",
+    "parent_toc_id": "toc-0004",
+    "level": 3,
+    "title": "WHOIS Resources",
+    "page_number": 17
+  },
+  {
+    "toc_id": "toc-0007",
+    "parent_toc_id": "toc-0003",
+    "level": 2,
+    "title": "OSINT Resources",
+    "page_number": 18
+  },
+  {
+    "toc_id": "toc-0008",
+    "parent_toc_id": "toc-0007",
+    "level": 3,
+    "title": "Relationship and Recon Tools",
+    "page_number": 18
+  },
+  {
+    "toc_id": "toc-0009",
+    "parent_toc_id": "toc-0007",
+    "level": 3,
+    "title": "Google Searches",
+    "page_number": 18
+  },
+  {
+    "toc_id": "toc-0010",
+    "parent_toc_id": "toc-0007",
+    "level": 3,
+    "title": "People Search",
+    "page_number": 19
+  },
+  {
+    "toc_id": "toc-0011",
+    "parent_toc_id": "toc-0007",
+    "level": 3,
+    "title": "OSINT Websites",
+    "page_number": 19
+  },
+  {
+    "toc_id": "toc-0012",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Windows",
+    "page_number": 20
+  },
+  {
+    "toc_id": "toc-0013",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Windows OS Details",
+    "page_number": 21
+  },
+  {
+    "toc_id": "toc-0014",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Windows 10 & 11 Versions",
+    "page_number": 21
+  },
+  {
+    "toc_id": "toc-0015",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Windows Server Versions",
+    "page_number": 21
+  },
+  {
+    "toc_id": "toc-0016",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Windows “NT” Versions",
+    "page_number": 23
+  },
+  {
+    "toc_id": "toc-0017",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Windows Administrative Binaries",
+    "page_number": 23
+  },
+  {
+    "toc_id": "toc-0018",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Environment Variables",
+    "page_number": 25
+  },
+  {
+    "toc_id": "toc-0019",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Windows Key Files & Locations",
+    "page_number": 26
+  },
+  {
+    "toc_id": "toc-0020",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Registry Run Keys",
+    "page_number": 28
+  },
+  {
+    "toc_id": "toc-0021",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Registry Run Keys Cont",
+    "page_number": 29
+  },
+  {
+    "toc_id": "toc-0022",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Windows System Enumeration",
+    "page_number": 30
+  },
+  {
+    "toc_id": "toc-0023",
+    "parent_toc_id": "toc-0022",
+    "level": 3,
+    "title": "Windows Situational Awareness",
+    "page_number": 30
+  },
+  {
+    "toc_id": "toc-0024",
+    "parent_toc_id": "toc-0022",
+    "level": 3,
+    "title": "Operating System Information",
+    "page_number": 30
+  },
+  {
+    "toc_id": "toc-0025",
+    "parent_toc_id": "toc-0022",
+    "level": 3,
+    "title": "Process & Service Enumeration",
+    "page_number": 32
+  },
+  {
+    "toc_id": "toc-0026",
+    "parent_toc_id": "toc-0022",
+    "level": 3,
+    "title": "Windows Account Enumeration",
+    "page_number": 32
+  },
+  {
+    "toc_id": "toc-0027",
+    "parent_toc_id": "toc-0022",
+    "level": 3,
+    "title": "Network Info & Configuration",
+    "page_number": 34
+  },
+  {
+    "toc_id": "toc-0028",
+    "parent_toc_id": "toc-0022",
+    "level": 3,
+    "title": "Registry Commands & Important Keys",
+    "page_number": 36
+  },
+  {
+    "toc_id": "toc-0029",
+    "parent_toc_id": "toc-0022",
+    "level": 3,
+    "title": "Remote System Enumeration",
+    "page_number": 38
+  },
+  {
+    "toc_id": "toc-0030",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Data Mining Windows",
+    "page_number": 40
+  },
+  {
+    "toc_id": "toc-0031",
+    "parent_toc_id": "toc-0030",
+    "level": 3,
+    "title": "File Info & Searching",
+    "page_number": 40
+  },
+  {
+    "toc_id": "toc-0032",
+    "parent_toc_id": "toc-0030",
+    "level": 3,
+    "title": "Tree Filesystem to Searchable File",
+    "page_number": 41
+  },
+  {
+    "toc_id": "toc-0033",
+    "parent_toc_id": "toc-0030",
+    "level": 3,
+    "title": "Using Volume Shadow Service (VSS)",
+    "page_number": 42
+  },
+  {
+    "toc_id": "toc-0034",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Remote Execution",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0035",
+    "parent_toc_id": "toc-0034",
+    "level": 3,
+    "title": "sc.exe Remote Execution",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0036",
+    "parent_toc_id": "toc-0034",
+    "level": 3,
+    "title": "MMC COM Object",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0037",
+    "parent_toc_id": "toc-0034",
+    "level": 3,
+    "title": "Remote Schtasks Execution",
+    "page_number": 44
+  },
+  {
+    "toc_id": "toc-0038",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Windows Active Directory",
+    "page_number": 45
+  },
+  {
+    "toc_id": "toc-0039",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Domain and User Enumeration",
+    "page_number": 47
+  },
+  {
+    "toc_id": "toc-0040",
+    "parent_toc_id": "toc-0039",
+    "level": 3,
+    "title": "Domain Enumeration with Net.exe",
+    "page_number": 47
+  },
+  {
+    "toc_id": "toc-0041",
+    "parent_toc_id": "toc-0039",
+    "level": 3,
+    "title": "Domain Enumeration with DSQuery",
+    "page_number": 49
+  },
+  {
+    "toc_id": "toc-0042",
+    "parent_toc_id": "toc-0039",
+    "level": 3,
+    "title": "Domain Enumeration with DSQuery Cont",
+    "page_number": 51
+  },
+  {
+    "toc_id": "toc-0043",
+    "parent_toc_id": "toc-0039",
+    "level": 3,
+    "title": "Finding User System in a Windows Domain",
+    "page_number": 53
+  },
+  {
+    "toc_id": "toc-0044",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Windows [Re]Configuration",
+    "page_number": 54
+  },
+  {
+    "toc_id": "toc-0045",
+    "parent_toc_id": "toc-0044",
+    "level": 3,
+    "title": "Remote Desktop Protocol (RDP) Configuration",
+    "page_number": 54
+  },
+  {
+    "toc_id": "toc-0046",
+    "parent_toc_id": "toc-0044",
+    "level": 3,
+    "title": "Misc [Re]Configuration",
+    "page_number": 56
+  },
+  {
+    "toc_id": "toc-0047",
+    "parent_toc_id": "toc-0044",
+    "level": 3,
+    "title": "Disable WIndows Defender",
+    "page_number": 57
+  },
+  {
+    "toc_id": "toc-0048",
+    "parent_toc_id": "toc-0044",
+    "level": 3,
+    "title": "Windows Event Viewer Manipulation",
+    "page_number": 58
+  },
+  {
+    "toc_id": "toc-0049",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "User Level Persistence",
+    "page_number": 59
+  },
+  {
+    "toc_id": "toc-0050",
+    "parent_toc_id": "toc-0049",
+    "level": 3,
+    "title": "Scheduled Task User Persistence",
+    "page_number": 59
+  },
+  {
+    "toc_id": "toc-0051",
+    "parent_toc_id": "toc-0049",
+    "level": 3,
+    "title": "Run Key User Persistence",
+    "page_number": 59
+  },
+  {
+    "toc_id": "toc-0052",
+    "parent_toc_id": "toc-0049",
+    "level": 3,
+    "title": "Startup Directories",
+    "page_number": 60
+  },
+  {
+    "toc_id": "toc-0053",
+    "parent_toc_id": "toc-0049",
+    "level": 3,
+    "title": "at.exe Schedule (WinXP)",
+    "page_number": 60
+  },
+  {
+    "toc_id": "toc-0054",
+    "parent_toc_id": "toc-0049",
+    "level": 3,
+    "title": "Poisoning Existing scripts",
+    "page_number": 60
+  },
+  {
+    "toc_id": "toc-0055",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "System Level Persistence",
+    "page_number": 61
+  },
+  {
+    "toc_id": "toc-0056",
+    "parent_toc_id": "toc-0055",
+    "level": 3,
+    "title": "Schtasks on Boot",
+    "page_number": 61
+  },
+  {
+    "toc_id": "toc-0057",
+    "parent_toc_id": "toc-0055",
+    "level": 3,
+    "title": "Service Creation",
+    "page_number": 61
+  },
+  {
+    "toc_id": "toc-0058",
+    "parent_toc_id": "toc-0055",
+    "level": 3,
+    "title": "Windows 10 .DLL Hijack (WPTSEXTENSIONS)",
+    "page_number": 63
+  },
+  {
+    "toc_id": "toc-0059",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Windows Scripting",
+    "page_number": 64
+  },
+  {
+    "toc_id": "toc-0060",
+    "parent_toc_id": "toc-0059",
+    "level": 3,
+    "title": "PowerShell Scripting",
+    "page_number": 64
+  },
+  {
+    "toc_id": "toc-0061",
+    "parent_toc_id": "toc-0059",
+    "level": 3,
+    "title": "Powershell Basics",
+    "page_number": 64
+  },
+  {
+    "toc_id": "toc-0062",
+    "parent_toc_id": "toc-0059",
+    "level": 3,
+    "title": "Powershell OneLiners",
+    "page_number": 65
+  },
+  {
+    "toc_id": "toc-0063",
+    "parent_toc_id": "toc-0059",
+    "level": 3,
+    "title": "Powershell OneLiners Cont",
+    "page_number": 66
+  },
+  {
+    "toc_id": "toc-0064",
+    "parent_toc_id": "toc-0059",
+    "level": 3,
+    "title": "Windows Batch Scripting",
+    "page_number": 67
+  },
+  {
+    "toc_id": "toc-0065",
+    "parent_toc_id": "toc-0059",
+    "level": 3,
+    "title": "Batch Scripts",
+    "page_number": 67
+  },
+  {
+    "toc_id": "toc-0066",
+    "parent_toc_id": "toc-0059",
+    "level": 3,
+    "title": "Batch Scripts Cont",
+    "page_number": 68
+  },
+  {
+    "toc_id": "toc-0067",
+    "parent_toc_id": "toc-0012",
+    "level": 2,
+    "title": "Post Exploitation",
+    "page_number": 69
+  },
+  {
+    "toc_id": "toc-0068",
+    "parent_toc_id": "toc-0067",
+    "level": 3,
+    "title": "Mimikatz Credential Manipulation",
+    "page_number": 69
+  },
+  {
+    "toc_id": "toc-0069",
+    "parent_toc_id": "toc-0067",
+    "level": 3,
+    "title": "Windows Privilege Escalation Checklist",
+    "page_number": 71
+  },
+  {
+    "toc_id": "toc-0070",
+    "parent_toc_id": "toc-0067",
+    "level": 3,
+    "title": "File System Redirection",
+    "page_number": 71
+  },
+  {
+    "toc_id": "toc-0071",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Mac OS",
+    "page_number": 72
+  },
+  {
+    "toc_id": "toc-0072",
+    "parent_toc_id": "toc-0071",
+    "level": 2,
+    "title": "Mac OS Details",
+    "page_number": 73
+  },
+  {
+    "toc_id": "toc-0073",
+    "parent_toc_id": "toc-0072",
+    "level": 3,
+    "title": "Mac OS Versions",
+    "page_number": 73
+  },
+  {
+    "toc_id": "toc-0074",
+    "parent_toc_id": "toc-0072",
+    "level": 3,
+    "title": "File System Structure",
+    "page_number": 74
+  },
+  {
+    "toc_id": "toc-0075",
+    "parent_toc_id": "toc-0071",
+    "level": 2,
+    "title": "Mac OS System Enumeration",
+    "page_number": 75
+  },
+  {
+    "toc_id": "toc-0076",
+    "parent_toc_id": "toc-0075",
+    "level": 3,
+    "title": "Mac OS Situational Awareness",
+    "page_number": 75
+  },
+  {
+    "toc_id": "toc-0077",
+    "parent_toc_id": "toc-0075",
+    "level": 3,
+    "title": "User Plist File Enumeration",
+    "page_number": 76
+  },
+  {
+    "toc_id": "toc-0078",
+    "parent_toc_id": "toc-0075",
+    "level": 3,
+    "title": "User enumeration & Modification",
+    "page_number": 77
+  },
+  {
+    "toc_id": "toc-0079",
+    "parent_toc_id": "toc-0075",
+    "level": 3,
+    "title": "Create user & make administrator",
+    "page_number": 77
+  },
+  {
+    "toc_id": "toc-0080",
+    "parent_toc_id": "toc-0075",
+    "level": 3,
+    "title": "Create A Group",
+    "page_number": 79
+  },
+  {
+    "toc_id": "toc-0081",
+    "parent_toc_id": "toc-0075",
+    "level": 3,
+    "title": "Group enumeration & Modification",
+    "page_number": 79
+  },
+  {
+    "toc_id": "toc-0082",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "*Nix",
+    "page_number": 80
+  },
+  {
+    "toc_id": "toc-0083",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Linux OS Details",
+    "page_number": 81
+  },
+  {
+    "toc_id": "toc-0084",
+    "parent_toc_id": "toc-0083",
+    "level": 3,
+    "title": "File System Structure",
+    "page_number": 81
+  },
+  {
+    "toc_id": "toc-0085",
+    "parent_toc_id": "toc-0083",
+    "level": 3,
+    "title": "Important File/Directory Descriptions",
+    "page_number": 82
+  },
+  {
+    "toc_id": "toc-0086",
+    "parent_toc_id": "toc-0083",
+    "level": 3,
+    "title": "/etc/shadow File Format",
+    "page_number": 83
+  },
+  {
+    "toc_id": "toc-0087",
+    "parent_toc_id": "toc-0083",
+    "level": 3,
+    "title": "/etc/shadow Hash Types",
+    "page_number": 83
+  },
+  {
+    "toc_id": "toc-0088",
+    "parent_toc_id": "toc-0083",
+    "level": 3,
+    "title": "/etc/passwd File Format",
+    "page_number": 83
+  },
+  {
+    "toc_id": "toc-0089",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Linux System Enumeration",
+    "page_number": 85
+  },
+  {
+    "toc_id": "toc-0090",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "Operating System Information",
+    "page_number": 85
+  },
+  {
+    "toc_id": "toc-0091",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "Manipulate Packages Using RPM (Red Hat)",
+    "page_number": 85
+  },
+  {
+    "toc_id": "toc-0092",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "Manipulate Packages Using DPKG",
+    "page_number": 85
+  },
+  {
+    "toc_id": "toc-0093",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "Update System Using Apt Get",
+    "page_number": 86
+  },
+  {
+    "toc_id": "toc-0094",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "Situational Awareness & Process Manipulation",
+    "page_number": 87
+  },
+  {
+    "toc_id": "toc-0095",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "User Account Enumeration & Configuration",
+    "page_number": 87
+  },
+  {
+    "toc_id": "toc-0096",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "Network Configuration",
+    "page_number": 89
+  },
+  {
+    "toc_id": "toc-0097",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "Network Configuration Cont",
+    "page_number": 91
+  },
+  {
+    "toc_id": "toc-0098",
+    "parent_toc_id": "toc-0089",
+    "level": 3,
+    "title": "DNS Zone Transfer",
+    "page_number": 92
+  },
+  {
+    "toc_id": "toc-0099",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Linux File Manipulation",
+    "page_number": 93
+  },
+  {
+    "toc_id": "toc-0100",
+    "parent_toc_id": "toc-0099",
+    "level": 3,
+    "title": "File Manipulation",
+    "page_number": 93
+  },
+  {
+    "toc_id": "toc-0101",
+    "parent_toc_id": "toc-0099",
+    "level": 3,
+    "title": "File Compression & Chunking",
+    "page_number": 95
+  },
+  {
+    "toc_id": "toc-0102",
+    "parent_toc_id": "toc-0099",
+    "level": 3,
+    "title": "File Hashing",
+    "page_number": 95
+  },
+  {
+    "toc_id": "toc-0103",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Linux Persistence",
+    "page_number": 96
+  },
+  {
+    "toc_id": "toc-0104",
+    "parent_toc_id": "toc-0103",
+    "level": 3,
+    "title": "rc.local",
+    "page_number": 96
+  },
+  {
+    "toc_id": "toc-0105",
+    "parent_toc_id": "toc-0103",
+    "level": 3,
+    "title": "Linux Service",
+    "page_number": 96
+  },
+  {
+    "toc_id": "toc-0106",
+    "parent_toc_id": "toc-0103",
+    "level": 3,
+    "title": "Crontab",
+    "page_number": 96
+  },
+  {
+    "toc_id": "toc-0107",
+    "parent_toc_id": "toc-0103",
+    "level": 3,
+    "title": "Poisoning Existing Scripts",
+    "page_number": 97
+  },
+  {
+    "toc_id": "toc-0108",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Linux Scripting",
+    "page_number": 98
+  },
+  {
+    "toc_id": "toc-0109",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Linux Post Exploitation",
+    "page_number": 100
+  },
+  {
+    "toc_id": "toc-0110",
+    "parent_toc_id": "toc-0109",
+    "level": 3,
+    "title": "Misc Commands",
+    "page_number": 100
+  },
+  {
+    "toc_id": "toc-0111",
+    "parent_toc_id": "toc-0109",
+    "level": 3,
+    "title": "Mount USB Device",
+    "page_number": 102
+  },
+  {
+    "toc_id": "toc-0112",
+    "parent_toc_id": "toc-0109",
+    "level": 3,
+    "title": "Bash History Manipulation",
+    "page_number": 102
+  },
+  {
+    "toc_id": "toc-0113",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Linux Tools",
+    "page_number": 104
+  },
+  {
+    "toc_id": "toc-0114",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "SSH",
+    "page_number": 104
+  },
+  {
+    "toc_id": "toc-0115",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "Setup SSH Keys",
+    "page_number": 104
+  },
+  {
+    "toc_id": "toc-0116",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "SSH Forwarding/Tunneling",
+    "page_number": 106
+  },
+  {
+    "toc_id": "toc-0117",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "TCPDump & TCPReplay",
+    "page_number": 108
+  },
+  {
+    "toc_id": "toc-0118",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "TCPDump & TCPReplay Cont:",
+    "page_number": 109
+  },
+  {
+    "toc_id": "toc-0119",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "Screen",
+    "page_number": 111
+  },
+  {
+    "toc_id": "toc-0120",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "IPTables",
+    "page_number": 112
+  },
+  {
+    "toc_id": "toc-0121",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "IPTables Examples",
+    "page_number": 114
+  },
+  {
+    "toc_id": "toc-0122",
+    "parent_toc_id": "toc-0113",
+    "level": 3,
+    "title": "Service Manipulation",
+    "page_number": 116
+  },
+  {
+    "toc_id": "toc-0123",
+    "parent_toc_id": "toc-0082",
+    "level": 2,
+    "title": "Solaris OS",
+    "page_number": 117
+  },
+  {
+    "toc_id": "toc-0124",
+    "parent_toc_id": "toc-0123",
+    "level": 3,
+    "title": "Solaris File System Structure",
+    "page_number": 117
+  },
+  {
+    "toc_id": "toc-0125",
+    "parent_toc_id": "toc-0123",
+    "level": 3,
+    "title": "Solaris Commands",
+    "page_number": 117
+  },
+  {
+    "toc_id": "toc-0126",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Networking",
+    "page_number": 119
+  },
+  {
+    "toc_id": "toc-0127",
+    "parent_toc_id": "toc-0126",
+    "level": 2,
+    "title": "Common Ports",
+    "page_number": 120
+  },
+  {
+    "toc_id": "toc-0128",
+    "parent_toc_id": "toc-0127",
+    "level": 3,
+    "title": "Common Ports",
+    "page_number": 120
+  },
+  {
+    "toc_id": "toc-0129",
+    "parent_toc_id": "toc-0127",
+    "level": 3,
+    "title": "Health Care Protocol & Ports",
+    "page_number": 122
+  },
+  {
+    "toc_id": "toc-0130",
+    "parent_toc_id": "toc-0127",
+    "level": 3,
+    "title": "Scada Protocols & Ports",
+    "page_number": 122
+  },
+  {
+    "toc_id": "toc-0131",
+    "parent_toc_id": "toc-0127",
+    "level": 3,
+    "title": "TTL Fingerprinting",
+    "page_number": 123
+  },
+  {
+    "toc_id": "toc-0132",
+    "parent_toc_id": "toc-0126",
+    "level": 2,
+    "title": "IPv4",
+    "page_number": 124
+  },
+  {
+    "toc_id": "toc-0133",
+    "parent_toc_id": "toc-0132",
+    "level": 3,
+    "title": "Classful IPv4 Ranges",
+    "page_number": 124
+  },
+  {
+    "toc_id": "toc-0134",
+    "parent_toc_id": "toc-0132",
+    "level": 3,
+    "title": "Reserved Private Ranges",
+    "page_number": 124
+  },
+  {
+    "toc_id": "toc-0135",
+    "parent_toc_id": "toc-0132",
+    "level": 3,
+    "title": "Subnetting",
+    "page_number": 124
+  },
+  {
+    "toc_id": "toc-0136",
+    "parent_toc_id": "toc-0132",
+    "level": 3,
+    "title": "Calculating Subnet Range",
+    "page_number": 126
+  },
+  {
+    "toc_id": "toc-0137",
+    "parent_toc_id": "toc-0126",
+    "level": 2,
+    "title": "IPv6",
+    "page_number": 127
+  },
+  {
+    "toc_id": "toc-0138",
+    "parent_toc_id": "toc-0137",
+    "level": 3,
+    "title": "Broadcast Addresses",
+    "page_number": 127
+  },
+  {
+    "toc_id": "toc-0139",
+    "parent_toc_id": "toc-0137",
+    "level": 3,
+    "title": "Interface Addresses",
+    "page_number": 127
+  },
+  {
+    "toc_id": "toc-0140",
+    "parent_toc_id": "toc-0137",
+    "level": 3,
+    "title": "IPV6 Tools",
+    "page_number": 127
+  },
+  {
+    "toc_id": "toc-0141",
+    "parent_toc_id": "toc-0126",
+    "level": 2,
+    "title": "Networking",
+    "page_number": 128
+  },
+  {
+    "toc_id": "toc-0142",
+    "parent_toc_id": "toc-0141",
+    "level": 3,
+    "title": "Cisco Commands",
+    "page_number": 128
+  },
+  {
+    "toc_id": "toc-0143",
+    "parent_toc_id": "toc-0141",
+    "level": 3,
+    "title": "SNMP Tools",
+    "page_number": 130
+  },
+  {
+    "toc_id": "toc-0144",
+    "parent_toc_id": "toc-0141",
+    "level": 3,
+    "title": "DNSRecon & NMap Reverse DNS",
+    "page_number": 130
+  },
+  {
+    "toc_id": "toc-0145",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Technologies",
+    "page_number": 132
+  },
+  {
+    "toc_id": "toc-0146",
+    "parent_toc_id": "toc-0145",
+    "level": 2,
+    "title": "Wireless",
+    "page_number": 133
+  },
+  {
+    "toc_id": "toc-0147",
+    "parent_toc_id": "toc-0146",
+    "level": 3,
+    "title": "Frequency Chart",
+    "page_number": 133
+  },
+  {
+    "toc_id": "toc-0148",
+    "parent_toc_id": "toc-0146",
+    "level": 3,
+    "title": "Helpful RF Websites",
+    "page_number": 133
+  },
+  {
+    "toc_id": "toc-0149",
+    "parent_toc_id": "toc-0146",
+    "level": 3,
+    "title": "Kismet Command Reference",
+    "page_number": 134
+  },
+  {
+    "toc_id": "toc-0150",
+    "parent_toc_id": "toc-0146",
+    "level": 3,
+    "title": "Linux Wi-Fi Commands",
+    "page_number": 135
+  },
+  {
+    "toc_id": "toc-0151",
+    "parent_toc_id": "toc-0146",
+    "level": 3,
+    "title": "Linux Bluetooth",
+    "page_number": 135
+  },
+  {
+    "toc_id": "toc-0152",
+    "parent_toc_id": "toc-0146",
+    "level": 3,
+    "title": "Linux Wi-Fi Testing",
+    "page_number": 137
+  },
+  {
+    "toc_id": "toc-0153",
+    "parent_toc_id": "toc-0146",
+    "level": 3,
+    "title": "Wi-Fi DOS Attacks",
+    "page_number": 137
+  },
+  {
+    "toc_id": "toc-0154",
+    "parent_toc_id": "toc-0145",
+    "level": 2,
+    "title": "Web",
+    "page_number": 138
+  },
+  {
+    "toc_id": "toc-0155",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "User Agent String Keywords",
+    "page_number": 138
+  },
+  {
+    "toc_id": "toc-0156",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "HTML Beef Hook Technique",
+    "page_number": 138
+  },
+  {
+    "toc_id": "toc-0157",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "Embedded iframe",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0158",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "Firefox Type Conversions",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0159",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "Wget Capture Session Token",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0160",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "Curl",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0161",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "Automated Web Screenshots (WitnessMe)",
+    "page_number": 141
+  },
+  {
+    "toc_id": "toc-0162",
+    "parent_toc_id": "toc-0154",
+    "level": 3,
+    "title": "SQLMap",
+    "page_number": 141
+  },
+  {
+    "toc_id": "toc-0163",
+    "parent_toc_id": "toc-0145",
+    "level": 2,
+    "title": "Databases",
+    "page_number": 143
+  },
+  {
+    "toc_id": "toc-0164",
+    "parent_toc_id": "toc-0163",
+    "level": 3,
+    "title": "MSSQL",
+    "page_number": 143
+  },
+  {
+    "toc_id": "toc-0165",
+    "parent_toc_id": "toc-0163",
+    "level": 3,
+    "title": "POSTGRES",
+    "page_number": 143
+  },
+  {
+    "toc_id": "toc-0166",
+    "parent_toc_id": "toc-0163",
+    "level": 3,
+    "title": "MySQL",
+    "page_number": 145
+  },
+  {
+    "toc_id": "toc-0167",
+    "parent_toc_id": "toc-0163",
+    "level": 3,
+    "title": "Oracle",
+    "page_number": 145
+  },
+  {
+    "toc_id": "toc-0168",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Tools",
+    "page_number": 146
+  },
+  {
+    "toc_id": "toc-0169",
+    "parent_toc_id": "toc-0168",
+    "level": 2,
+    "title": "Nmap",
+    "page_number": 147
+  },
+  {
+    "toc_id": "toc-0170",
+    "parent_toc_id": "toc-0169",
+    "level": 3,
+    "title": "Scan Types",
+    "page_number": 147
+  },
+  {
+    "toc_id": "toc-0171",
+    "parent_toc_id": "toc-0169",
+    "level": 3,
+    "title": "Scan Options",
+    "page_number": 147
+  },
+  {
+    "toc_id": "toc-0172",
+    "parent_toc_id": "toc-0169",
+    "level": 3,
+    "title": "Output/Input Options",
+    "page_number": 147
+  },
+  {
+    "toc_id": "toc-0173",
+    "parent_toc_id": "toc-0169",
+    "level": 3,
+    "title": "Firewall Evasion",
+    "page_number": 148
+  },
+  {
+    "toc_id": "toc-0174",
+    "parent_toc_id": "toc-0169",
+    "level": 3,
+    "title": "Misc Flags",
+    "page_number": 149
+  },
+  {
+    "toc_id": "toc-0175",
+    "parent_toc_id": "toc-0168",
+    "level": 2,
+    "title": "Wireshark",
+    "page_number": 150
+  },
+  {
+    "toc_id": "toc-0176",
+    "parent_toc_id": "toc-0175",
+    "level": 3,
+    "title": "Wireshark Filter Options",
+    "page_number": 150
+  },
+  {
+    "toc_id": "toc-0177",
+    "parent_toc_id": "toc-0175",
+    "level": 3,
+    "title": "Comparison Operators",
+    "page_number": 151
+  },
+  {
+    "toc_id": "toc-0178",
+    "parent_toc_id": "toc-0175",
+    "level": 3,
+    "title": "Logical Operators",
+    "page_number": 151
+  },
+  {
+    "toc_id": "toc-0179",
+    "parent_toc_id": "toc-0175",
+    "level": 3,
+    "title": "Wireshark Examples",
+    "page_number": 151
+  },
+  {
+    "toc_id": "toc-0180",
+    "parent_toc_id": "toc-0168",
+    "level": 2,
+    "title": "Netcat",
+    "page_number": 152
+  },
+  {
+    "toc_id": "toc-0181",
+    "parent_toc_id": "toc-0180",
+    "level": 3,
+    "title": "Netcat Examples",
+    "page_number": 152
+  },
+  {
+    "toc_id": "toc-0182",
+    "parent_toc_id": "toc-0180",
+    "level": 3,
+    "title": "Download a File",
+    "page_number": 152
+  },
+  {
+    "toc_id": "toc-0183",
+    "parent_toc_id": "toc-0180",
+    "level": 3,
+    "title": "Upload a File",
+    "page_number": 152
+  },
+  {
+    "toc_id": "toc-0184",
+    "parent_toc_id": "toc-0168",
+    "level": 2,
+    "title": "Metasploit",
+    "page_number": 153
+  },
+  {
+    "toc_id": "toc-0185",
+    "parent_toc_id": "toc-0184",
+    "level": 3,
+    "title": "Metasploit Options",
+    "page_number": 153
+  },
+  {
+    "toc_id": "toc-0186",
+    "parent_toc_id": "toc-0184",
+    "level": 3,
+    "title": "Create & Catch Payloads (msfvenom)",
+    "page_number": 155
+  },
+  {
+    "toc_id": "toc-0187",
+    "parent_toc_id": "toc-0184",
+    "level": 3,
+    "title": "Start MSF DB (Kali)",
+    "page_number": 156
+  },
+  {
+    "toc_id": "toc-0188",
+    "parent_toc_id": "toc-0184",
+    "level": 3,
+    "title": "Meterpreter Pass a Shell",
+    "page_number": 156
+  },
+  {
+    "toc_id": "toc-0189",
+    "parent_toc_id": "toc-0184",
+    "level": 3,
+    "title": "Meterpreter Commands",
+    "page_number": 157
+  },
+  {
+    "toc_id": "toc-0190",
+    "parent_toc_id": "toc-0184",
+    "level": 3,
+    "title": "Nmap Through Meterpreter Socks Proxy",
+    "page_number": 159
+  },
+  {
+    "toc_id": "toc-0191",
+    "parent_toc_id": "toc-0168",
+    "level": 2,
+    "title": "Ettercap",
+    "page_number": 160
+  },
+  {
+    "toc_id": "toc-0192",
+    "parent_toc_id": "toc-0191",
+    "level": 3,
+    "title": "Ettercap Commands",
+    "page_number": 160
+  },
+  {
+    "toc_id": "toc-0193",
+    "parent_toc_id": "toc-0191",
+    "level": 3,
+    "title": "Ettercap Filter",
+    "page_number": 160
+  },
+  {
+    "toc_id": "toc-0194",
+    "parent_toc_id": "toc-0191",
+    "level": 3,
+    "title": "hping3",
+    "page_number": 160
+  },
+  {
+    "toc_id": "toc-0195",
+    "parent_toc_id": "toc-0191",
+    "level": 3,
+    "title": "arping",
+    "page_number": 161
+  },
+  {
+    "toc_id": "toc-0196",
+    "parent_toc_id": "toc-0168",
+    "level": 2,
+    "title": "Password Cracking",
+    "page_number": 162
+  },
+  {
+    "toc_id": "toc-0197",
+    "parent_toc_id": "toc-0196",
+    "level": 3,
+    "title": "Hydra",
+    "page_number": 162
+  },
+  {
+    "toc_id": "toc-0198",
+    "parent_toc_id": "toc-0196",
+    "level": 3,
+    "title": "John The Ripper",
+    "page_number": 162
+  },
+  {
+    "toc_id": "toc-0199",
+    "parent_toc_id": "toc-0196",
+    "level": 3,
+    "title": "Crack Excel Password Protected Document",
+    "page_number": 163
+  },
+  {
+    "toc_id": "toc-0200",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Programming",
+    "page_number": 164
+  },
+  {
+    "toc_id": "toc-0201",
+    "parent_toc_id": "toc-0200",
+    "level": 2,
+    "title": "ASCII & Regex",
+    "page_number": 165
+  },
+  {
+    "toc_id": "toc-0202",
+    "parent_toc_id": "toc-0201",
+    "level": 3,
+    "title": "Regex Expressions",
+    "page_number": 165
+  },
+  {
+    "toc_id": "toc-0203",
+    "parent_toc_id": "toc-0201",
+    "level": 3,
+    "title": "ASCII Table",
+    "page_number": 167
+  },
+  {
+    "toc_id": "toc-0204",
+    "parent_toc_id": "toc-0200",
+    "level": 2,
+    "title": "Python",
+    "page_number": 171
+  },
+  {
+    "toc_id": "toc-0205",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Python Port Scanner",
+    "page_number": 171
+  },
+  {
+    "toc_id": "toc-0206",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Python Base64 Wordlist",
+    "page_number": 171
+  },
+  {
+    "toc_id": "toc-0207",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Convert Windows Registry HEX Format To Readable ASCII",
+    "page_number": 171
+  },
+  {
+    "toc_id": "toc-0208",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Read All Files in Folder & Search For Regex",
+    "page_number": 172
+  },
+  {
+    "toc_id": "toc-0209",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "SSL Encrypted SimpleHTTPServer",
+    "page_number": 173
+  },
+  {
+    "toc_id": "toc-0210",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Loop Through IP List, Download File Over HTTP & Execute",
+    "page_number": 173
+  },
+  {
+    "toc_id": "toc-0211",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Python Email Sender (SendMail Must Be Installed)",
+    "page_number": 175
+  },
+  {
+    "toc_id": "toc-0212",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Generate Random String of N Length",
+    "page_number": 175
+  },
+  {
+    "toc_id": "toc-0213",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Python HTTP Server",
+    "page_number": 176
+  },
+  {
+    "toc_id": "toc-0214",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Custom Python HTTP Banner Grabber",
+    "page_number": 177
+  },
+  {
+    "toc_id": "toc-0215",
+    "parent_toc_id": "toc-0200",
+    "level": 2,
+    "title": "Scapy",
+    "page_number": 179
+  },
+  {
+    "toc_id": "toc-0216",
+    "parent_toc_id": "toc-0215",
+    "level": 3,
+    "title": "Scapy Setup",
+    "page_number": 179
+  },
+  {
+    "toc_id": "toc-0217",
+    "parent_toc_id": "toc-0215",
+    "level": 3,
+    "title": "Send IPv6 ICMP Message",
+    "page_number": 180
+  },
+  {
+    "toc_id": "toc-0218",
+    "parent_toc_id": "toc-0215",
+    "level": 3,
+    "title": "UDP Packet With Specific Payload",
+    "page_number": 180
+  },
+  {
+    "toc_id": "toc-0219",
+    "parent_toc_id": "toc-0215",
+    "level": 3,
+    "title": "NTP Fuzzer",
+    "page_number": 181
+  },
+  {
+    "toc_id": "toc-0220",
+    "parent_toc_id": "toc-0215",
+    "level": 3,
+    "title": "Send HTTP Message",
+    "page_number": 181
+  },
+  {
+    "toc_id": "toc-0221",
+    "parent_toc_id": "toc-0200",
+    "level": 2,
+    "title": "Perl",
+    "page_number": 182
+  },
+  {
+    "toc_id": "toc-0222",
+    "parent_toc_id": "toc-0221",
+    "level": 3,
+    "title": "Perl Port Scanner",
+    "page_number": 182
+  },
+  {
+    "toc_id": "toc-0223",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Tips & Tricks",
+    "page_number": 183
+  },
+  {
+    "toc_id": "toc-0224",
+    "parent_toc_id": "toc-0223",
+    "level": 2,
+    "title": "Tips & Tricks",
+    "page_number": 184
+  },
+  {
+    "toc_id": "toc-0225",
+    "parent_toc_id": "toc-0224",
+    "level": 3,
+    "title": "FTP Through Non-Interactive Windows Shell",
+    "page_number": 184
+  },
+  {
+    "toc_id": "toc-0226",
+    "parent_toc_id": "toc-0224",
+    "level": 3,
+    "title": "DNS Transfer on Linux",
+    "page_number": 184
+  },
+  {
+    "toc_id": "toc-0227",
+    "parent_toc_id": "toc-0224",
+    "level": 3,
+    "title": "Exfil Command Output on a Linux Machine Over ICMP",
+    "page_number": 184
+  },
+  {
+    "toc_id": "toc-0228",
+    "parent_toc_id": "toc-0224",
+    "level": 3,
+    "title": "Sending Email From Open Relay (Telnet)",
+    "page_number": 186
+  },
+  {
+    "toc_id": "toc-0229",
+    "parent_toc_id": "toc-0223",
+    "level": 2,
+    "title": "Reverse Shells",
+    "page_number": 187
+  },
+  {
+    "toc_id": "toc-0230",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "Netcat",
+    "page_number": 187
+  },
+  {
+    "toc_id": "toc-0231",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "Perl",
+    "page_number": 187
+  },
+  {
+    "toc_id": "toc-0232",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "Python",
+    "page_number": 187
+  },
+  {
+    "toc_id": "toc-0233",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "Bash",
+    "page_number": 187
+  },
+  {
+    "toc_id": "toc-0234",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "Java",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0235",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "PHP",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0236",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "Ruby",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0237",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "Telnet",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0238",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "XTerm",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0239",
+    "parent_toc_id": "toc-0229",
+    "level": 3,
+    "title": "WGET Script Download & Execute",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0240",
+    "parent_toc_id": "toc-0223",
+    "level": 2,
+    "title": "Tunneling",
+    "page_number": 189
+  },
+  {
+    "toc_id": "toc-0241",
+    "parent_toc_id": "toc-0240",
+    "level": 3,
+    "title": "FPipe Tunnel",
+    "page_number": 189
+  },
+  {
+    "toc_id": "toc-0242",
+    "parent_toc_id": "toc-0240",
+    "level": 3,
+    "title": "Socat Tunnel",
+    "page_number": 189
+  },
+  {
+    "toc_id": "toc-0243",
+    "parent_toc_id": "toc-0240",
+    "level": 3,
+    "title": "SSL Encapsulated Netcat TunneL (STunnel)",
+    "page_number": 189
+  },
+  {
+    "toc_id": "toc-0244",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Tradecraft Concerns",
+    "page_number": 191
+  },
+  {
+    "toc_id": "toc-0245",
+    "parent_toc_id": "toc-0244",
+    "level": 2,
+    "title": "Tradecraft Concerns",
+    "page_number": 192
+  },
+  {
+    "toc_id": "toc-0246",
+    "parent_toc_id": "toc-0245",
+    "level": 3,
+    "title": "Artifact Creation and Uploading",
+    "page_number": 192
+  },
+  {
+    "toc_id": "toc-0247",
+    "parent_toc_id": "toc-0245",
+    "level": 3,
+    "title": "Persistence Actions",
+    "page_number": 192
+  },
+  {
+    "toc_id": "toc-0248",
+    "parent_toc_id": "toc-0245",
+    "level": 3,
+    "title": "Remote Execution",
+    "page_number": 192
+  },
+  {
+    "toc_id": "toc-0249",
+    "parent_toc_id": "toc-0245",
+    "level": 3,
+    "title": "Infrastructure Setup",
+    "page_number": 193
+  },
+  {
+    "toc_id": "toc-0250",
+    "parent_toc_id": "toc-0245",
+    "level": 3,
+    "title": "Token Manipulation",
+    "page_number": 194
+  },
+  {
+    "toc_id": "toc-0251",
+    "parent_toc_id": "toc-0245",
+    "level": 3,
+    "title": "End of Day Operations",
+    "page_number": 194
+  },
+  {
+    "toc_id": "toc-0252",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Index",
+    "page_number": 195
+  }
+]

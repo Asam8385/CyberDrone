@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "document_id": "modern-web-penetration-testing-2016",
+  "source_path": "data/raw/books/web-security/modern-web-penetration-testing-2016.pdf",
+  "source_filename": "modern-web-penetration-testing-2016.pdf",
+  "source_sha256": "a708fea5b1019cb9e094a5ca17175881f7cb12900c10cee5097a5eee1f632b73",
+  "title": "Mastering Modern Web Penetration Testing",
+  "author": "Prakhar Prasad",
+  "publication_year": 2016,
+  "document_type": "technical_book",
+  "domain": "web_security",
+  "chunk_profile": "technical_book",
+  "freshness_warning": true,
+  "language": "en",
+  "trust_tier": 3,
+  "page_count": 298,
+  "toc_entry_count": 241,
+  "table_extraction_enabled": true,
+  "ocr_enabled": false,
+  "extractor": "pymupdf",
+  "extractor_version": "1.27.2.3",
+  "extracted_at": "2026-07-30T04:32:52.952473+00:00"
+}

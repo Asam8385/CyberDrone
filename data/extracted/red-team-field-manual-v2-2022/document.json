@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "document_id": "red-team-field-manual-v2-2022",
+  "source_path": "data/raw/books/reference-manuals/red-team-field-manual-v2-2022.pdf",
+  "source_filename": "red-team-field-manual-v2-2022.pdf",
+  "source_sha256": "a2c4c162f9b9c89aeaef73add5ffc60f9000c0dca385496138c706cafcab0a24",
+  "title": "Red Team Field Manual v2",
+  "author": "Ben Clark and Nick Downer",
+  "publication_year": 2022,
+  "document_type": "command_reference",
+  "domain": "red_team_reference",
+  "chunk_profile": "command_reference",
+  "freshness_warning": true,
+  "language": "en",
+  "trust_tier": 3,
+  "page_count": 200,
+  "toc_entry_count": 252,
+  "table_extraction_enabled": true,
+  "ocr_enabled": false,
+  "extractor": "pymupdf",
+  "extractor_version": "1.27.2.3",
+  "extracted_at": "2026-07-30T04:32:35.209272+00:00"
+}

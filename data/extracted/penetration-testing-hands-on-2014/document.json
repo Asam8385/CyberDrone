@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "document_id": "penetration-testing-hands-on-2014",
+  "source_path": "data/raw/books/general-pentest/penetration-testing-hands-on-2014.pdf",
+  "source_filename": "penetration-testing-hands-on-2014.pdf",
+  "source_sha256": "a5ae0ea7dabe373ca8306fa99599c4cde8d94309104fb07c3aa54bf982c55d13",
+  "title": "Penetration Testing - A Hands-On Introduction to Hacking",
+  "author": "Georgia Weidman",
+  "publication_year": 2014,
+  "document_type": "training_book",
+  "domain": "general_pentest",
+  "chunk_profile": "technical_book",
+  "freshness_warning": true,
+  "language": "en",
+  "trust_tier": 3,
+  "page_count": 531,
+  "toc_entry_count": 0,
+  "table_extraction_enabled": true,
+  "ocr_enabled": false,
+  "extractor": "pymupdf",
+  "extractor_version": "1.27.2.3",
+  "extracted_at": "2026-07-30T04:32:19.901255+00:00"
+}

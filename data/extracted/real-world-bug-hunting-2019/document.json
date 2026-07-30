@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "document_id": "real-world-bug-hunting-2019",
+  "source_path": "data/raw/books/bug-bounty/real-world-bug-hunting-2019.pdf",
+  "source_filename": "real-world-bug-hunting-2019.pdf",
+  "source_sha256": "e673bab50fd022e0f84a97b8eac894b5bea2a9a7daf37f707b5abce094587715",
+  "title": "Real-World Bug Hunting",
+  "author": "Peter Yaworski",
+  "publication_year": 2019,
+  "document_type": "case_study_book",
+  "domain": "web_bug_bounty",
+  "chunk_profile": "case_study",
+  "freshness_warning": false,
+  "language": "en",
+  "trust_tier": 3,
+  "page_count": 266,
+  "toc_entry_count": 264,
+  "table_extraction_enabled": true,
+  "ocr_enabled": false,
+  "extractor": "pymupdf",
+  "extractor_version": "1.27.2.3",
+  "extracted_at": "2026-07-30T04:31:46.467014+00:00"
+}

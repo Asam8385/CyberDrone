@@ -1,0 +1,1850 @@
+[
+  {
+    "toc_id": "toc-0001",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Brief Contents",
+    "page_number": 9
+  },
+  {
+    "toc_id": "toc-0002",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Contents in Detail",
+    "page_number": 11
+  },
+  {
+    "toc_id": "toc-0003",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Foreword",
+    "page_number": 19
+  },
+  {
+    "toc_id": "toc-0004",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Acknowledgments",
+    "page_number": 21
+  },
+  {
+    "toc_id": "toc-0005",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Introduction",
+    "page_number": 23
+  },
+  {
+    "toc_id": "toc-0006",
+    "parent_toc_id": "toc-0005",
+    "level": 2,
+    "title": "Who Should Read This Book",
+    "page_number": 24
+  },
+  {
+    "toc_id": "toc-0007",
+    "parent_toc_id": "toc-0005",
+    "level": 2,
+    "title": "How to Read This Book",
+    "page_number": 24
+  },
+  {
+    "toc_id": "toc-0008",
+    "parent_toc_id": "toc-0005",
+    "level": 2,
+    "title": "What’s in This Book",
+    "page_number": 25
+  },
+  {
+    "toc_id": "toc-0009",
+    "parent_toc_id": "toc-0005",
+    "level": 2,
+    "title": "A Disclaimer About Hacking",
+    "page_number": 27
+  },
+  {
+    "toc_id": "toc-0010",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 1: Bug Bounty Basics",
+    "page_number": 29
+  },
+  {
+    "toc_id": "toc-0011",
+    "parent_toc_id": "toc-0010",
+    "level": 2,
+    "title": "Vulnerabilities and Bug Bounties",
+    "page_number": 30
+  },
+  {
+    "toc_id": "toc-0012",
+    "parent_toc_id": "toc-0010",
+    "level": 2,
+    "title": "Client and Server",
+    "page_number": 30
+  },
+  {
+    "toc_id": "toc-0013",
+    "parent_toc_id": "toc-0010",
+    "level": 2,
+    "title": "What Happens When You Visit a Website",
+    "page_number": 31
+  },
+  {
+    "toc_id": "toc-0014",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Step 1: Extracting the Domain Name",
+    "page_number": 31
+  },
+  {
+    "toc_id": "toc-0015",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Step 2: Resolving an IP Address",
+    "page_number": 31
+  },
+  {
+    "toc_id": "toc-0016",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Step 3: Establishing a TCP Connection",
+    "page_number": 32
+  },
+  {
+    "toc_id": "toc-0017",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Step 4: Sending an HTTP Request",
+    "page_number": 32
+  },
+  {
+    "toc_id": "toc-0018",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Step 5: Server Response",
+    "page_number": 33
+  },
+  {
+    "toc_id": "toc-0019",
+    "parent_toc_id": "toc-0013",
+    "level": 3,
+    "title": "Step 6: Rendering the Response",
+    "page_number": 34
+  },
+  {
+    "toc_id": "toc-0020",
+    "parent_toc_id": "toc-0010",
+    "level": 2,
+    "title": "HTTP Requests",
+    "page_number": 35
+  },
+  {
+    "toc_id": "toc-0021",
+    "parent_toc_id": "toc-0020",
+    "level": 3,
+    "title": "Request Methods",
+    "page_number": 35
+  },
+  {
+    "toc_id": "toc-0022",
+    "parent_toc_id": "toc-0020",
+    "level": 3,
+    "title": "HTTP Is Stateless",
+    "page_number": 36
+  },
+  {
+    "toc_id": "toc-0023",
+    "parent_toc_id": "toc-0010",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 37
+  },
+  {
+    "toc_id": "toc-0024",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 2: Open Redirect",
+    "page_number": 39
+  },
+  {
+    "toc_id": "toc-0025",
+    "parent_toc_id": "toc-0024",
+    "level": 2,
+    "title": "How Open Redirects Work",
+    "page_number": 40
+  },
+  {
+    "toc_id": "toc-0026",
+    "parent_toc_id": "toc-0024",
+    "level": 2,
+    "title": "Shopify Theme Install Open Redirect",
+    "page_number": 41
+  },
+  {
+    "toc_id": "toc-0027",
+    "parent_toc_id": "toc-0026",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 42
+  },
+  {
+    "toc_id": "toc-0028",
+    "parent_toc_id": "toc-0024",
+    "level": 2,
+    "title": "Shopify Login Open Redirect",
+    "page_number": 42
+  },
+  {
+    "toc_id": "toc-0029",
+    "parent_toc_id": "toc-0028",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0030",
+    "parent_toc_id": "toc-0024",
+    "level": 2,
+    "title": "HackerOne Interstitial Redirect",
+    "page_number": 43
+  },
+  {
+    "toc_id": "toc-0031",
+    "parent_toc_id": "toc-0030",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 44
+  },
+  {
+    "toc_id": "toc-0032",
+    "parent_toc_id": "toc-0024",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 45
+  },
+  {
+    "toc_id": "toc-0033",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 3: HTTP Parameter Pollution",
+    "page_number": 47
+  },
+  {
+    "toc_id": "toc-0034",
+    "parent_toc_id": "toc-0033",
+    "level": 2,
+    "title": "Server-Side HPP",
+    "page_number": 48
+  },
+  {
+    "toc_id": "toc-0035",
+    "parent_toc_id": "toc-0033",
+    "level": 2,
+    "title": "Client-Side HPP",
+    "page_number": 50
+  },
+  {
+    "toc_id": "toc-0036",
+    "parent_toc_id": "toc-0033",
+    "level": 2,
+    "title": "HackerOne Social Sharing Buttons",
+    "page_number": 51
+  },
+  {
+    "toc_id": "toc-0037",
+    "parent_toc_id": "toc-0036",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 52
+  },
+  {
+    "toc_id": "toc-0038",
+    "parent_toc_id": "toc-0033",
+    "level": 2,
+    "title": "Twitter Unsubscribe Notifications",
+    "page_number": 52
+  },
+  {
+    "toc_id": "toc-0039",
+    "parent_toc_id": "toc-0038",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 53
+  },
+  {
+    "toc_id": "toc-0040",
+    "parent_toc_id": "toc-0033",
+    "level": 2,
+    "title": "Twitter Web Intents",
+    "page_number": 53
+  },
+  {
+    "toc_id": "toc-0041",
+    "parent_toc_id": "toc-0040",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 55
+  },
+  {
+    "toc_id": "toc-0042",
+    "parent_toc_id": "toc-0033",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 55
+  },
+  {
+    "toc_id": "toc-0043",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 4: Cross-Site Request Forgery",
+    "page_number": 57
+  },
+  {
+    "toc_id": "toc-0044",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "Authentication",
+    "page_number": 58
+  },
+  {
+    "toc_id": "toc-0045",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "CSRF with GET Requests",
+    "page_number": 59
+  },
+  {
+    "toc_id": "toc-0046",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "CSRF with POST Requests",
+    "page_number": 60
+  },
+  {
+    "toc_id": "toc-0047",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "Defenses Against CSRF Attacks",
+    "page_number": 62
+  },
+  {
+    "toc_id": "toc-0048",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "Shopify Twitter Disconnect",
+    "page_number": 64
+  },
+  {
+    "toc_id": "toc-0049",
+    "parent_toc_id": "toc-0048",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 65
+  },
+  {
+    "toc_id": "toc-0050",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "Change Users Instacart Zones",
+    "page_number": 65
+  },
+  {
+    "toc_id": "toc-0051",
+    "parent_toc_id": "toc-0050",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 66
+  },
+  {
+    "toc_id": "toc-0052",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "Badoo Full Account Takeover",
+    "page_number": 66
+  },
+  {
+    "toc_id": "toc-0053",
+    "parent_toc_id": "toc-0052",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 68
+  },
+  {
+    "toc_id": "toc-0054",
+    "parent_toc_id": "toc-0043",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 68
+  },
+  {
+    "toc_id": "toc-0055",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 5: HTML Injection and Content Spoofing",
+    "page_number": 69
+  },
+  {
+    "toc_id": "toc-0056",
+    "parent_toc_id": "toc-0055",
+    "level": 2,
+    "title": "Coinbase Comment Injection Through Character Encoding",
+    "page_number": 70
+  },
+  {
+    "toc_id": "toc-0057",
+    "parent_toc_id": "toc-0056",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 72
+  },
+  {
+    "toc_id": "toc-0058",
+    "parent_toc_id": "toc-0055",
+    "level": 2,
+    "title": "HackerOne Unintended HTML Inclusion",
+    "page_number": 72
+  },
+  {
+    "toc_id": "toc-0059",
+    "parent_toc_id": "toc-0058",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 74
+  },
+  {
+    "toc_id": "toc-0060",
+    "parent_toc_id": "toc-0055",
+    "level": 2,
+    "title": "HackerOne Unintended HTML Include Fix Bypass",
+    "page_number": 74
+  },
+  {
+    "toc_id": "toc-0061",
+    "parent_toc_id": "toc-0060",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 75
+  },
+  {
+    "toc_id": "toc-0062",
+    "parent_toc_id": "toc-0055",
+    "level": 2,
+    "title": "Within Security Content Spoofing",
+    "page_number": 75
+  },
+  {
+    "toc_id": "toc-0063",
+    "parent_toc_id": "toc-0062",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 75
+  },
+  {
+    "toc_id": "toc-0064",
+    "parent_toc_id": "toc-0055",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 76
+  },
+  {
+    "toc_id": "toc-0065",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 6: Carriage Return Line Feed Injection",
+    "page_number": 77
+  },
+  {
+    "toc_id": "toc-0066",
+    "parent_toc_id": "toc-0065",
+    "level": 2,
+    "title": "HTTP Request Smuggling",
+    "page_number": 78
+  },
+  {
+    "toc_id": "toc-0067",
+    "parent_toc_id": "toc-0065",
+    "level": 2,
+    "title": "v.shopify.com Response Splitting",
+    "page_number": 79
+  },
+  {
+    "toc_id": "toc-0068",
+    "parent_toc_id": "toc-0067",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 80
+  },
+  {
+    "toc_id": "toc-0069",
+    "parent_toc_id": "toc-0065",
+    "level": 2,
+    "title": "Twitter HTTP Response Splitting",
+    "page_number": 80
+  },
+  {
+    "toc_id": "toc-0070",
+    "parent_toc_id": "toc-0069",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 82
+  },
+  {
+    "toc_id": "toc-0071",
+    "parent_toc_id": "toc-0065",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 82
+  },
+  {
+    "toc_id": "toc-0072",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 7: Cross-Site Scripting",
+    "page_number": 83
+  },
+  {
+    "toc_id": "toc-0073",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "Types of XSS",
+    "page_number": 86
+  },
+  {
+    "toc_id": "toc-0074",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "Shopify Wholesale",
+    "page_number": 89
+  },
+  {
+    "toc_id": "toc-0075",
+    "parent_toc_id": "toc-0074",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 90
+  },
+  {
+    "toc_id": "toc-0076",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "Shopify Currency Formatting",
+    "page_number": 90
+  },
+  {
+    "toc_id": "toc-0077",
+    "parent_toc_id": "toc-0076",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 91
+  },
+  {
+    "toc_id": "toc-0078",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "Yahoo! Mail Stored XSS",
+    "page_number": 91
+  },
+  {
+    "toc_id": "toc-0079",
+    "parent_toc_id": "toc-0078",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 93
+  },
+  {
+    "toc_id": "toc-0080",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "Google Image Search",
+    "page_number": 93
+  },
+  {
+    "toc_id": "toc-0081",
+    "parent_toc_id": "toc-0080",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 94
+  },
+  {
+    "toc_id": "toc-0082",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "Google Tag Manager Stored XSS",
+    "page_number": 94
+  },
+  {
+    "toc_id": "toc-0083",
+    "parent_toc_id": "toc-0082",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 95
+  },
+  {
+    "toc_id": "toc-0084",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "United Airlines XSS",
+    "page_number": 95
+  },
+  {
+    "toc_id": "toc-0085",
+    "parent_toc_id": "toc-0084",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 98
+  },
+  {
+    "toc_id": "toc-0086",
+    "parent_toc_id": "toc-0072",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 98
+  },
+  {
+    "toc_id": "toc-0087",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 8: Template Injections",
+    "page_number": 99
+  },
+  {
+    "toc_id": "toc-0088",
+    "parent_toc_id": "toc-0087",
+    "level": 2,
+    "title": "Server-Side Template Injections",
+    "page_number": 100
+  },
+  {
+    "toc_id": "toc-0089",
+    "parent_toc_id": "toc-0087",
+    "level": 2,
+    "title": "Client-Side Template Injections",
+    "page_number": 100
+  },
+  {
+    "toc_id": "toc-0090",
+    "parent_toc_id": "toc-0087",
+    "level": 2,
+    "title": "Uber AngularJS Template Injection",
+    "page_number": 101
+  },
+  {
+    "toc_id": "toc-0091",
+    "parent_toc_id": "toc-0090",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 102
+  },
+  {
+    "toc_id": "toc-0092",
+    "parent_toc_id": "toc-0087",
+    "level": 2,
+    "title": "Uber Flask Jinja2 Template Injection",
+    "page_number": 102
+  },
+  {
+    "toc_id": "toc-0093",
+    "parent_toc_id": "toc-0092",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 104
+  },
+  {
+    "toc_id": "toc-0094",
+    "parent_toc_id": "toc-0087",
+    "level": 2,
+    "title": "Rails Dynamic Render",
+    "page_number": 104
+  },
+  {
+    "toc_id": "toc-0095",
+    "parent_toc_id": "toc-0094",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 105
+  },
+  {
+    "toc_id": "toc-0096",
+    "parent_toc_id": "toc-0087",
+    "level": 2,
+    "title": "Unikrn Smarty Template Injection",
+    "page_number": 106
+  },
+  {
+    "toc_id": "toc-0097",
+    "parent_toc_id": "toc-0096",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 108
+  },
+  {
+    "toc_id": "toc-0098",
+    "parent_toc_id": "toc-0087",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 108
+  },
+  {
+    "toc_id": "toc-0099",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 9: SQL Injection",
+    "page_number": 109
+  },
+  {
+    "toc_id": "toc-0100",
+    "parent_toc_id": "toc-0099",
+    "level": 2,
+    "title": "SQL Databases",
+    "page_number": 110
+  },
+  {
+    "toc_id": "toc-0101",
+    "parent_toc_id": "toc-0099",
+    "level": 2,
+    "title": "Countermeasures Against SQLi",
+    "page_number": 111
+  },
+  {
+    "toc_id": "toc-0102",
+    "parent_toc_id": "toc-0099",
+    "level": 2,
+    "title": "Yahoo! Sports Blind SQLi",
+    "page_number": 112
+  },
+  {
+    "toc_id": "toc-0103",
+    "parent_toc_id": "toc-0102",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 115
+  },
+  {
+    "toc_id": "toc-0104",
+    "parent_toc_id": "toc-0099",
+    "level": 2,
+    "title": "Uber Blind SQLi",
+    "page_number": 115
+  },
+  {
+    "toc_id": "toc-0105",
+    "parent_toc_id": "toc-0104",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 118
+  },
+  {
+    "toc_id": "toc-0106",
+    "parent_toc_id": "toc-0099",
+    "level": 2,
+    "title": "Drupal SQLi",
+    "page_number": 118
+  },
+  {
+    "toc_id": "toc-0107",
+    "parent_toc_id": "toc-0106",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 121
+  },
+  {
+    "toc_id": "toc-0108",
+    "parent_toc_id": "toc-0099",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 121
+  },
+  {
+    "toc_id": "toc-0109",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 10: Server-Side Request Forgery",
+    "page_number": 123
+  },
+  {
+    "toc_id": "toc-0110",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "Demonstrating the Impact of Server-Side Request Forgery",
+    "page_number": 124
+  },
+  {
+    "toc_id": "toc-0111",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "Invoking GET vs. POST Requests",
+    "page_number": 125
+  },
+  {
+    "toc_id": "toc-0112",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "Performing Blind SSRFs",
+    "page_number": 125
+  },
+  {
+    "toc_id": "toc-0113",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "Attacking Users with SSRF Responses",
+    "page_number": 126
+  },
+  {
+    "toc_id": "toc-0114",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "ESEA SSRF and Querying AWS Metadata",
+    "page_number": 126
+  },
+  {
+    "toc_id": "toc-0115",
+    "parent_toc_id": "toc-0114",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 128
+  },
+  {
+    "toc_id": "toc-0116",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "Google Internal DNS SSRF",
+    "page_number": 128
+  },
+  {
+    "toc_id": "toc-0117",
+    "parent_toc_id": "toc-0116",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 132
+  },
+  {
+    "toc_id": "toc-0118",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "Internal Port Scanning Using Webhooks",
+    "page_number": 132
+  },
+  {
+    "toc_id": "toc-0119",
+    "parent_toc_id": "toc-0118",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 133
+  },
+  {
+    "toc_id": "toc-0120",
+    "parent_toc_id": "toc-0109",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 133
+  },
+  {
+    "toc_id": "toc-0121",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 11: XML External Entity",
+    "page_number": 135
+  },
+  {
+    "toc_id": "toc-0122",
+    "parent_toc_id": "toc-0121",
+    "level": 2,
+    "title": "eXtensible Markup Language",
+    "page_number": 135
+  },
+  {
+    "toc_id": "toc-0123",
+    "parent_toc_id": "toc-0122",
+    "level": 3,
+    "title": "Document Type Definitions",
+    "page_number": 136
+  },
+  {
+    "toc_id": "toc-0124",
+    "parent_toc_id": "toc-0122",
+    "level": 3,
+    "title": "XML Entities",
+    "page_number": 138
+  },
+  {
+    "toc_id": "toc-0125",
+    "parent_toc_id": "toc-0121",
+    "level": 2,
+    "title": "How XXE Attacks Work",
+    "page_number": 139
+  },
+  {
+    "toc_id": "toc-0126",
+    "parent_toc_id": "toc-0121",
+    "level": 2,
+    "title": "Read Access to Google",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0127",
+    "parent_toc_id": "toc-0126",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0128",
+    "parent_toc_id": "toc-0121",
+    "level": 2,
+    "title": "Facebook XXE with Microsoft Word",
+    "page_number": 140
+  },
+  {
+    "toc_id": "toc-0129",
+    "parent_toc_id": "toc-0128",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 142
+  },
+  {
+    "toc_id": "toc-0130",
+    "parent_toc_id": "toc-0121",
+    "level": 2,
+    "title": "Wikiloc XXE",
+    "page_number": 143
+  },
+  {
+    "toc_id": "toc-0131",
+    "parent_toc_id": "toc-0130",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 145
+  },
+  {
+    "toc_id": "toc-0132",
+    "parent_toc_id": "toc-0121",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 145
+  },
+  {
+    "toc_id": "toc-0133",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 12: Remote Code Execution",
+    "page_number": 147
+  },
+  {
+    "toc_id": "toc-0134",
+    "parent_toc_id": "toc-0133",
+    "level": 2,
+    "title": "Executing Shell Commands",
+    "page_number": 147
+  },
+  {
+    "toc_id": "toc-0135",
+    "parent_toc_id": "toc-0133",
+    "level": 2,
+    "title": "Executing Functions",
+    "page_number": 149
+  },
+  {
+    "toc_id": "toc-0136",
+    "parent_toc_id": "toc-0133",
+    "level": 2,
+    "title": "Strategies for Escalating Remote Code Execution",
+    "page_number": 150
+  },
+  {
+    "toc_id": "toc-0137",
+    "parent_toc_id": "toc-0133",
+    "level": 2,
+    "title": "Polyvore ImageMagick",
+    "page_number": 151
+  },
+  {
+    "toc_id": "toc-0138",
+    "parent_toc_id": "toc-0137",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 153
+  },
+  {
+    "toc_id": "toc-0139",
+    "parent_toc_id": "toc-0133",
+    "level": 2,
+    "title": "Algolia RCE on facebooksearch.algolia.com",
+    "page_number": 153
+  },
+  {
+    "toc_id": "toc-0140",
+    "parent_toc_id": "toc-0139",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 155
+  },
+  {
+    "toc_id": "toc-0141",
+    "parent_toc_id": "toc-0133",
+    "level": 2,
+    "title": "RCE Through SSH",
+    "page_number": 155
+  },
+  {
+    "toc_id": "toc-0142",
+    "parent_toc_id": "toc-0141",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 156
+  },
+  {
+    "toc_id": "toc-0143",
+    "parent_toc_id": "toc-0133",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 156
+  },
+  {
+    "toc_id": "toc-0144",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 13: Memory Vulnerabilities",
+    "page_number": 157
+  },
+  {
+    "toc_id": "toc-0145",
+    "parent_toc_id": "toc-0144",
+    "level": 2,
+    "title": "Buffer Overflows",
+    "page_number": 158
+  },
+  {
+    "toc_id": "toc-0146",
+    "parent_toc_id": "toc-0144",
+    "level": 2,
+    "title": "Read Out of Bounds",
+    "page_number": 161
+  },
+  {
+    "toc_id": "toc-0147",
+    "parent_toc_id": "toc-0144",
+    "level": 2,
+    "title": "PHP ftp_genlist() Integer Overflow",
+    "page_number": 162
+  },
+  {
+    "toc_id": "toc-0148",
+    "parent_toc_id": "toc-0147",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 162
+  },
+  {
+    "toc_id": "toc-0149",
+    "parent_toc_id": "toc-0144",
+    "level": 2,
+    "title": "Python Hotshot Module",
+    "page_number": 163
+  },
+  {
+    "toc_id": "toc-0150",
+    "parent_toc_id": "toc-0149",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 163
+  },
+  {
+    "toc_id": "toc-0151",
+    "parent_toc_id": "toc-0144",
+    "level": 2,
+    "title": "Libcurl Read Out of Bounds",
+    "page_number": 164
+  },
+  {
+    "toc_id": "toc-0152",
+    "parent_toc_id": "toc-0151",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 164
+  },
+  {
+    "toc_id": "toc-0153",
+    "parent_toc_id": "toc-0144",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 164
+  },
+  {
+    "toc_id": "toc-0154",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 14: Subdomain Takeover",
+    "page_number": 167
+  },
+  {
+    "toc_id": "toc-0155",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Understanding Domain Names",
+    "page_number": 167
+  },
+  {
+    "toc_id": "toc-0156",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "How Subdomain Takeovers Work",
+    "page_number": 168
+  },
+  {
+    "toc_id": "toc-0157",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Ubiquiti Subdomain Takeover",
+    "page_number": 169
+  },
+  {
+    "toc_id": "toc-0158",
+    "parent_toc_id": "toc-0157",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 170
+  },
+  {
+    "toc_id": "toc-0159",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Scan.me Pointing to Zendesk",
+    "page_number": 170
+  },
+  {
+    "toc_id": "toc-0160",
+    "parent_toc_id": "toc-0159",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 170
+  },
+  {
+    "toc_id": "toc-0161",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Shopify Windsor Subdomain Takeover",
+    "page_number": 170
+  },
+  {
+    "toc_id": "toc-0162",
+    "parent_toc_id": "toc-0161",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 171
+  },
+  {
+    "toc_id": "toc-0163",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Snapchat Fastly Takeover",
+    "page_number": 171
+  },
+  {
+    "toc_id": "toc-0164",
+    "parent_toc_id": "toc-0163",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 172
+  },
+  {
+    "toc_id": "toc-0165",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Legal Robot Takeover",
+    "page_number": 172
+  },
+  {
+    "toc_id": "toc-0166",
+    "parent_toc_id": "toc-0165",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 173
+  },
+  {
+    "toc_id": "toc-0167",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Uber SendGrid Mail Takeover",
+    "page_number": 173
+  },
+  {
+    "toc_id": "toc-0168",
+    "parent_toc_id": "toc-0167",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 174
+  },
+  {
+    "toc_id": "toc-0169",
+    "parent_toc_id": "toc-0154",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 175
+  },
+  {
+    "toc_id": "toc-0170",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 15: Race Conditions",
+    "page_number": 177
+  },
+  {
+    "toc_id": "toc-0171",
+    "parent_toc_id": "toc-0170",
+    "level": 2,
+    "title": "Accepting a HackerOne Invite Multiple Times",
+    "page_number": 178
+  },
+  {
+    "toc_id": "toc-0172",
+    "parent_toc_id": "toc-0171",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 179
+  },
+  {
+    "toc_id": "toc-0173",
+    "parent_toc_id": "toc-0170",
+    "level": 2,
+    "title": "Exceeding Keybase Invitation Limits",
+    "page_number": 180
+  },
+  {
+    "toc_id": "toc-0174",
+    "parent_toc_id": "toc-0173",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 180
+  },
+  {
+    "toc_id": "toc-0175",
+    "parent_toc_id": "toc-0170",
+    "level": 2,
+    "title": "HackerOne Payments Race Condition",
+    "page_number": 181
+  },
+  {
+    "toc_id": "toc-0176",
+    "parent_toc_id": "toc-0175",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 182
+  },
+  {
+    "toc_id": "toc-0177",
+    "parent_toc_id": "toc-0170",
+    "level": 2,
+    "title": "Shopify Partners Race Condition",
+    "page_number": 182
+  },
+  {
+    "toc_id": "toc-0178",
+    "parent_toc_id": "toc-0177",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 183
+  },
+  {
+    "toc_id": "toc-0179",
+    "parent_toc_id": "toc-0170",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 184
+  },
+  {
+    "toc_id": "toc-0180",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 16: Insecure Direct Object References",
+    "page_number": 185
+  },
+  {
+    "toc_id": "toc-0181",
+    "parent_toc_id": "toc-0180",
+    "level": 2,
+    "title": "Finding Simple IDORs",
+    "page_number": 186
+  },
+  {
+    "toc_id": "toc-0182",
+    "parent_toc_id": "toc-0180",
+    "level": 2,
+    "title": "Finding More Complex IDORs",
+    "page_number": 186
+  },
+  {
+    "toc_id": "toc-0183",
+    "parent_toc_id": "toc-0180",
+    "level": 2,
+    "title": "Binary.com Privilege Escalation",
+    "page_number": 187
+  },
+  {
+    "toc_id": "toc-0184",
+    "parent_toc_id": "toc-0183",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0185",
+    "parent_toc_id": "toc-0180",
+    "level": 2,
+    "title": "Moneybird App Creation",
+    "page_number": 188
+  },
+  {
+    "toc_id": "toc-0186",
+    "parent_toc_id": "toc-0185",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 189
+  },
+  {
+    "toc_id": "toc-0187",
+    "parent_toc_id": "toc-0180",
+    "level": 2,
+    "title": "Twitter Mopub API Token Theft",
+    "page_number": 189
+  },
+  {
+    "toc_id": "toc-0188",
+    "parent_toc_id": "toc-0187",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 191
+  },
+  {
+    "toc_id": "toc-0189",
+    "parent_toc_id": "toc-0180",
+    "level": 2,
+    "title": "ACME Customer Information Disclosure",
+    "page_number": 191
+  },
+  {
+    "toc_id": "toc-0190",
+    "parent_toc_id": "toc-0189",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 192
+  },
+  {
+    "toc_id": "toc-0191",
+    "parent_toc_id": "toc-0180",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 193
+  },
+  {
+    "toc_id": "toc-0192",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 17: OAuth Vulnerabilities",
+    "page_number": 195
+  },
+  {
+    "toc_id": "toc-0193",
+    "parent_toc_id": "toc-0192",
+    "level": 2,
+    "title": "The OAuth Workflow",
+    "page_number": 196
+  },
+  {
+    "toc_id": "toc-0194",
+    "parent_toc_id": "toc-0192",
+    "level": 2,
+    "title": "Stealing Slack OAuth Tokens",
+    "page_number": 199
+  },
+  {
+    "toc_id": "toc-0195",
+    "parent_toc_id": "toc-0194",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 199
+  },
+  {
+    "toc_id": "toc-0196",
+    "parent_toc_id": "toc-0192",
+    "level": 2,
+    "title": "Passing Authentication with Default Passwords",
+    "page_number": 199
+  },
+  {
+    "toc_id": "toc-0197",
+    "parent_toc_id": "toc-0196",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 200
+  },
+  {
+    "toc_id": "toc-0198",
+    "parent_toc_id": "toc-0192",
+    "level": 2,
+    "title": "Stealing Microsoft Login Tokens",
+    "page_number": 201
+  },
+  {
+    "toc_id": "toc-0199",
+    "parent_toc_id": "toc-0198",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 202
+  },
+  {
+    "toc_id": "toc-0200",
+    "parent_toc_id": "toc-0192",
+    "level": 2,
+    "title": "Swiping Facebook Official Access Tokens",
+    "page_number": 202
+  },
+  {
+    "toc_id": "toc-0201",
+    "parent_toc_id": "toc-0200",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 203
+  },
+  {
+    "toc_id": "toc-0202",
+    "parent_toc_id": "toc-0192",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 204
+  },
+  {
+    "toc_id": "toc-0203",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 18: Application Logic and Configuration Vulnerabilities",
+    "page_number": 205
+  },
+  {
+    "toc_id": "toc-0204",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "Bypassing Shopify Administrator Privileges",
+    "page_number": 207
+  },
+  {
+    "toc_id": "toc-0205",
+    "parent_toc_id": "toc-0204",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 207
+  },
+  {
+    "toc_id": "toc-0206",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "Bypassing Twitter Account Protections",
+    "page_number": 208
+  },
+  {
+    "toc_id": "toc-0207",
+    "parent_toc_id": "toc-0206",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 208
+  },
+  {
+    "toc_id": "toc-0208",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "HackerOne Signal Manipulation",
+    "page_number": 208
+  },
+  {
+    "toc_id": "toc-0209",
+    "parent_toc_id": "toc-0208",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 209
+  },
+  {
+    "toc_id": "toc-0210",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "HackerOne Incorrect S3 Bucket Permissions",
+    "page_number": 209
+  },
+  {
+    "toc_id": "toc-0211",
+    "parent_toc_id": "toc-0210",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 211
+  },
+  {
+    "toc_id": "toc-0212",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "Bypassing GitLab Two-Factor Authentication",
+    "page_number": 211
+  },
+  {
+    "toc_id": "toc-0213",
+    "parent_toc_id": "toc-0212",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 212
+  },
+  {
+    "toc_id": "toc-0214",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "Yahoo! PHP Info Disclosure",
+    "page_number": 212
+  },
+  {
+    "toc_id": "toc-0215",
+    "parent_toc_id": "toc-0214",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 214
+  },
+  {
+    "toc_id": "toc-0216",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "HackerOne Hacktivity Voting",
+    "page_number": 214
+  },
+  {
+    "toc_id": "toc-0217",
+    "parent_toc_id": "toc-0216",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 215
+  },
+  {
+    "toc_id": "toc-0218",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "Accessing PornHub’s Memcache Installation",
+    "page_number": 216
+  },
+  {
+    "toc_id": "toc-0219",
+    "parent_toc_id": "toc-0218",
+    "level": 3,
+    "title": "Takeaways",
+    "page_number": 217
+  },
+  {
+    "toc_id": "toc-0220",
+    "parent_toc_id": "toc-0203",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 217
+  },
+  {
+    "toc_id": "toc-0221",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 19: Finding Your Own Bug Bounties",
+    "page_number": 219
+  },
+  {
+    "toc_id": "toc-0222",
+    "parent_toc_id": "toc-0221",
+    "level": 2,
+    "title": "Reconnaissance",
+    "page_number": 220
+  },
+  {
+    "toc_id": "toc-0223",
+    "parent_toc_id": "toc-0222",
+    "level": 3,
+    "title": "Subdomain Enumeration",
+    "page_number": 220
+  },
+  {
+    "toc_id": "toc-0224",
+    "parent_toc_id": "toc-0222",
+    "level": 3,
+    "title": "Port Scanning",
+    "page_number": 221
+  },
+  {
+    "toc_id": "toc-0225",
+    "parent_toc_id": "toc-0222",
+    "level": 3,
+    "title": "Screenshotting",
+    "page_number": 222
+  },
+  {
+    "toc_id": "toc-0226",
+    "parent_toc_id": "toc-0222",
+    "level": 3,
+    "title": "Content Discovery",
+    "page_number": 223
+  },
+  {
+    "toc_id": "toc-0227",
+    "parent_toc_id": "toc-0222",
+    "level": 3,
+    "title": "Previous Bugs",
+    "page_number": 224
+  },
+  {
+    "toc_id": "toc-0228",
+    "parent_toc_id": "toc-0221",
+    "level": 2,
+    "title": "Testing the Application",
+    "page_number": 224
+  },
+  {
+    "toc_id": "toc-0229",
+    "parent_toc_id": "toc-0228",
+    "level": 3,
+    "title": "The Technology Stack",
+    "page_number": 224
+  },
+  {
+    "toc_id": "toc-0230",
+    "parent_toc_id": "toc-0228",
+    "level": 3,
+    "title": "Functionality Mapping",
+    "page_number": 225
+  },
+  {
+    "toc_id": "toc-0231",
+    "parent_toc_id": "toc-0228",
+    "level": 3,
+    "title": "Finding Vulnerabilities",
+    "page_number": 226
+  },
+  {
+    "toc_id": "toc-0232",
+    "parent_toc_id": "toc-0221",
+    "level": 2,
+    "title": "Going Further",
+    "page_number": 228
+  },
+  {
+    "toc_id": "toc-0233",
+    "parent_toc_id": "toc-0232",
+    "level": 3,
+    "title": "Automating Your Work",
+    "page_number": 228
+  },
+  {
+    "toc_id": "toc-0234",
+    "parent_toc_id": "toc-0232",
+    "level": 3,
+    "title": "Looking at Mobile Apps",
+    "page_number": 228
+  },
+  {
+    "toc_id": "toc-0235",
+    "parent_toc_id": "toc-0232",
+    "level": 3,
+    "title": "Identifying New Fuctionality",
+    "page_number": 229
+  },
+  {
+    "toc_id": "toc-0236",
+    "parent_toc_id": "toc-0232",
+    "level": 3,
+    "title": "Tracking JavaScript Files",
+    "page_number": 229
+  },
+  {
+    "toc_id": "toc-0237",
+    "parent_toc_id": "toc-0232",
+    "level": 3,
+    "title": "Paying for Access to New Functionality",
+    "page_number": 229
+  },
+  {
+    "toc_id": "toc-0238",
+    "parent_toc_id": "toc-0232",
+    "level": 3,
+    "title": "Learning the Technology",
+    "page_number": 229
+  },
+  {
+    "toc_id": "toc-0239",
+    "parent_toc_id": "toc-0221",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 230
+  },
+  {
+    "toc_id": "toc-0240",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Chapter 20: Vulnerability Reports",
+    "page_number": 231
+  },
+  {
+    "toc_id": "toc-0241",
+    "parent_toc_id": "toc-0240",
+    "level": 2,
+    "title": "Read the Policy",
+    "page_number": 232
+  },
+  {
+    "toc_id": "toc-0242",
+    "parent_toc_id": "toc-0240",
+    "level": 2,
+    "title": "Include Details; Then Include More",
+    "page_number": 232
+  },
+  {
+    "toc_id": "toc-0243",
+    "parent_toc_id": "toc-0240",
+    "level": 2,
+    "title": "Reconfirm the Vulnerability",
+    "page_number": 233
+  },
+  {
+    "toc_id": "toc-0244",
+    "parent_toc_id": "toc-0240",
+    "level": 2,
+    "title": "Your Reputation",
+    "page_number": 233
+  },
+  {
+    "toc_id": "toc-0245",
+    "parent_toc_id": "toc-0240",
+    "level": 2,
+    "title": "Show Respect for the Company",
+    "page_number": 234
+  },
+  {
+    "toc_id": "toc-0246",
+    "parent_toc_id": "toc-0240",
+    "level": 2,
+    "title": "Appealing Bounty Rewards",
+    "page_number": 235
+  },
+  {
+    "toc_id": "toc-0247",
+    "parent_toc_id": "toc-0240",
+    "level": 2,
+    "title": "Summary",
+    "page_number": 236
+  },
+  {
+    "toc_id": "toc-0248",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Appendix A: Tools",
+    "page_number": 237
+  },
+  {
+    "toc_id": "toc-0249",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Web Proxies",
+    "page_number": 238
+  },
+  {
+    "toc_id": "toc-0250",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Subdomain Enumeration",
+    "page_number": 239
+  },
+  {
+    "toc_id": "toc-0251",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Discovery",
+    "page_number": 240
+  },
+  {
+    "toc_id": "toc-0252",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Screenshotting",
+    "page_number": 240
+  },
+  {
+    "toc_id": "toc-0253",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Port Scanning",
+    "page_number": 241
+  },
+  {
+    "toc_id": "toc-0254",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Reconnaissance",
+    "page_number": 241
+  },
+  {
+    "toc_id": "toc-0255",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Hacking Tools",
+    "page_number": 242
+  },
+  {
+    "toc_id": "toc-0256",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Mobile",
+    "page_number": 243
+  },
+  {
+    "toc_id": "toc-0257",
+    "parent_toc_id": "toc-0248",
+    "level": 2,
+    "title": "Browser Plug-Ins",
+    "page_number": 244
+  },
+  {
+    "toc_id": "toc-0258",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Appendix B: Resources",
+    "page_number": 245
+  },
+  {
+    "toc_id": "toc-0259",
+    "parent_toc_id": "toc-0258",
+    "level": 2,
+    "title": "Online Training",
+    "page_number": 245
+  },
+  {
+    "toc_id": "toc-0260",
+    "parent_toc_id": "toc-0258",
+    "level": 2,
+    "title": "Bug Bounty Platforms",
+    "page_number": 247
+  },
+  {
+    "toc_id": "toc-0261",
+    "parent_toc_id": "toc-0258",
+    "level": 2,
+    "title": "Recommended Reading",
+    "page_number": 248
+  },
+  {
+    "toc_id": "toc-0262",
+    "parent_toc_id": "toc-0258",
+    "level": 2,
+    "title": "Video Resources",
+    "page_number": 250
+  },
+  {
+    "toc_id": "toc-0263",
+    "parent_toc_id": "toc-0258",
+    "level": 2,
+    "title": "Recommended Blogs",
+    "page_number": 250
+  },
+  {
+    "toc_id": "toc-0264",
+    "parent_toc_id": null,
+    "level": 1,
+    "title": "Index",
+    "page_number": 253
+  }
+]
