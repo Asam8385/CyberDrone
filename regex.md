@@ -123,3 +123,90 @@ This is the fastest way to build intuition — much faster than reading tables.
 ## Quick Mental Model
 
 Think of regex as a **very literal-minded find**: you're describing the *shape* of text you want, character by character, using symbols instead of prose. Once you can name what each symbol does in isolation, reading a long pattern is just reading the symbols left to right and chaining the meanings together.
+
+
+
+
+### What is a regex, at the most basic level?
+
+A **regex** (regular expression) is just a **search pattern for text** — a mini-language for describing "what does the text I'm looking for look like?"
+
+Instead of searching for one exact word, you describe a _shape_ of text, and the computer finds anything matching that shape.
+
+Example: instead of searching for the exact word "cat", you could write a pattern that means "any word that starts with a letter and has 3 letters" — and it would match "cat", "dog", "run", etc.
+
+### The building blocks used in our pattern
+
+Our pattern is: \\w+|\[^\\w\\s\]
+
+Let's learn each piece **one at a time**, super slowly.
+
+#### Piece 1: \\w — "a word character"
+
+\\w is a **shortcut symbol** that means: _"any single letter, digit, or underscore."_
+
+So \\w matches ONE character from this list: a b c ... z A B C ... Z 0 1 2 ... 9 \_
+
+It does **not** match: spaces, punctuation like . , !, symbols like % #.
+
+Think of \\w as a stamp that checks one character at a time and asks: _"is this a letter, digit, or underscore?"_ If yes → match. If no → no match.
+
+#### Piece 2: + — "one or more of the thing before it"
+
+\+ doesn't match a character itself — it's a **modifier** that changes the meaning of whatever comes right before it.
+
+\+ means: _"one or more repeats of the previous thing."_
+
+So \\w+ means: _"one or more word characters, back to back."_
+
+**Example:** In the text hello, \\w+ doesn't just match the letter h — it greedily matches h, then checks "is the next character also \\w? yes, keep going" — and keeps grabbing letters until it hits something that ISN'T a word character (like a space). So \\w+ matches the whole word hello as one single match.
+
+#### Piece 3: | — "OR"
+
+| is just the word **"or"**. It lets you say "match THIS pattern, or THAT pattern."
+
+So A|B means: "match A, or if that doesn't work, try matching B."
+
+In our pattern \\w+|\[^\\w\\s\], the | splits it into two options:
+
+*   Option 1: \\w+
+    
+*   Option 2: \[^\\w\\s\]
+    
+
+At every position in the text, the regex tries option 1 first; if that can't match starting there, it tries option 2.
+
+#### Piece 4: \[...\] — "a character class" (a menu of choices)
+
+Square brackets \[ \] mean: _"match exactly ONE character, and it has to be one of the characters listed inside these brackets."_
+
+Example: \[abc\] matches a single character that is either a, b, or c. Just one character — not all three.
+
+#### Piece 5: ^ inside brackets — "NOT" (negation)
+
+Normally \[abc\] means "match a, b, or c." But if you put a ^ as the **very first character** inside the brackets, it flips the meaning to **negation**: _"match any ONE character that is NOT in this list."_
+
+Example: \[^abc\] matches any single character that is **anything except** a, b, or c. So it would match d, 9, !, a space — anything, as long as it's not a, b, or c.
+
+#### Piece 6: \\s — "a whitespace character"
+
+Like \\w, this is another shortcut symbol. \\s matches ONE character that is whitespace — a space, a tab, or a newline (the invisible characters used for spacing/line breaks).
+
+#### Now let's combine pieces 4, 5, 6: \[^\\w\\s\]
+
+Read it left to right:
+
+*   \[^ → "match one character that is NOT any of the following"
+    
+*   \\w → word characters (letters/digits/underscore)
+    
+*   \\s → whitespace characters (spaces, tabs, newlines)
+    
+*   \] → end of the list
+    
+
+So \[^\\w\\s\] means: **"match exactly one character that is neither a letter/digit/underscore, nor whitespace."**
+
+What's left over, if you rule out letters/digits/underscore AND whitespace? **Punctuation and symbols** — things like . , ! ? % # @ ( ) - " etc.
+
+So \[^\\w\\s\] = "grab one punctuation/symbol character."

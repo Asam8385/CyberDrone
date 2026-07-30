@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
-import unicodedata
-from collections import Counter, defaultdict
-from difflib import SequenceMatcher
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -26,35 +25,72 @@ DEFAULT_MANIFEST_PATH = (
 EXTRACTED_ROOT = PROJECT_ROOT / "data" / "extracted"
 PROCESSED_ROOT = PROJECT_ROOT / "data" / "processed"
 
-NON_INDEXABLE_TITLES = (
-    re.compile(r"^cover$", re.I),
-    re.compile(r"^copyright$", re.I),
-    re.compile(r"^credits$", re.I),
-    re.compile(r"^brief contents$", re.I),
-    re.compile(r"^contents in detail$", re.I),
-    re.compile(r"^table of contents$", re.I),
-    re.compile(r"^foreword.*$", re.I),
-    re.compile(r"^acknowledg(e)?ments$", re.I),
-    re.compile(r"^about the author$", re.I),
-    re.compile(r"^about the reviewer$", re.I),
-    re.compile(r"^index$", re.I),
-    re.compile(r"^www\..*$", re.I),
+# This is an approximate, model-independent tokenizer.
+# Use the embedding model's real tokenizer during indexing.
+TOKEN_PATTERN = re.compile(
+    r"\w+|[^\w\s]",
+    flags=re.UNICODE,
 )
 
-TITLE_PREFIX_PATTERNS = (
-    re.compile(
-        r"^\s*chapter\s+\d+\s*[:.-]?\s*",
-        re.I,
-    ),
-    re.compile(
-        r"^\s*appendix\s+[a-z0-9]+\s*[:.-]?\s*",
-        re.I,
-    ),
-    re.compile(
-        r"^\s*part\s+[ivxlcdm0-9]+\s*[:.-]?\s*",
-        re.I,
-    ),
-)
+CHUNK_PROFILES: dict[str, dict[str, int]] = {
+    "case_study": {
+        "maximum_tokens": 450,
+        "overlap_tokens": 60,
+        "minimum_tokens": 60,
+    },
+    "technical_book": {
+        "maximum_tokens": 500,
+        "overlap_tokens": 75,
+        "minimum_tokens": 70,
+    },
+    "training_book": {
+        "maximum_tokens": 500,
+        "overlap_tokens": 75,
+        "minimum_tokens": 70,
+    },
+    "command_reference": {
+        "maximum_tokens": 250,
+        "overlap_tokens": 30,
+        "minimum_tokens": 25,
+    },
+    "default": {
+        "maximum_tokens": 450,
+        "overlap_tokens": 60,
+        "minimum_tokens": 60,
+    },
+}
+
+
+@dataclass(frozen=True)
+class TextAtom:
+    text: str
+    page_number: int
+    source_block_id: str
+    likely_code_block: bool
+
+    @property
+    def token_count(self) -> int:
+        return approximate_token_count(self.text)
+
+
+def approximate_token_count(text: str) -> int:
+    return len(TOKEN_PATTERN.findall(text))
+
+
+def normalize_for_hash(text: str) -> str:
+    return re.sub(
+        r"\s+",
+        " ",
+        text.casefold(),
+    ).strip()
+
+
+def calculate_text_hash(text: str) -> str:
+    normalized = normalize_for_hash(text)
+
+    return hashlib.sha256(
+        normalized.encode("utf-8")
+    ).hexdigest()
 
 
 def load_json(path: Path) -> Any:
@@ -121,1018 +157,729 @@ def write_jsonl(
 
 
 def load_manifest(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Manifest not found: {path}"
+        )
+
     with path.open("r", encoding="utf-8") as file:
         manifest = yaml.safe_load(file) or {}
 
     documents = manifest.get("documents", [])
 
-    if not documents:
+    if not isinstance(documents, list) or not documents:
         raise ValueError(
-            "No documents were found in documents.yaml"
+            "documents.yaml must contain a "
+            "non-empty 'documents' list."
         )
 
     return documents
 
 
-def collapse_whitespace(text: str) -> str:
-    text = text.replace("\u00ad", "")
-    text = text.replace("\xa0", " ")
-    return re.sub(r"\s+", " ", text).strip()
-
-
-def normalize_heading(text: str) -> str:
-    text = unicodedata.normalize("NFKC", text)
-    text = collapse_whitespace(text)
-    text = text.casefold()
-    text = re.sub(r"[^\w]+", " ", text)
-    return collapse_whitespace(text)
-
-
-def heading_skeleton(text: str) -> str:
-    normalized = normalize_heading(text)
-    return re.sub(r"[^a-z0-9]+", "", normalized)
-
-
-def slugify(text: str, maximum_length: int = 70) -> str:
-    value = normalize_heading(text)
-    value = re.sub(r"[^a-z0-9]+", "-", value)
-    value = value.strip("-")
-
-    if not value:
-        value = "section"
-
-    return value[:maximum_length].rstrip("-")
-
-
-def create_title_variants(title: str) -> list[str]:
-    variants = {collapse_whitespace(title)}
-
-    for pattern in TITLE_PREFIX_PATTERNS:
-        stripped = pattern.sub("", title).strip()
-
-        if stripped:
-            variants.add(stripped)
-
-    return sorted(variants)
-
-
-def calculate_heading_similarity(
-    expected_title: str,
-    candidate_text: str,
-) -> float:
-    candidate_text = collapse_whitespace(candidate_text)
-
-    if not candidate_text:
-        return 0.0
-
-    best_score = 0.0
-
-    for variant in create_title_variants(expected_title):
-        variant_normalized = normalize_heading(variant)
-        candidate_normalized = normalize_heading(
-            candidate_text
-        )
-
-        variant_skeleton = heading_skeleton(variant)
-        candidate_skeleton = heading_skeleton(
-            candidate_text
-        )
-
-        if not variant_skeleton or not candidate_skeleton:
-            continue
-
-        if variant_skeleton == candidate_skeleton:
-            return 1.0
-
-        if (
-            candidate_skeleton.startswith(variant_skeleton)
-            and len(candidate_skeleton)
-            <= len(variant_skeleton) * 2
-        ):
-            best_score = max(best_score, 0.96)
-
-        if (
-            variant_skeleton in candidate_skeleton
-            and len(candidate_skeleton)
-            <= len(variant_skeleton) * 2
-        ):
-            best_score = max(best_score, 0.92)
-
-        skeleton_similarity = SequenceMatcher(
-            None,
-            variant_skeleton,
-            candidate_skeleton,
-        ).ratio()
-
-        word_similarity = SequenceMatcher(
-            None,
-            variant_normalized,
-            candidate_normalized,
-        ).ratio()
-
-        expected_words = set(variant_normalized.split())
-        candidate_words = set(candidate_normalized.split())
-
-        if expected_words and candidate_words:
-            word_overlap = len(
-                expected_words & candidate_words
-            ) / len(expected_words | candidate_words)
-        else:
-            word_overlap = 0.0
-
-        score = max(
-            skeleton_similarity,
-            word_similarity,
-            word_overlap,
-        )
-
-        best_score = max(best_score, score)
-
-    return round(best_score, 4)
-
-
-def collect_block_font_statistics(
-    block: dict[str, Any],
-) -> dict[str, Any]:
-    total_characters = 0
-    bold_characters = 0
-    monospaced_characters = 0
-    maximum_font_size = 0.0
-    font_weights: Counter[float] = Counter()
-
-    for line in block.get("lines", []):
-        for span in line.get("spans", []):
-            text = str(span.get("text", ""))
-            character_count = len(text.strip())
-
-            if character_count == 0:
-                continue
-
-            font_size = float(span.get("font_size", 0.0))
-            rounded_size = round(font_size * 2) / 2
-
-            total_characters += character_count
-            maximum_font_size = max(
-                maximum_font_size,
-                font_size,
-            )
-
-            font_weights[rounded_size] += character_count
-
-            if span.get("is_bold"):
-                bold_characters += character_count
-
-            if span.get("is_monospaced"):
-                monospaced_characters += character_count
-
-    bold_ratio = (
-        bold_characters / total_characters
-        if total_characters
-        else 0.0
-    )
-
-    monospaced_ratio = (
-        monospaced_characters / total_characters
-        if total_characters
-        else 0.0
-    )
-
-    return {
-        "maximum_font_size": maximum_font_size,
-        "bold_ratio": bold_ratio,
-        "monospaced_ratio": monospaced_ratio,
-        "font_weights": font_weights,
-    }
-
-
-def flatten_pages(
+def build_source_block_lookup(
     pages: list[dict[str, Any]],
-    content_start_page: int,
-    content_end_page: int | None,
-) -> tuple[
-    list[dict[str, Any]],
-    dict[int, dict[str, Any]],
-]:
-    units: list[dict[str, Any]] = []
-    pages_by_number: dict[int, dict[str, Any]] = {}
+) -> dict[str, dict[str, Any]]:
+    lookup: dict[str, dict[str, Any]] = {}
 
-    sorted_pages = sorted(
-        pages,
-        key=lambda page: page["page_number"],
-    )
-
-    for page in sorted_pages:
+    for page in pages:
         page_number = int(page["page_number"])
-        pages_by_number[page_number] = page
-
-        if page_number < content_start_page:
-            continue
-
-        if (
-            content_end_page is not None
-            and page_number > content_end_page
-        ):
-            continue
 
         for block in page.get("blocks", []):
             if block.get("is_repeated_margin"):
                 continue
 
-            text = str(block.get("text", "")).strip()
+            text = str(
+                block.get("text", "")
+            ).strip()
 
             if not text:
                 continue
 
-            statistics = collect_block_font_statistics(
-                block
+            block_index = int(block["block_index"])
+
+            source_block_id = (
+                f"page-{page_number:04d}/"
+                f"block-{block_index:03d}"
             )
 
-            units.append(
-                {
-                    "global_index": len(units),
-                    "source_block_id": (
-                        f"page-{page_number:04d}/"
-                        f"block-{int(block['block_index']):03d}"
-                    ),
-                    "page_number": page_number,
-                    "block_index": int(
-                        block["block_index"]
-                    ),
-                    "text": text,
-                    "line_count": len(
-                        block.get("lines", [])
-                    ),
-                    "bbox": block.get("bbox", []),
-                    "likely_code_block": bool(
-                        block.get(
-                            "likely_code_block",
-                            False,
-                        )
-                    ),
-                    "maximum_font_size": statistics[
-                        "maximum_font_size"
-                    ],
-                    "bold_ratio": statistics["bold_ratio"],
-                    "monospaced_ratio": statistics[
-                        "monospaced_ratio"
-                    ],
-                    "font_weights": statistics[
-                        "font_weights"
-                    ],
-                }
-            )
+            lookup[source_block_id] = {
+                "source_block_id": source_block_id,
+                "page_number": page_number,
+                "block_index": block_index,
+                "text": text,
+                "likely_code_block": bool(
+                    block.get(
+                        "likely_code_block",
+                        False,
+                    )
+                ),
+            }
 
-    return units, pages_by_number
+    return lookup
 
 
-def detect_body_font_size(
-    units: list[dict[str, Any]],
-) -> float:
-    weights: Counter[float] = Counter()
-
-    for unit in units:
-        if unit["likely_code_block"]:
-            continue
-
-        for font_size, count in unit[
-            "font_weights"
-        ].items():
-            if 6.0 <= font_size <= 16.0:
-                weights[font_size] += count
-
-    if not weights:
-        return 10.0
-
-    return float(weights.most_common(1)[0][0])
-
-
-def is_numeric_chapter_marker(text: str) -> bool:
-    value = collapse_whitespace(text)
-
-    return bool(
-        re.fullmatch(
-            r"(?:\d+|[ivxlcdm]+)",
-            value,
-            flags=re.I,
+def get_chunk_profile(
+    document_config: dict[str, Any],
+    maximum_tokens_override: int | None,
+    overlap_tokens_override: int | None,
+) -> dict[str, int]:
+    profile_name = str(
+        document_config.get(
+            "chunk_profile",
+            "default",
         )
     )
 
+    profile = dict(
+        CHUNK_PROFILES.get(
+            profile_name,
+            CHUNK_PROFILES["default"],
+        )
+    )
 
-def is_heading_candidate(
-    unit: dict[str, Any],
-    body_font_size: float,
-) -> bool:
-    text = collapse_whitespace(unit["text"])
+    manifest_overrides = document_config.get(
+        "chunking",
+        {},
+    )
 
-    if len(text) < 2 or len(text) > 180:
-        return False
+    if isinstance(manifest_overrides, dict):
+        for property_name in (
+            "maximum_tokens",
+            "overlap_tokens",
+            "minimum_tokens",
+        ):
+            if property_name in manifest_overrides:
+                profile[property_name] = int(
+                    manifest_overrides[
+                        property_name
+                    ]
+                )
 
-    if unit["likely_code_block"]:
-        return False
+    if maximum_tokens_override is not None:
+        profile["maximum_tokens"] = (
+            maximum_tokens_override
+        )
 
-    if is_numeric_chapter_marker(text):
-        return False
+    if overlap_tokens_override is not None:
+        profile["overlap_tokens"] = (
+            overlap_tokens_override
+        )
 
-    if "http://" in text.casefold():
-        return False
+    if profile["maximum_tokens"] <= 0:
+        raise ValueError(
+            "maximum_tokens must be greater than zero"
+        )
 
-    if "https://" in text.casefold():
-        return False
+    if profile["minimum_tokens"] < 0:
+        raise ValueError(
+            "minimum_tokens cannot be negative"
+        )
 
-    word_count = len(text.split())
-
-    if word_count > 22:
-        return False
-
-    if unit["line_count"] > 4:
-        return False
+    if profile["overlap_tokens"] < 0:
+        raise ValueError(
+            "overlap_tokens cannot be negative"
+        )
 
     if (
-        text.endswith(".")
-        and not text.casefold().startswith("chapter ")
+        profile["overlap_tokens"]
+        >= profile["maximum_tokens"]
     ):
-        return False
-
-    maximum_size = unit["maximum_font_size"]
-    bold_ratio = unit["bold_ratio"]
-
-    explicit_heading = bool(
-        re.match(
-            r"^(?:chapter|part|appendix)\s+",
-            text,
-            flags=re.I,
-        )
-    )
-
-    large_font = (
-        maximum_size >= body_font_size * 1.15
-    )
-
-    bold_heading = (
-        bold_ratio >= 0.65
-        and maximum_size >= body_font_size * 0.95
-    )
-
-    return explicit_heading or large_font or bold_heading
-
-
-def infer_heading_level(
-    unit: dict[str, Any],
-    units: list[dict[str, Any]],
-    body_font_size: float,
-) -> int:
-    text = collapse_whitespace(unit["text"])
-
-    if re.match(
-        r"^(?:chapter|part|appendix)\s+",
-        text,
-        flags=re.I,
-    ):
-        return 1
-
-    previous_index = unit["global_index"] - 1
-
-    if previous_index >= 0:
-        previous = units[previous_index]
-
-        if (
-            previous["page_number"]
-            == unit["page_number"]
-            and is_numeric_chapter_marker(
-                previous["text"]
-            )
-            and previous["maximum_font_size"]
-            >= body_font_size * 3
-        ):
-            return 1
-
-    maximum_size = unit["maximum_font_size"]
-
-    if maximum_size >= body_font_size * 1.45:
-        return 1
-
-    if maximum_size >= body_font_size * 1.15:
-        return 2
-
-    return 3
-
-
-def create_unit_page_map(
-    units: list[dict[str, Any]],
-) -> dict[int, list[dict[str, Any]]]:
-    mapping: dict[int, list[dict[str, Any]]] = (
-        defaultdict(list)
-    )
-
-    for unit in units:
-        mapping[unit["page_number"]].append(unit)
-
-    return dict(mapping)
-
-
-def find_toc_anchor(
-    toc_entry: dict[str, Any],
-    units_by_page: dict[int, list[dict[str, Any]]],
-    body_font_size: float,
-    minimum_global_index: int,
-    used_indices: set[int],
-) -> tuple[dict[str, Any] | None, float, str]:
-    expected_page = int(toc_entry["page_number"])
-    expected_title = str(toc_entry["title"])
-
-    best_unit: dict[str, Any] | None = None
-    best_score = 0.0
-
-    page_offsets = (0, 1, -1)
-
-    for page_offset in page_offsets:
-        page_number = expected_page + page_offset
-
-        for unit in units_by_page.get(page_number, []):
-            global_index = unit["global_index"]
-
-            if global_index < minimum_global_index:
-                continue
-
-            if global_index in used_indices:
-                continue
-
-            score = calculate_heading_similarity(
-                expected_title,
-                unit["text"],
-            )
-
-            if is_heading_candidate(
-                unit,
-                body_font_size,
-            ):
-                score = min(1.0, score + 0.03)
-
-            score -= abs(page_offset) * 0.04
-
-            if score > best_score:
-                best_score = score
-                best_unit = unit
-
-    if best_unit is not None and best_score >= 0.64:
-        return (
-            best_unit,
-            round(best_score, 4),
-            "toc-text-anchor",
+        raise ValueError(
+            "overlap_tokens must be smaller than "
+            "maximum_tokens"
         )
 
-    fallback_candidates: list[dict[str, Any]] = []
-
-    for page_offset in (0, 1, 2):
-        page_number = expected_page + page_offset
-
-        for unit in units_by_page.get(page_number, []):
-            if unit["global_index"] < minimum_global_index:
-                continue
-
-            if unit["global_index"] in used_indices:
-                continue
-
-            fallback_candidates.append(unit)
-
-    heading_candidates = [
-        unit
-        for unit in fallback_candidates
-        if is_heading_candidate(
-            unit,
-            body_font_size,
-        )
-    ]
-
-    if heading_candidates:
-        return (
-            heading_candidates[0],
-            0.0,
-            "toc-heading-fallback",
-        )
-
-    if fallback_candidates:
-        return (
-            fallback_candidates[0],
-            0.0,
-            "toc-page-fallback",
-        )
-
-    return None, 0.0, "unresolved"
+    return profile
 
 
-def build_toc_events(
-    toc: list[dict[str, Any]],
-    units: list[dict[str, Any]],
-    body_font_size: float,
-) -> tuple[
-    list[dict[str, Any]],
-    list[str],
-]:
-    units_by_page = create_unit_page_map(units)
-    events: list[dict[str, Any]] = []
-    warnings: list[str] = []
-    used_indices: set[int] = set()
-    minimum_global_index = 0
-
-    for toc_entry in toc:
-        anchor, score, method = find_toc_anchor(
-            toc_entry=toc_entry,
-            units_by_page=units_by_page,
-            body_font_size=body_font_size,
-            minimum_global_index=minimum_global_index,
-            used_indices=used_indices,
-        )
-
-        if anchor is None:
-            warnings.append(
-                f"Could not resolve TOC entry "
-                f"'{toc_entry['title']}' on page "
-                f"{toc_entry['page_number']}."
-            )
-            continue
-
-        global_index = anchor["global_index"]
-        used_indices.add(global_index)
-        minimum_global_index = global_index + 1
-
-        events.append(
-            {
-                "event_id": toc_entry["toc_id"],
-                "parent_event_id": toc_entry.get(
-                    "parent_toc_id"
-                ),
-                "title": collapse_whitespace(
-                    toc_entry["title"]
-                ),
-                "level": int(toc_entry["level"]),
-                "anchor_index": global_index,
-                "anchor_page": anchor["page_number"],
-                "anchor_block_id": anchor[
-                    "source_block_id"
-                ],
-                "anchor_score": score,
-                "detection_method": method,
-            }
-        )
-
-    return events, warnings
-
-
-def find_manual_chapter_anchor(
-    hint: dict[str, Any],
-    units_by_page: dict[int, list[dict[str, Any]]],
-    body_font_size: float,
-) -> dict[str, Any] | None:
-    page_number = int(hint["page_number"])
-
-    candidates = [
-        unit
-        for unit in units_by_page.get(page_number, [])
-        if not is_numeric_chapter_marker(unit["text"])
-    ]
-
-    if not candidates:
-        return None
-
-    heading_candidates = [
-        unit
-        for unit in candidates
-        if is_heading_candidate(
-            unit,
-            body_font_size,
-        )
-    ]
-
-    if heading_candidates:
-        return max(
-            heading_candidates,
-            key=lambda unit: (
-                unit["maximum_font_size"],
-                unit["bold_ratio"],
-                -unit["block_index"],
-            ),
-        )
-
-    return candidates[0]
-
-
-def build_font_events(
-    document_config: dict[str, Any],
-    units: list[dict[str, Any]],
-    body_font_size: float,
-) -> tuple[
-    list[dict[str, Any]],
-    list[str],
-]:
-    units_by_page = create_unit_page_map(units)
-    warnings: list[str] = []
-    events_by_anchor: dict[int, dict[str, Any]] = {}
-
-    for unit in units:
-        if not is_heading_candidate(
-            unit,
-            body_font_size,
-        ):
-            continue
-
-        level = infer_heading_level(
-            unit=unit,
-            units=units,
-            body_font_size=body_font_size,
-        )
-
-        events_by_anchor[unit["global_index"]] = {
-            "event_id": None,
-            "parent_event_id": None,
-            "title": collapse_whitespace(unit["text"]),
-            "level": level,
-            "anchor_index": unit["global_index"],
-            "anchor_page": unit["page_number"],
-            "anchor_block_id": unit[
-                "source_block_id"
-            ],
-            "anchor_score": 1.0,
-            "detection_method": "font-heading",
-        }
-
-    for hint_index, hint in enumerate(
-        document_config.get("chapter_starts", []),
-        start=1,
-    ):
-        anchor = find_manual_chapter_anchor(
-            hint=hint,
-            units_by_page=units_by_page,
-            body_font_size=body_font_size,
-        )
-
-        if anchor is None:
-            warnings.append(
-                f"Could not resolve manual chapter "
-                f"'{hint['title']}' on page "
-                f"{hint['page_number']}."
-            )
-            continue
-
-        events_by_anchor[anchor["global_index"]] = {
-            "event_id": f"manual-{hint_index:04d}",
-            "parent_event_id": None,
-            "title": collapse_whitespace(
-                hint["title"]
-            ),
-            "level": int(hint.get("level", 1)),
-            "anchor_index": anchor["global_index"],
-            "anchor_page": anchor["page_number"],
-            "anchor_block_id": anchor[
-                "source_block_id"
-            ],
-            "anchor_score": 1.0,
-            "detection_method": "manual-chapter-anchor",
-        }
-
-    events = sorted(
-        events_by_anchor.values(),
-        key=lambda event: event["anchor_index"],
-    )
-
-    level_stack: dict[int, str] = {}
-
-    for event_index, event in enumerate(
-        events,
-        start=1,
-    ):
-        if not event["event_id"]:
-            event["event_id"] = (
-                f"font-{event_index:04d}"
-            )
-
-        level = event["level"]
-
-        event["parent_event_id"] = (
-            level_stack.get(level - 1)
-            if level > 1
-            else None
-        )
-
-        level_stack[level] = event["event_id"]
-
-        for existing_level in list(level_stack):
-            if existing_level > level:
-                del level_stack[existing_level]
-
-    return events, warnings
-
-
-def build_heading_path(
-    event: dict[str, Any],
-    events_by_id: dict[str, dict[str, Any]],
+def split_text_by_token_budget(
+    text: str,
+    maximum_tokens: int,
 ) -> list[str]:
-    titles: list[str] = []
-    current: dict[str, Any] | None = event
-    visited: set[str] = set()
+    """
+    Split a single oversized source block.
 
-    while current is not None:
-        event_id = current["event_id"]
-
-        if event_id in visited:
-            break
-
-        visited.add(event_id)
-        titles.append(current["title"])
-
-        parent_id = current.get("parent_event_id")
-
-        if not parent_id:
-            break
-
-        current = events_by_id.get(parent_id)
-
-    return list(reversed(titles))
-
-
-def is_indexable_title(title: str) -> bool:
-    normalized = collapse_whitespace(title)
-
-    return not any(
-        pattern.match(normalized)
-        for pattern in NON_INDEXABLE_TITLES
+    Most chunks remain aligned to PDF text blocks. This
+    function is only used when one block alone exceeds
+    the configured maximum.
+    """
+    token_matches = list(
+        TOKEN_PATTERN.finditer(text)
     )
 
+    if len(token_matches) <= maximum_tokens:
+        return [text]
 
-def collect_table_ids(
-    pages_by_number: dict[int, dict[str, Any]],
-    page_start: int,
-    page_end: int,
-) -> list[str]:
-    table_ids: list[str] = []
+    pieces: list[str] = []
+    start_token_index = 0
 
-    for page_number in range(
-        page_start,
-        page_end + 1,
-    ):
-        page = pages_by_number.get(page_number)
+    while start_token_index < len(token_matches):
+        end_token_index = min(
+            start_token_index + maximum_tokens,
+            len(token_matches),
+        )
 
-        if not page:
+        character_start = token_matches[
+            start_token_index
+        ].start()
+
+        character_end = token_matches[
+            end_token_index - 1
+        ].end()
+
+        piece = text[
+            character_start:character_end
+        ].strip()
+
+        if piece:
+            pieces.append(piece)
+
+        start_token_index = end_token_index
+
+    return pieces
+
+
+def build_section_atoms(
+    section: dict[str, Any],
+    block_lookup: dict[str, dict[str, Any]],
+    maximum_tokens: int,
+) -> tuple[list[TextAtom], list[str]]:
+    atoms: list[TextAtom] = []
+    missing_blocks: list[str] = []
+
+    source_block_ids = section.get(
+        "source_block_ids",
+        [],
+    )
+
+    for source_block_id in source_block_ids:
+        block = block_lookup.get(source_block_id)
+
+        if block is None:
+            missing_blocks.append(source_block_id)
             continue
 
-        table_ids.extend(
-            page.get("table_ids", [])
+        pieces = split_text_by_token_budget(
+            text=block["text"],
+            maximum_tokens=maximum_tokens,
         )
 
-    return list(dict.fromkeys(table_ids))
-
-
-def build_sections_from_events(
-    document_record: dict[str, Any],
-    events: list[dict[str, Any]],
-    units: list[dict[str, Any]],
-    pages_by_number: dict[int, dict[str, Any]],
-    minimum_section_characters: int,
-) -> list[dict[str, Any]]:
-    if not events:
-        return []
-
-    events = sorted(
-        events,
-        key=lambda event: event["anchor_index"],
-    )
-
-    events_by_id = {
-        event["event_id"]: event
-        for event in events
-    }
-
-    section_ids_by_event: dict[str, str] = {}
-
-    for section_number, event in enumerate(
-        events,
-        start=1,
-    ):
-        section_ids_by_event[event["event_id"]] = (
-            f"{document_record['document_id']}/"
-            f"{section_number:04d}-"
-            f"{slugify(event['title'])}"
-        )
-
-    sections: list[dict[str, Any]] = []
-
-    for event_index, event in enumerate(events):
-        start_index = int(event["anchor_index"])
-
-        if event_index + 1 < len(events):
-            end_index = int(
-                events[event_index + 1][
-                    "anchor_index"
-                ]
+        for piece in pieces:
+            atoms.append(
+                TextAtom(
+                    text=piece,
+                    page_number=block[
+                        "page_number"
+                    ],
+                    source_block_id=(
+                        source_block_id
+                    ),
+                    likely_code_block=block[
+                        "likely_code_block"
+                    ],
+                )
             )
-        else:
-            end_index = len(units)
 
-        if end_index <= start_index:
-            continue
-
-        section_units = units[
-            start_index:end_index
-        ]
-
-        if not section_units:
-            continue
-
-        text = "\n\n".join(
-            unit["text"] for unit in section_units
+    # Fallback for a section whose source blocks could not
+    # be resolved but which still has section text.
+    if not atoms:
+        fallback_text = str(
+            section.get("text", "")
         ).strip()
 
-        page_start = min(
-            unit["page_number"]
-            for unit in section_units
+        if fallback_text:
+            fallback_page = int(
+                section.get("page_start", 1)
+            )
+
+            pieces = split_text_by_token_budget(
+                text=fallback_text,
+                maximum_tokens=maximum_tokens,
+            )
+
+            for piece_index, piece in enumerate(
+                pieces,
+                start=1,
+            ):
+                atoms.append(
+                    TextAtom(
+                        text=piece,
+                        page_number=fallback_page,
+                        source_block_id=(
+                            f"section-fallback/"
+                            f"{piece_index:03d}"
+                        ),
+                        likely_code_block=bool(
+                            section.get(
+                                "contains_code",
+                                False,
+                            )
+                        ),
+                    )
+                )
+
+    return atoms, missing_blocks
+
+
+def select_overlap_atoms(
+    atoms: list[TextAtom],
+    overlap_token_budget: int,
+) -> list[TextAtom]:
+    if overlap_token_budget <= 0:
+        return []
+
+    selected: list[TextAtom] = []
+    selected_token_count = 0
+
+    for atom in reversed(atoms):
+        atom_token_count = atom.token_count
+
+        if (
+            selected_token_count
+            + atom_token_count
+            > overlap_token_budget
+        ):
+            break
+
+        selected.append(atom)
+        selected_token_count += atom_token_count
+
+    return list(reversed(selected))
+
+
+def chunk_atoms(
+    atoms: list[TextAtom],
+    maximum_tokens: int,
+    overlap_tokens: int,
+) -> list[list[TextAtom]]:
+    if not atoms:
+        return []
+
+    chunks: list[list[TextAtom]] = []
+    current_atoms: list[TextAtom] = []
+    current_token_count = 0
+
+    for atom in atoms:
+        atom_token_count = atom.token_count
+
+        if (
+            current_atoms
+            and current_token_count
+            + atom_token_count
+            > maximum_tokens
+        ):
+            chunks.append(current_atoms)
+
+            overlap_atoms = select_overlap_atoms(
+                atoms=current_atoms,
+                overlap_token_budget=(
+                    overlap_tokens
+                ),
+            )
+
+            # Ensure that overlap plus the next atom does not
+            # exceed the configured maximum.
+            while (
+                overlap_atoms
+                and sum(
+                    overlap_atom.token_count
+                    for overlap_atom
+                    in overlap_atoms
+                )
+                + atom_token_count
+                > maximum_tokens
+            ):
+                overlap_atoms.pop(0)
+
+            current_atoms = overlap_atoms
+
+            current_token_count = sum(
+                overlap_atom.token_count
+                for overlap_atom
+                in current_atoms
+            )
+
+        current_atoms.append(atom)
+        current_token_count += atom_token_count
+
+    if current_atoms:
+        chunks.append(current_atoms)
+
+    return chunks
+
+
+def combine_atom_text(
+    atoms: list[TextAtom],
+) -> str:
+    return "\n\n".join(
+        atom.text.strip()
+        for atom in atoms
+        if atom.text.strip()
+    ).strip()
+
+
+def build_embedding_text(
+    document_record: dict[str, Any],
+    section: dict[str, Any],
+    chunk_text: str,
+) -> str:
+    heading_path = " > ".join(
+        section.get(
+            "heading_path",
+            [section["title"]],
+        )
+    )
+
+    values = [
+        f"Document: {document_record['title']}",
+        f"Section: {heading_path}",
+    ]
+
+    publication_year = document_record.get(
+        "publication_year"
+    )
+
+    if publication_year is not None:
+        values.append(
+            f"Publication year: {publication_year}"
         )
 
-        page_end = max(
-            unit["page_number"]
-            for unit in section_units
+    document_type = document_record.get(
+        "document_type"
+    )
+
+    if document_type:
+        values.append(
+            f"Document type: {document_type}"
         )
 
-        parent_event_id = event.get(
-            "parent_event_id"
+    domain = document_record.get("domain")
+
+    if domain:
+        values.append(
+            f"Domain: {domain}"
         )
 
-        parent_section_id = (
-            section_ids_by_event.get(parent_event_id)
-            if parent_event_id
-            else None
-        )
+    values.extend(
+        [
+            "",
+            chunk_text,
+        ]
+    )
 
-        heading_path = build_heading_path(
-            event=event,
-            events_by_id=events_by_id,
+    return "\n".join(values).strip()
+
+
+def create_parent_record(
+    section: dict[str, Any],
+    document_record: dict[str, Any],
+    atoms: list[TextAtom],
+) -> dict[str, Any]:
+    text = combine_atom_text(atoms)
+
+    page_numbers = [
+        atom.page_number for atom in atoms
+    ]
+
+    page_start = (
+        min(page_numbers)
+        if page_numbers
+        else int(section["page_start"])
+    )
+
+    page_end = (
+        max(page_numbers)
+        if page_numbers
+        else int(section["page_end"])
+    )
+
+    source_block_ids = list(
+        dict.fromkeys(
+            atom.source_block_id
+            for atom in atoms
+        )
+    )
+
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "parent_id": section["section_id"],
+        "section_id": section["section_id"],
+        "document_id": section["document_id"],
+        "parent_section_id": section.get(
+            "parent_section_id"
+        ),
+        "title": section["title"],
+        "heading_path": section.get(
+            "heading_path",
+            [section["title"]],
+        ),
+        "level": section.get("level"),
+        "page_start": page_start,
+        "page_end": page_end,
+        "text": text,
+        "character_count": len(text),
+        "token_count_approx": (
+            approximate_token_count(text)
+        ),
+        "source_block_ids": source_block_ids,
+        "contains_code": any(
+            atom.likely_code_block
+            for atom in atoms
+        ),
+        "indexable": bool(
+            section.get("indexable", True)
+        ),
+        "freshness_warning": bool(
+            document_record.get(
+                "freshness_warning",
+                False,
+            )
+        ),
+        "source": section.get(
+            "source",
+            {
+                "title": document_record["title"],
+                "source_filename": document_record[
+                    "source_filename"
+                ],
+            },
+        ),
+        "citation": {
+            "document_title": document_record[
+                "title"
+            ],
+            "section_title": section["title"],
+            "page_start": page_start,
+            "page_end": page_end,
+        },
+        "content_hash": calculate_text_hash(text),
+    }
+
+
+def create_chunk_records(
+    section: dict[str, Any],
+    document_record: dict[str, Any],
+    chunks: list[list[TextAtom]],
+    minimum_tokens: int,
+) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+
+    for chunk_number, atoms in enumerate(
+        chunks,
+        start=1,
+    ):
+        text = combine_atom_text(atoms)
+
+        if not text:
+            continue
+
+        page_numbers = [
+            atom.page_number for atom in atoms
+        ]
+
+        page_start = min(page_numbers)
+        page_end = max(page_numbers)
+
+        token_count = approximate_token_count(
+            text
         )
 
         quality_flags: list[str] = []
 
-        if event["detection_method"].endswith(
-            "fallback"
+        if token_count < minimum_tokens:
+            quality_flags.append("short-chunk")
+
+        if any(
+            atom.likely_code_block
+            for atom in atoms
         ):
             quality_flags.append(
-                "fallback-heading-anchor"
+                "contains-code"
             )
 
-        if len(text) < minimum_section_characters:
-            quality_flags.append("short-section")
-
-        if event["anchor_score"] < 0.64:
-            quality_flags.append(
-                "low-anchor-confidence"
+        source_block_ids = list(
+            dict.fromkeys(
+                atom.source_block_id
+                for atom in atoms
             )
-
-        indexable = (
-            is_indexable_title(event["title"])
-            and len(text)
-            >= minimum_section_characters
         )
 
-        section_id = section_ids_by_event[
-            event["event_id"]
-        ]
+        chunk_id = (
+            f"{section['section_id']}/"
+            f"chunk-{chunk_number:03d}"
+        )
 
-        sections.append(
+        records.append(
             {
                 "schema_version": SCHEMA_VERSION,
-                "section_id": section_id,
-                "document_id": document_record[
-                    "document_id"
-                ],
-                "parent_section_id": (
-                    parent_section_id
+                "chunk_id": chunk_id,
+                "parent_id": section["section_id"],
+                "section_id": section["section_id"],
+                "document_id": section["document_id"],
+                "chunk_number": chunk_number,
+                "title": section["title"],
+                "heading_path": section.get(
+                    "heading_path",
+                    [section["title"]],
                 ),
-                "section_number": len(sections) + 1,
-                "title": event["title"],
-                "heading_path": heading_path,
-                "level": event["level"],
+                "text": text,
+                "embedding_text": (
+                    build_embedding_text(
+                        document_record=(
+                            document_record
+                        ),
+                        section=section,
+                        chunk_text=text,
+                    )
+                ),
                 "page_start": page_start,
                 "page_end": page_end,
-                "text": text,
+                "source_block_ids": (
+                    source_block_ids
+                ),
                 "character_count": len(text),
-                "word_count": len(text.split()),
-                "source_block_ids": [
-                    unit["source_block_id"]
-                    for unit in section_units
-                ],
-                "table_ids": collect_table_ids(
-                    pages_by_number=pages_by_number,
-                    page_start=page_start,
-                    page_end=page_end,
+                "token_count_approx": (
+                    token_count
                 ),
                 "contains_code": any(
-                    unit["likely_code_block"]
-                    for unit in section_units
+                    atom.likely_code_block
+                    for atom in atoms
                 ),
-                "indexable": indexable,
-                "detection": {
-                    "method": event[
-                        "detection_method"
-                    ],
-                    "anchor_page": event[
-                        "anchor_page"
-                    ],
-                    "anchor_block_id": event[
-                        "anchor_block_id"
-                    ],
-                    "anchor_score": event[
-                        "anchor_score"
-                    ],
-                },
-                "source": {
-                    "title": document_record[
-                        "title"
-                    ],
-                    "author": document_record.get(
-                        "author"
-                    ),
-                    "publication_year": (
-                        document_record.get(
-                            "publication_year"
-                        )
-                    ),
-                    "source_filename": (
-                        document_record[
-                            "source_filename"
-                        ]
-                    ),
-                    "source_sha256": (
-                        document_record[
-                            "source_sha256"
-                        ]
-                    ),
-                },
+                "freshness_warning": bool(
+                    document_record.get(
+                        "freshness_warning",
+                        False,
+                    )
+                ),
+                "source": section.get(
+                    "source"
+                ),
                 "citation": {
                     "document_title": (
                         document_record["title"]
                     ),
-                    "section_title": event["title"],
+                    "section_title": (
+                        section["title"]
+                    ),
                     "page_start": page_start,
                     "page_end": page_end,
                 },
                 "quality_flags": quality_flags,
+                "content_hash": (
+                    calculate_text_hash(text)
+                ),
             }
         )
 
-    return sections
+    return records
 
 
-def build_section_report(
+def deduplicate_chunks(
+    chunks: list[dict[str, Any]],
+) -> tuple[
+    list[dict[str, Any]],
+    int,
+]:
+    unique_chunks: list[dict[str, Any]] = []
+    seen_hashes: set[str] = set()
+    duplicate_count = 0
+
+    for chunk in chunks:
+        content_hash = chunk["content_hash"]
+
+        if content_hash in seen_hashes:
+            duplicate_count += 1
+            continue
+
+        seen_hashes.add(content_hash)
+        unique_chunks.append(chunk)
+
+    return unique_chunks, duplicate_count
+
+
+def build_chunk_report(
     document_id: str,
-    detection_mode: str,
-    body_font_size: float,
-    sections: list[dict[str, Any]],
-    event_count: int,
-    warnings: list[str],
+    profile: dict[str, int],
+    source_sections: list[dict[str, Any]],
+    parent_records: list[dict[str, Any]],
+    chunk_records: list[dict[str, Any]],
+    missing_blocks: list[str],
+    duplicate_count: int,
 ) -> dict[str, Any]:
+    token_counts = [
+        chunk["token_count_approx"]
+        for chunk in chunk_records
+    ]
+
     return {
         "schema_version": SCHEMA_VERSION,
         "document_id": document_id,
-        "detection_mode": detection_mode,
-        "body_font_size": body_font_size,
-        "heading_event_count": event_count,
-        "section_count": len(sections),
+        "profile": profile,
+        "source_section_count": len(
+            source_sections
+        ),
         "indexable_section_count": sum(
-            section["indexable"]
-            for section in sections
+            bool(
+                section.get(
+                    "indexable",
+                    True,
+                )
+            )
+            for section in source_sections
         ),
-        "non_indexable_section_count": sum(
-            not section["indexable"]
-            for section in sections
+        "parent_count": len(parent_records),
+        "chunk_count": len(chunk_records),
+        "duplicate_chunk_count": duplicate_count,
+        "missing_source_block_count": len(
+            set(missing_blocks)
         ),
-        "sections_with_code_count": sum(
-            section["contains_code"]
-            for section in sections
+        "missing_source_blocks": sorted(
+            set(missing_blocks)
         ),
-        "short_section_count": sum(
-            "short-section"
-            in section["quality_flags"]
-            for section in sections
+        "minimum_chunk_tokens": (
+            min(token_counts)
+            if token_counts
+            else 0
         ),
-        "fallback_anchor_count": sum(
-            "fallback-heading-anchor"
-            in section["quality_flags"]
-            for section in sections
+        "maximum_chunk_tokens": (
+            max(token_counts)
+            if token_counts
+            else 0
         ),
-        "low_confidence_anchor_count": sum(
-            "low-anchor-confidence"
-            in section["quality_flags"]
-            for section in sections
+        "average_chunk_tokens": (
+            round(
+                sum(token_counts)
+                / len(token_counts),
+                2,
+            )
+            if token_counts
+            else 0
         ),
-        "warnings": warnings,
+        "short_chunk_count": sum(
+            "short-chunk"
+            in chunk["quality_flags"]
+            for chunk in chunk_records
+        ),
+        "chunks_with_code_count": sum(
+            chunk["contains_code"]
+            for chunk in chunk_records
+        ),
     }
 
 
 def process_document(
     document_config: dict[str, Any],
-    minimum_section_characters: int,
+    maximum_tokens_override: int | None,
+    overlap_tokens_override: int | None,
 ) -> None:
     document_id = document_config["id"]
 
     extracted_directory = (
         EXTRACTED_ROOT / document_id
+    )
+
+    processed_directory = (
+        PROCESSED_ROOT / document_id
     )
 
     document_path = (
@@ -1143,131 +890,148 @@ def process_document(
         extracted_directory / "pages.jsonl"
     )
 
-    toc_path = extracted_directory / "toc.json"
+    sections_path = (
+        processed_directory / "sections.jsonl"
+    )
 
     if not document_path.exists():
-        raise FileNotFoundError(document_path)
+        raise FileNotFoundError(
+            f"Missing document metadata: "
+            f"{document_path}"
+        )
 
     if not pages_path.exists():
-        raise FileNotFoundError(pages_path)
+        raise FileNotFoundError(
+            f"Missing extracted pages: "
+            f"{pages_path}"
+        )
+
+    if not sections_path.exists():
+        raise FileNotFoundError(
+            f"Missing semantic sections: "
+            f"{sections_path}"
+        )
 
     document_record = load_json(document_path)
     pages = load_jsonl(pages_path)
+    sections = load_jsonl(sections_path)
 
-    toc = (
-        load_json(toc_path)
-        if toc_path.exists()
-        else []
+    block_lookup = build_source_block_lookup(
+        pages
     )
 
-    content_start_page = int(
-        document_config.get(
-            "content_start_page",
-            1,
-        )
-    )
-
-    configured_end_page = document_config.get(
-        "content_end_page"
-    )
-
-    content_end_page = (
-        int(configured_end_page)
-        if configured_end_page is not None
-        else None
-    )
-
-    units, pages_by_number = flatten_pages(
-        pages=pages,
-        content_start_page=content_start_page,
-        content_end_page=content_end_page,
-    )
-
-    if not units:
-        raise ValueError(
-            f"No text units found for {document_id}"
-        )
-
-    body_font_size = detect_body_font_size(units)
-
-    requested_mode = document_config.get(
-        "section_detection",
-        "auto",
-    )
-
-    if requested_mode == "toc":
-        detection_mode = "toc"
-    elif requested_mode == "font":
-        detection_mode = "font"
-    elif toc:
-        detection_mode = "toc"
-    else:
-        detection_mode = "font"
-
-    if detection_mode == "toc":
-        events, warnings = build_toc_events(
-            toc=toc,
-            units=units,
-            body_font_size=body_font_size,
-        )
-    else:
-        events, warnings = build_font_events(
-            document_config=document_config,
-            units=units,
-            body_font_size=body_font_size,
-        )
-
-    sections = build_sections_from_events(
-        document_record=document_record,
-        events=events,
-        units=units,
-        pages_by_number=pages_by_number,
-        minimum_section_characters=(
-            minimum_section_characters
+    profile = get_chunk_profile(
+        document_config=document_config,
+        maximum_tokens_override=(
+            maximum_tokens_override
+        ),
+        overlap_tokens_override=(
+            overlap_tokens_override
         ),
     )
 
-    output_directory = (
-        PROCESSED_ROOT / document_id
-    )
+    parent_records: list[dict[str, Any]] = []
+    chunk_records: list[dict[str, Any]] = []
+    missing_blocks: list[str] = []
 
-    output_directory.mkdir(
+    for section in sections:
+        if not section.get("indexable", True):
+            continue
+
+        atoms, section_missing_blocks = (
+            build_section_atoms(
+                section=section,
+                block_lookup=block_lookup,
+                maximum_tokens=profile[
+                    "maximum_tokens"
+                ],
+            )
+        )
+
+        missing_blocks.extend(
+            section_missing_blocks
+        )
+
+        if not atoms:
+            continue
+
+        parent_records.append(
+            create_parent_record(
+                section=section,
+                document_record=document_record,
+                atoms=atoms,
+            )
+        )
+
+        section_chunks = chunk_atoms(
+            atoms=atoms,
+            maximum_tokens=profile[
+                "maximum_tokens"
+            ],
+            overlap_tokens=profile[
+                "overlap_tokens"
+            ],
+        )
+
+        chunk_records.extend(
+            create_chunk_records(
+                section=section,
+                document_record=document_record,
+                chunks=section_chunks,
+                minimum_tokens=profile[
+                    "minimum_tokens"
+                ],
+            )
+        )
+
+    (
+        chunk_records,
+        duplicate_count,
+    ) = deduplicate_chunks(chunk_records)
+
+    processed_directory.mkdir(
         parents=True,
         exist_ok=True,
     )
 
     write_jsonl(
-        output_directory / "sections.jsonl",
-        sections,
+        processed_directory / "parents.jsonl",
+        parent_records,
     )
 
-    report = build_section_report(
+    write_jsonl(
+        processed_directory / "chunks.jsonl",
+        chunk_records,
+    )
+
+    report = build_chunk_report(
         document_id=document_id,
-        detection_mode=detection_mode,
-        body_font_size=body_font_size,
-        sections=sections,
-        event_count=len(events),
-        warnings=warnings,
+        profile=profile,
+        source_sections=sections,
+        parent_records=parent_records,
+        chunk_records=chunk_records,
+        missing_blocks=missing_blocks,
+        duplicate_count=duplicate_count,
     )
 
     write_json(
-        output_directory / "section-report.json",
+        processed_directory / "chunk-report.json",
         report,
     )
 
     print(
         f"[OK] {document_id}: "
-        f"{len(sections)} sections, "
-        f"{report['indexable_section_count']} indexable, "
-        f"mode={detection_mode}"
+        f"{len(parent_records)} parents, "
+        f"{len(chunk_records)} chunks, "
+        f"{duplicate_count} duplicates removed"
     )
 
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Build semantically structured sections "
-            "from extracted PDF pages."
+            "Create parent and child retrieval chunks "
+            "from semantic PDF sections."
         )
     )
 
@@ -1275,6 +1039,7 @@ def parse_arguments() -> argparse.Namespace:
         "--manifest",
         type=Path,
         default=DEFAULT_MANIFEST_PATH,
+        help="Path to documents.yaml",
     )
 
     parser.add_argument(
@@ -1283,14 +1048,28 @@ def parse_arguments() -> argparse.Namespace:
         dest="document_ids",
         help=(
             "Process only this document ID. "
-            "Can be supplied more than once."
+            "May be supplied multiple times."
         ),
     )
 
     parser.add_argument(
-        "--minimum-section-characters",
+        "--maximum-tokens",
         type=int,
-        default=80,
+        default=None,
+        help=(
+            "Override maximum chunk size for "
+            "all selected documents."
+        ),
+    )
+
+    parser.add_argument(
+        "--overlap-tokens",
+        type=int,
+        default=None,
+        help=(
+            "Override chunk overlap for "
+            "all selected documents."
+        ),
     )
 
     return parser.parse_args()
@@ -1340,9 +1119,11 @@ def main() -> None:
         try:
             process_document(
                 document_config=document,
-                minimum_section_characters=(
-                    arguments
-                    .minimum_section_characters
+                maximum_tokens_override=(
+                    arguments.maximum_tokens
+                ),
+                overlap_tokens_override=(
+                    arguments.overlap_tokens
                 ),
             )
         except Exception as error:
@@ -1359,12 +1140,12 @@ def main() -> None:
 
     if failures:
         raise SystemExit(
-            "Section construction failed for: "
+            "Chunk construction failed for: "
             + ", ".join(failures)
         )
 
     print(
-        f"Section construction completed for "
+        f"Chunk construction completed for "
         f"{len(documents)} document(s)."
     )
 
