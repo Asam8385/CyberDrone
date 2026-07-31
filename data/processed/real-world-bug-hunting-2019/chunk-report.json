@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "document_id": "real-world-bug-hunting-2019",
+  "profile": {
+    "maximum_tokens": 450,
+    "overlap_tokens": 60,
+    "minimum_tokens": 60
+  },
+  "source_section_count": 264,
+  "indexable_section_count": 258,
+  "parent_count": 258,
+  "chunk_count": 407,
+  "duplicate_chunk_count": 0,
+  "missing_source_block_count": 0,
+  "missing_source_blocks": [],
+  "minimum_chunk_tokens": 1,
+  "maximum_chunk_tokens": 450,
+  "average_chunk_tokens": 258.56,
+  "short_chunk_count": 25,
+  "chunks_with_code_count": 40
+}

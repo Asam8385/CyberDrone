@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "document_id": "penetration-testing-hands-on-2014",
+  "profile": {
+    "maximum_tokens": 500,
+    "overlap_tokens": 75,
+    "minimum_tokens": 70
+  },
+  "source_section_count": 520,
+  "indexable_section_count": 493,
+  "parent_count": 493,
+  "chunk_count": 761,
+  "duplicate_chunk_count": 0,
+  "missing_source_block_count": 0,
+  "missing_source_blocks": [],
+  "minimum_chunk_tokens": 1,
+  "maximum_chunk_tokens": 500,
+  "average_chunk_tokens": 292.52,
+  "short_chunk_count": 57,
+  "chunks_with_code_count": 144
+}

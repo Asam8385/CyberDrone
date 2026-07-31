@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "document_id": "red-team-field-manual-v2-2022",
+  "profile": {
+    "maximum_tokens": 250,
+    "overlap_tokens": 30,
+    "minimum_tokens": 25
+  },
+  "source_section_count": 242,
+  "indexable_section_count": 156,
+  "parent_count": 156,
+  "chunk_count": 203,
+  "duplicate_chunk_count": 0,
+  "missing_source_block_count": 0,
+  "missing_source_blocks": [],
+  "minimum_chunk_tokens": 13,
+  "maximum_chunk_tokens": 250,
+  "average_chunk_tokens": 134.68,
+  "short_chunk_count": 9,
+  "chunks_with_code_count": 105
+}

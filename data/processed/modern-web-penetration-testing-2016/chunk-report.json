@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "document_id": "modern-web-penetration-testing-2016",
+  "profile": {
+    "maximum_tokens": 500,
+    "overlap_tokens": 75,
+    "minimum_tokens": 70
+  },
+  "source_section_count": 241,
+  "indexable_section_count": 172,
+  "parent_count": 172,
+  "chunk_count": 231,
+  "duplicate_chunk_count": 0,
+  "missing_source_block_count": 0,
+  "missing_source_blocks": [],
+  "minimum_chunk_tokens": 17,
+  "maximum_chunk_tokens": 500,
+  "average_chunk_tokens": 292.68,
+  "short_chunk_count": 27,
+  "chunks_with_code_count": 60
+}
