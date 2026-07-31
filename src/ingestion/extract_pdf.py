@@ -10,7 +10,7 @@ from datetime import datetime , timezone
 from pathlib import Path
 from typing import Any
 
-import pymupdf
+import py_mu_pdf
 import yaml
 
 SCHEMA_VERSION = "1.0"
@@ -332,7 +332,7 @@ def calculate_area(bbox: Any) -> float:
    paragraph, code block, or image container is.
    """
    try:
-      return max(0.0 , pymupdf.Rect(bbox).get_area())
+      return max(0.0 , py_mu_pdf.Rect(bbox).get_area())
    except (TypeError , ValueError):
       return 0.0
 
@@ -447,16 +447,16 @@ def extract_span(span : dict[str, Any]) -> dict[str , Any] :
       ),
       "flags": flags,
               "is_bold": bool(
-                  flags & pymupdf.TEXT_FONT_BOLD
+                  flags & py_mu_pdf.TEXT_FONT_BOLD
               ),
               "is_italic": bool(
-                  flags & pymupdf.TEXT_FONT_ITALIC
+                  flags & py_mu_pdf.TEXT_FONT_ITALIC
               ),
               "is_monospaced": bool(
-                  flags & pymupdf.TEXT_FONT_MONOSPACED
+                  flags & py_mu_pdf.TEXT_FONT_MONOSPACED
               ),
               "is_superscript": bool(
-                  flags & pymupdf.TEXT_FONT_SUPERSCRIPT
+                  flags & py_mu_pdf.TEXT_FONT_SUPERSCRIPT
               ),
               "color": span.get("color"),
 
@@ -559,7 +559,7 @@ def classify_code_block(
 
 
 def extract_text_blocks(
-      page: pymupdf.Page,
+      page: py_mu_pdf.Page,
 ) -> list[dict[str , Any]] :
    """
        Extract text structure without including image byte data.
@@ -571,7 +571,7 @@ def extract_text_blocks(
    page_dictionary = page.get_text(
       "dict", 
       sort = True , 
-      flags=pymupdf.TEXTFLAGS_TEXT , 
+      flags=py_mu_pdf.TEXTFLAGS_TEXT , 
 
    )
 
@@ -617,7 +617,7 @@ def extract_text_blocks(
 
 
 def extract_image_metadata(
-    page: pymupdf.Page,
+    page: py_mu_pdf.Page,
     document_id: str,
 ) -> list[dict[str, Any]]:
     """
@@ -670,7 +670,7 @@ def extract_image_metadata(
 
 
 def extract_tables(
-    page: pymupdf.Page,
+    page: py_mu_pdf.Page,
     document_id: str,
 ) -> tuple[list[dict[str, Any]], list[str]]:
     results: list[dict[str, Any]] = []
@@ -738,7 +738,7 @@ def extract_tables(
 
 
 def extract_toc(
-    document: pymupdf.Document,
+    document: py_mu_pdf.Document,
 ) -> list[dict[str, Any]]:
     raw_toc = document.get_toc(simple=True)
     results: list[dict[str, Any]] = []
@@ -891,7 +891,7 @@ def remove_repeated_margins(
 
 
 def extract_page(
-    page: pymupdf.Page,
+    page: py_mu_pdf.Page,
     document_id: str,
     enable_tables: bool,
 ) -> tuple[
@@ -1070,7 +1070,7 @@ def extract_document(
     table_records: list[dict[str, Any]] = []
     warnings: list[str] = []
 
-    document = pymupdf.open(source_path)
+    document = py_mu_pdf.open(source_path)
 
     try:
         toc = extract_toc(document)
@@ -1165,7 +1165,7 @@ def extract_document(
             "table_extraction_enabled": enable_tables,
             "ocr_enabled": False,
             "extractor": "pymupdf",
-            "extractor_version": pymupdf.VersionBind,
+            "extractor_version": py_mu_pdf.VersionBind,
             "extracted_at": utc_now(),
         }
 
