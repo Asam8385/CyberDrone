@@ -1,2 +1,2 @@
 .env
-__pycache__
+data/indexes/qdrant/collection/security-book-chunks-v1
