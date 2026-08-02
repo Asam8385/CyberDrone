@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-08-02T16:10:55.717832+00:00",
+  "collection_name": "security-book-chunks-v1",
+  "dense_model": "google/embeddinggemma-300m",
+  "dense_dimension": 768,
+  "sparse_model": "Qdrant/bm25",
+  "bm25_language": "english",
+  "bm25_average_document_length": 201.2041,
+  "distance": "cosine",
+  "fusion": "rrf",
+  "dense_vector_name": "dense",
+  "sparse_vector_name": "sparse",
+  "document_ids": [
+    "modern-web-penetration-testing-2016",
+    "penetration-testing-hands-on-2014",
+    "real-world-bug-hunting-2019",
+    "red-team-field-manual-v2-2022"
+  ],
+  "chunk_count": 1602,
+  "parent_count": 1079,
+  "processed_root": "C:\\Users\\ASAM\\Documents\\RAG\\data\\processed",
+  "qdrant_mode": "local",
+  "qdrant_path": "C:\\Users\\ASAM\\Documents\\RAG\\data\\indexes\\qdrant",
+  "qdrant_url": null
+}
