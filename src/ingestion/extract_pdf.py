@@ -10,7 +10,7 @@ from datetime import datetime , timezone
 from pathlib import Path
 from typing import Any
 
-import py_mu_pdf
+import notes.py_mu_pdf as py_mu_pdf
 import yaml
 
 SCHEMA_VERSION = "1.0"

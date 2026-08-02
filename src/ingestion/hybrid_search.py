@@ -566,3 +566,22 @@ def stable_point_id(chunk_id: str) -> str:
     ) 
 
 
+def convert_sparse_vector(
+        sparse_embedding: Any,
+) -> models.SparseVector:
+    indices = [
+        int(value)
+        for value in sparse_embedding.indices.tolist()
+    ]
+
+    values = [
+        int(value)
+        for value in sparse_embedding.values.tolist()
+    ]
+
+    return models.SparseVector(
+        indices=indices,
+        values=values
+    )
+    
+
