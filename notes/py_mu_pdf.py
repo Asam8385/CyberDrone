@@ -1,11 +1,6 @@
-import pymupdf
-import json
+import pymupdf4llm
 
-doc = pymupdf.open("ANET_Investment_Identification_Report.pdf")
-page = doc[2]
+md_text = pymupdf4llm.to_markdown("ANET_Investment_Identification_Report.pdf")
 
-data = page.get_text("dict", sort=True, flags=pymupdf.TEXTFLAGS_TEXT)
-
-with open("text.json", "w" , encoding="utf-8") as file:
-   json.dump(data, file , indent=2, ensure_ascii=False )
-   
+with open("output.md", "w", encoding="utf-8") as f:
+    f.write(md_text)

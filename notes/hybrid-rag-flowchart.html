@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive beginner guide to the complete PDF-to-hybrid-RAG retrieval pipeline.">
+  <title>Hybrid RAG Retrieval — Complete Beginner Flow</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#07111f; --surface:#0f1d30; --surface2:#14263e; --line:#29435f;
+      --text:#f2f7ff; --muted:#a9bad0; --cyan:#62d7ff; --blue:#86aaff;
+      --green:#7ee2a8; --yellow:#ffd379; --red:#ff8791; --radius:20px;
+      --sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+      --mono:"Cascadia Code","SFMono-Regular",Consolas,monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:82px}
+    body{margin:0;min-width:320px;font:16px/1.62 var(--sans);color:var(--text);background:radial-gradient(circle at 12% 0,rgba(75,123,255,.22),transparent 34rem),radial-gradient(circle at 90% 6%,rgba(57,222,177,.12),transparent 30rem),var(--bg)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.15;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(#000,transparent 85%)}
+    button{font:inherit;color:inherit} code,pre{font-family:var(--mono)}
+    code:not(pre code){padding:.14rem .4rem;border:1px solid rgba(98,215,255,.2);border-radius:7px;color:#c9f0ff;background:rgba(98,215,255,.07);font-size:.92em}
+    .shell{width:min(1220px,calc(100% - 32px));margin:auto}.hero{padding:70px 0 42px}.hero-grid{display:grid;grid-template-columns:1fr 350px;gap:36px;align-items:end}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid rgba(98,215,255,.3);border-radius:999px;color:var(--cyan);background:rgba(98,215,255,.07);font-size:.76rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+    h1,h2,h3{line-height:1.12}h1{max-width:900px;margin:22px 0 16px;font-size:clamp(2.8rem,7vw,5.6rem);letter-spacing:-.055em}.gradient{color:transparent;background:linear-gradient(110deg,#fff,var(--cyan),var(--green));background-clip:text;-webkit-background-clip:text}
+    .lead{max-width:810px;margin:0;color:var(--muted);font-size:clamp(1.04rem,2vw,1.25rem)}.lead strong{color:var(--text)}
+    .hero-card,.panel{border:1px solid rgba(145,181,217,.17);border-radius:var(--radius);background:rgba(15,29,48,.93);box-shadow:0 24px 65px rgba(0,0,0,.28)}
+    .hero-card{padding:23px}.micro{color:var(--cyan);font-size:.75rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.hero-card h3{margin:7px 0;font-size:1.8rem}.hero-card p{margin:0;color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:28px}.stat{padding:14px;border:1px solid rgba(145,181,217,.14);border-radius:14px;background:rgba(13,27,46,.72)}.stat b{display:block;font-size:1.35rem}.stat span{color:var(--muted);font-size:.78rem}
+    .nav-wrap{position:sticky;z-index:20;top:0;padding:9px 0;border-block:1px solid rgba(145,181,217,.15);background:rgba(7,17,31,.9);backdrop-filter:blur(16px)}.nav{display:flex;gap:7px;overflow:auto}.nav a{flex:none;padding:8px 11px;border:1px solid transparent;border-radius:9px;color:var(--muted);text-decoration:none;font-size:.8rem;font-weight:750}.nav a:hover,.nav a.active{color:var(--text);border-color:rgba(98,215,255,.25);background:rgba(98,215,255,.09)}
+    main{padding:30px 0 80px}section{margin-bottom:74px}.head{display:grid;grid-template-columns:1fr minmax(260px,430px);gap:28px;align-items:end;margin-bottom:25px}.kicker{margin:0 0 7px;color:var(--green);font-size:.76rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}h2{margin:0;font-size:clamp(2rem,4vw,3.3rem);letter-spacing:-.045em}.head>p{margin:0;color:var(--muted)}
+    .one-line{display:grid;grid-template-columns:50px 1fr;gap:15px;align-items:center;padding:19px 21px;margin-bottom:20px;border:1px solid rgba(126,226,168,.25);border-radius:17px;background:rgba(126,226,168,.07)}.one-line .badge{display:grid;place-items:center;width:50px;height:50px;border-radius:15px;color:#07160e;background:var(--green);font-weight:900}.one-line strong{color:var(--green)}
+    .pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;padding:22px}.node{position:relative;min-height:140px;padding:16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(24,45,72,.92),rgba(12,27,46,.92))}.node:not(:nth-child(5n)):after{content:"→";position:absolute;top:50%;right:-14px;z-index:2;color:var(--cyan);font-weight:900}.node b{display:grid;place-items:center;width:29px;height:29px;margin-bottom:14px;border-radius:9px;color:#07111f;background:var(--cyan);font-size:.75rem}.node h3{margin:0 0 6px;font-size:.98rem}.node p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.48}.node.special{border-color:rgba(255,211,121,.35)}.node.special b{background:var(--yellow)}.node.query b{background:var(--green)}
+    .pages{display:grid;grid-template-columns:repeat(2,1fr);gap:23px}.page{min-height:500px;padding:23px;border-radius:9px 9px 23px 9px;color:#142236;background:#f6f8fb;box-shadow:0 28px 60px rgba(0,0,0,.3)}.page-top{display:flex;justify-content:space-between;margin-bottom:17px;color:#607187;font:800 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase}.block{margin-bottom:12px;padding:13px 14px;border:2px solid;border-radius:10px;background:#fff}.block:before{content:attr(data-id);display:inline-block;margin-bottom:6px;padding:2px 7px;border-radius:99px;color:#fff;background:#31537d;font:800 .62rem var(--mono)}.block p,.block h3{margin:0}.block h3{font-size:1.35rem}.block p{font-size:.88rem}.block.header{border-color:#ef9ca5;color:#8b2934;background:#fff0f2;text-align:center}.block.header:before{background:#c54d5b}.block.heading{border-color:#66a5db;background:#eef7ff}.block.prose{border-color:#86cba1;background:#f1fbf5}.block.code{border-color:#d7ac56;background:#fff8e8}.block.code p{font: .78rem/1.55 var(--mono)}
+    .legend,.chips,.toolbar,.query-buttons{display:flex;flex-wrap:wrap;gap:8px}.legend{margin-top:22px}.legend span,.chip{padding:6px 9px;border:1px solid rgba(145,181,217,.16);border-radius:99px;color:var(--muted);background:rgba(255,255,255,.025);font: .7rem var(--mono)}
+    .steps{display:grid;gap:21px}.step{position:relative;overflow:hidden;padding:25px}.step:before{content:"";position:absolute;left:0;top:0;width:5px;height:100%;background:linear-gradient(var(--cyan),var(--blue))}.step-top{display:grid;grid-template-columns:54px 1fr;gap:17px}.num{display:grid;place-items:center;width:54px;height:54px;border:1px solid rgba(98,215,255,.28);border-radius:17px;color:var(--cyan);background:rgba(98,215,255,.08);font-size:1.25rem;font-weight:900}.step h3{margin:0 0 7px;font-size:clamp(1.35rem,3vw,1.95rem)}.step .{max-width:860px;margin:0;color:var(--muted)}.step . strong{color:var(--text)}.chips{margin:15px 0 0 71px}.chip{color:#c5efff;border-color:rgba(98,215,255,.2);background:rgba(98,215,255,.055)}
+    .io{display:grid;grid-template-columns:1fr 70px 1fr;gap:13px;align-items:stretch;margin-top:21px}.box{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:#081425}.box-title{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:9px 12px;border-bottom:1px solid rgba(145,181,217,.14);color:var(--muted);background:rgba(255,255,255,.025);font-size:.72rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}.copy{padding:3px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted);background:transparent;cursor:pointer;font-size:.66rem;text-transform:none;letter-spacing:0}pre{min-height:180px;max-height:400px;overflow:auto;margin:0;padding:15px;color:#d5eaff;font-size:.75rem;line-height:1.58;white-space:pre-wrap}.arrow{display:grid;place-items:center;color:var(--cyan);font-size:1.8rem;font-weight:900}.arrow span{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(98,215,255,.23);border-radius:50%;background:rgba(98,215,255,.07)}.note{margin:17px 0 0 71px;padding:13px 15px;border-left:3px solid var(--green);border-radius:0 11px 11px 0;color:var(--muted);background:rgba(126,226,168,.07);font-size:.89rem}
+    .chunk-map{display:grid;gap:9px;margin-top:18px;padding:15px;border:1px solid rgba(145,181,217,.14);border-radius:14px}.chunk-row{display:grid;grid-template-columns:82px 1fr;gap:10px;align-items:center}.chunk-row>span{color:var(--muted);font: .72rem var(--mono)}.atoms{display:flex;gap:6px;flex-wrap:wrap}.atom{padding:7px 9px;border:1px solid rgba(134,170,255,.32);border-radius:8px;color:#dfe8ff;background:rgba(134,170,255,.1);font:.7rem var(--mono)}.atom.overlap{border-color:rgba(255,211,121,.55);color:var(--yellow);background:rgba(255,211,121,.1)}
+    .model-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:21px}.model{padding:23px;border-top:4px solid var(--cyan)}.model.sparse{border-top-color:var(--yellow)}.model h3{margin:0 0 7px;font-size:1.5rem}.model p{color:var(--muted)}.path{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:16px 0;font:.74rem var(--mono)}.path span{padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.03)}.path b{color:var(--cyan)}.sparse .path b{color:var(--yellow)}.dense{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:16px 0}.dense i{display:block;aspect-ratio:1;border-radius:4px;background:rgba(98,215,255,var(--v))}.bars{display:grid;gap:10px;margin:16px 0}.bar{display:grid;grid-template-columns:100px 1fr 35px;gap:9px;align-items:center;font:.72rem var(--mono)}.track{height:9px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}.track i{display:block;width:var(--w);height:100%;background:linear-gradient(90deg,#efa934,var(--yellow))}
+    .sim{padding:25px}.query-buttons{margin-bottom:17px}.query-button,.small{padding:9px 13px;border:1px solid var(--line);border-radius:11px;color:var(--muted);background:rgba(255,255,255,.025);cursor:pointer;font-weight:750}.query-button:hover,.query-button.active,.small:hover{color:var(--text);border-color:rgba(98,215,255,.45);background:rgba(98,215,255,.09)}.query-display{display:grid;grid-template-columns:42px 1fr;gap:11px;align-items:center;padding:14px 16px;border:1px solid rgba(126,226,168,.25);border-radius:14px;background:rgba(126,226,168,.07)}.query-display b{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;color:#06160e;background:var(--green)}.rank-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:19px}.rank-col{padding:15px;border:1px solid rgba(145,181,217,.14);border-radius:15px;background:rgba(8,19,34,.7)}.rank-col h3{display:flex;justify-content:space-between;margin:0 0 10px;font-size:.96rem}.rank-col h3 span{color:var(--muted);font-size:.65rem}.rank-item{display:grid;grid-template-columns:26px 1fr auto;gap:7px;align-items:center;margin-top:7px;padding:9px;border-radius:9px;background:rgba(255,255,255,.035);font-size:.75rem}.rank-num{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;color:var(--cyan);background:rgba(98,215,255,.09);font-weight:900}.score{color:var(--muted);font-family:var(--mono)}.context{margin-top:19px;padding:18px;border:1px solid rgba(126,226,168,.25);border-radius:15px;background:rgba(126,226,168,.06)}.context h3{margin:0 0 6px}.context p{margin:0;color:var(--muted)}.context div{margin-top:12px;padding:13px;border-radius:11px;color:#dffbed;background:rgba(2,17,11,.5);font-size:.87rem}
+    .toolbar{margin-bottom:14px}.flow-intro{display:grid;grid-template-columns:44px 1fr;gap:13px;align-items:start;margin-bottom:16px;padding:15px 17px;border:1px solid rgba(255,211,121,.24);border-radius:14px;color:var(--muted);background:rgba(255,211,121,.055)}.flow-intro b:first-child{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;color:#241700;background:var(--yellow)}.flow-intro strong{color:var(--text)}.fn-group{margin-bottom:12px;border:1px solid rgba(145,181,217,.15);border-radius:15px;background:rgba(15,29,48,.93)}.fn-group summary{display:flex;justify-content:space-between;padding:17px 19px;cursor:pointer;list-style:none;font-weight:850}.fn-group summary::-webkit-details-marker{display:none}.fn-group summary:after{content:"+";color:var(--cyan);font-size:1.3rem}.fn-group[open] summary:after{content:"−"}.fn-group summary span{color:var(--muted);font-size:.75rem;font-weight:600}.svg-flow-panel{margin:0 15px 17px;overflow:hidden;border:1px solid rgba(98,215,255,.18);border-radius:15px;background:#081425}.svg-flow-head{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(145,181,217,.14);color:var(--muted);font-size:.76rem}.svg-flow-head strong{color:var(--cyan);letter-spacing:.06em;text-transform:uppercase}.svg-flow-head span{font-family:var(--mono);font-size:.68rem}.svg-scroller{overflow-x:auto;overflow-y:hidden;padding:4px 0 8px;scrollbar-color:#315b80 #07111f;scrollbar-width:thin}.function-flow{display:block;max-width:none;height:390px}.flow-node-title{font:800 13px var(--mono);fill:#f2f7ff}.flow-node-label{font:850 9px var(--sans);letter-spacing:1.1px}.flow-node-text{font:11px var(--sans);fill:#c7d5e7}.flow-step{font:850 10px var(--mono);fill:#07111f}.flow-end-title{font:900 13px var(--sans);letter-spacing:.7px}.flow-end-text{font:12px var(--sans)}.flow-arrow-label{font:800 9px var(--mono);fill:#78a3c7;letter-spacing:.8px}.stage-example{display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);gap:12px;align-items:stretch;padding:16px;border-top:1px solid rgba(145,181,217,.14);background:rgba(98,215,255,.025)}.example-box{background:#06101d}.example-box pre{min-height:245px;max-height:360px;font-size:.72rem}.example-arrow{display:grid;place-items:center;color:var(--green);font-size:1.7rem;font-weight:900}.example-arrow span{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(126,226,168,.3);border-radius:50%;background:rgba(126,226,168,.08)}.example-result{padding:0 16px 16px;color:var(--muted);background:rgba(98,215,255,.025);font-size:.82rem}.example-result strong{color:var(--green)}.table-wrap{overflow:auto;padding:0 15px 15px}.fn-table{width:100%;min-width:760px;border-collapse:collapse;font-size:.79rem}.fn-table th,.fn-table td{padding:11px;border-top:1px solid rgba(145,181,217,.14);text-align:left;vertical-align:top}.fn-table th{color:var(--muted);font-size:.67rem;letter-spacing:.07em;text-transform:uppercase}.fn-table td:first-child{color:var(--cyan);font-family:var(--mono);font-weight:750;white-space:nowrap}
+    .glossary{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.term{padding:17px;border:1px solid rgba(145,181,217,.14);border-radius:14px;background:rgba(255,255,255,.024)}.term h3{margin:0 0 5px;color:var(--cyan);font-size:.98rem}.term p{margin:0;color:var(--muted);font-size:.82rem}.truths{display:grid;gap:9px}.truth{display:grid;grid-template-columns:25px 1fr;gap:10px;padding:12px 14px;border:1px solid rgba(145,181,217,.14);border-radius:12px;color:var(--muted);background:rgba(255,255,255,.02)}.truth b{color:var(--green)}.truth.warn b{color:var(--yellow)}
+    footer{padding:25px 0 40px;border-top:1px solid rgba(145,181,217,.14);color:var(--muted);font-size:.8rem}.foot{display:flex;justify-content:space-between;gap:20px}.foot strong{color:var(--text)}
+    @media(max-width:1030px){.hero-grid{grid-template-columns:1fr}.hero-card{max-width:600px}.pipeline{grid-template-columns:repeat(3,1fr)}.node:after{display:none}.rank-grid{grid-template-columns:1fr}}
+    @media(max-width:790px){.shell{width:calc(100% - 22px)}.stats{grid-template-columns:repeat(2,1fr)}.head{grid-template-columns:1fr;gap:10px}.pipeline{grid-template-columns:repeat(2,1fr)}.pages,.model-grid{grid-template-columns:1fr}.io,.stage-example{grid-template-columns:1fr}.arrow,.example-arrow{min-height:45px;transform:rotate(90deg)}.chips,.note{margin-left:0}.glossary{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:510px){h1{font-size:2.55rem}.pipeline,.glossary{grid-template-columns:1fr}.step,.sim{padding:18px}.step-top{grid-template-columns:43px 1fr;gap:11px}.num{width:43px;height:43px;border-radius:12px}.page{padding:15px}.chunk-row{grid-template-columns:1fr}.foot{flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Beginner-safe system map</div>
+        <h1><span class="gradient">PDF to hybrid RAG</span>, without the mystery.</h1>
+        <p class="lead">Follow one tiny two-page security document through <strong>every important function</strong>: PyMuPDF blocks, sections, atoms, parent and child chunks, EmbeddingGemma, BM25, Qdrant, RRF, neighbour expansion, and the final context sent to your agent.</p>
+        <div class="stats" aria-label="Current Modern Web Penetration Testing counts">
+          <div class="stat"><b>298</b><span>PDF pages</span></div>
+          <div class="stat"><b>241</b><span>detected sections</span></div>
+          <div class="stat"><b>172</b><span>indexable parents</span></div>
+          <div class="stat"><b>231</b><span>searchable chunks</span></div>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <div class="micro">The whole idea</div>
+        <h3>Find small. Read enough.</h3>
+        <p>Search small child chunks for accuracy. Then use their <code>parent_id</code> to fetch the full section or neighbouring chunks when the answer needs more context.</p>
+      </aside>
+    </div>
+  </header>
+  <div class="nav-wrap">
+    <nav class="shell nav" aria-label="Page sections">
+      <a href="#big-picture">Big picture</a><a href="#sample">Sample PDF</a><a href="#walkthrough">Function flow</a><a href="#models">Dense & sparse</a><a href="#simulator">Search simulator</a><a href="#function-dictionary">All functions</a><a href="#glossary"> glossary</a>
+    </nav>
+  </div>
+  <main class="shell">
+    <section id="big-picture" data-nav-section>
+      <div class="head"><div><p class="kicker">01 · First see the road</p><h2>The complete pipeline</h2></div><p>Each box has one job. No box understands everything. Together they turn a visual PDF into evidence your agent can search.</p></div>
+      <div class="one-line"><div class="badge">1</div><div><strong>One-sentence version:</strong> extract visible text blocks → group blocks into sections → split sections into child chunks → represent every child in two ways → search both → load enough surrounding context.</div></div>
+      <div class="panel pipeline" aria-label="End-to-end RAG flowchart">
+        <article class="node"><b>01</b><h3>PDF</h3><p>Characters live at x/y positions. A PDF usually has no true paragraph object.</p></article>
+        <article class="node"><b>02</b><h3>PyMuPDF blocks</h3><p>Nearby spans and lines become visual blocks with fonts and coordinates.</p></article>
+        <article class="node"><b>03</b><h3>pages.jsonl</h3><p>Exact cleaned blocks become your source of truth.</p></article>
+        <article class="node"><b>04</b><h3>sections.jsonl</h3><p>Heading logic lists which block IDs belong to each topic.</p></article>
+        <article class="node special"><b>05</b><h3>Parents + children</h3><p>Keep the whole section and make small search pieces.</p></article>
+        <article class="node special"><b>06</b><h3>Two fingerprints</h3><p>Dense meaning vector plus sparse BM25 word vector.</p></article>
+        <article class="node"><b>07</b><h3>Qdrant</h3><p>Stores both vectors and the child's metadata payload.</p></article>
+        <article class="node query"><b>08</b><h3>Hybrid query</h3><p>Search meaning and exact words at the same time.</p></article>
+        <article class="node query"><b>09</b><h3>RRF fusion</h3><p>Combine the positions from both ranked lists.</p></article>
+        <article class="node query"><b>10</b><h3>Agent context</h3><p>Return child, neighbours, or parent with pages.</p></article>
+      </div>
+    </section>
+
+    <section id="sample" data-nav-section>
+      <div class="head"><div><p class="kicker">02 · Our tiny example</p><h2>The same two pages all the way through</h2></div><p>The coloured boxes show the approximate visual regions PyMuPDF returns as text blocks.</p></div>
+      <div class="pages">
+        <article class="page" aria-label="Sample PDF page one">
+          <div class="page-top"><span>Sample security book</span><span>Page 1</span></div>
+          <div class="block header" data-id="P1-B0 · repeated"><p>MY SECURITY BOOK</p></div>
+          <div class="block heading" data-id="A · P1-B1"><h3>SQL Injection</h3></div>
+          <div class="block prose" data-id="B · P1-B2"><p>A login form places user input inside a database query.</p></div>
+          <div class="block prose" data-id="C · P1-B3"><p>Unsafe input can change the meaning of that query and alter its condition.</p></div>
+          <div class="block code" data-id="D · P1-B4 · code"><p>SELECT * FROM users<br>WHERE name = '$input';</p></div>
+        </article>
+        <article class="page" aria-label="Sample PDF page two">
+          <div class="page-top"><span>Sample security book</span><span>Page 2</span></div>
+          <div class="block header" data-id="P2-B0 · repeated"><p>MY SECURITY BOOK</p></div>
+          <div class="block prose" data-id="E · P2-B1"><p>An attacker may make the condition true and bypass authentication. Parameterized queries keep data separate from SQL instructions.</p></div>
+          <div class="block heading" data-id="F · P2-B2"><h3>Cross-Site Scripting</h3></div>
+          <div class="block prose" data-id="G · P2-B3"><p>XSS allows attacker-controlled script to execute inside another user's browser.</p></div>
+        </article>
+      </div>
+      <div class="legend"><span>Red · repeated header, skipped later</span><span>Blue · heading candidate</span><span>Green · prose block</span><span>Yellow · likely code block</span></div>
+    </section>
+
+    <section id="walkthrough" data-nav-section>
+      <div class="head"><div><p class="kicker">03 · Input → function → output</p><h2>Watch the data change shape</h2></div><p>The words stay the same. The structure wrapped around them changes so the next stage knows what to do.</p></div>
+      <div class="steps">
+        <article class="panel step">
+          <div class="step-top"><div class="num">1</div><div><p class="micro">Extraction</p><h3>PyMuPDF turns page positions into blocks</h3><p class="">Think of the PDF as letters glued onto paper. <strong>PyMuPDF looks at where letters sit</strong> and puts nearby letters into spans, lines, and blocks. It sees layout—not meaning.</p></div></div>
+          <div class="chips"><span class="chip">page.get_text("dict", sort=True)</span><span class="chip">extract_span()</span><span class="chip">extract_line()</span><span class="chip">extract_text_blocks()</span></div>
+          <div class="io"><div class="box"><div class="box-title">Input · PDF drawing instructions</div><pre>Page 1 roughly says:&#10;&#10;Draw "SQL Injection" at x=72, y=110&#10;font=Arial-Bold, size=18&#10;&#10;Draw "A login form places..." at x=72, y=148&#10;font=Arial, size=10.5</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · PyMuPDF dictionary</div><pre>{&#10;  "type": 0,&#10;  "bbox": [72, 102, 230, 124],&#10;  "lines": [{&#10;    "spans": [{&#10;      "text": "SQL Injection",&#10;      "font": "Arial-Bold",&#10;      "size": 18&#10;    }]&#10;  }]&#10;}</pre></div></div>
+          <div class="note"><strong>Important:</strong> PyMuPDF decides the first visual block boundaries. A visual block is not guaranteed to be one perfect semantic paragraph.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">2</div><div><p class="micro">Cleaning</p><h3>Your extraction code adds useful labels</h3><p class="">The script joins spans into lines, joins lines into block text, checks fonts and command patterns, and marks headers that repeat at the top or bottom of many pages.</p></div></div>
+          <div class="chips"><span class="chip">classify_code_block()</span><span class="chip">find_repeated_margin_signatures()</span><span class="chip">remove_repeated_margins()</span><span class="chip">extract_page()</span></div>
+          <div class="io"><div class="box"><div class="box-title">Input · raw visual block</div><pre>{&#10;  "source_block_index": 4,&#10;  "bbox": [72, 230, 410, 270],&#10;  "lines": [&#10;    {"text": "SELECT * FROM users", "mono": 1.0},&#10;    {"text": "WHERE name = '$input';", "mono": 1.0}&#10;  ]&#10;}</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · pages.jsonl block</div><pre>{&#10;  "block_index": 4,&#10;  "source_block_index": 4,&#10;  "text": "SELECT * FROM users / WHERE name = '$input';",&#10;  "likely_code_block": true,&#10;  "code_confidence": 1.0,&#10;  "is_repeated_margin": false,&#10;  "bbox": [72, 230, 410, 270]&#10;}</pre></div></div>
+          <div class="note"><code>pages.jsonl</code> is the source-of-truth cupboard. It keeps exact block text, page position, fonts, and code clues.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">3</div><div><p class="micro">Section detection</p><h3>Headings become fences around related blocks</h3><p class="">The detector sees “SQL Injection” as a heading. It collects blocks until “Cross-Site Scripting.” It records block IDs instead of losing their origin.</p></div></div>
+          <div class="chips"><span class="chip">flatten_pages()</span><span class="chip">detect_body_font_size()</span><span class="chip">is_heading_candidate()</span><span class="chip">build_sections_from_events()</span></div>
+          <div class="io"><div class="box"><div class="box-title">Input · ordered useful blocks</div><pre>A  page-0001/block-001  SQL Injection&#10;B  page-0001/block-002  A login form...&#10;C  page-0001/block-003  Unsafe input...&#10;D  page-0001/block-004  SELECT * FROM...&#10;E  page-0002/block-001  An attacker may...&#10;F  page-0002/block-002  Cross-Site Scripting&#10;G  page-0002/block-003  XSS allows...</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · sections.jsonl</div><pre>{&#10;  "section_id": "sample/0001-sql-injection",&#10;  "title": "SQL Injection",&#10;  "page_start": 1,&#10;  "page_end": 2,&#10;  "source_block_ids": ["A", "B", "C", "D", "E"],&#10;  "contains_code": true,&#10;  "indexable": true,&#10;  "text": "A + B + C + D + E"&#10;}</pre></div></div>
+          <div class="note">A section is a <strong>topic boundary</strong>, not yet a search-sized chunk. One section may be tiny or several thousand tokens.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">4</div><div><p class="micro">Block lookup and atoms</p><h3>The chunker collects the exact blocks named by the section</h3><p class=""><code>sections.jsonl</code> gives a shopping list of IDs. <code>pages.jsonl</code> gives the actual items. <code>build_section_atoms()</code> joins them.</p></div></div>
+          <div class="chips"><span class="chip">build_source_block_lookup()</span><span class="chip">split_text_by_token_budget()</span><span class="chip">build_section_atoms()</span><span class="chip">TextAtom</span></div>
+          <div class="io"><div class="box"><div class="box-title">Input · list + cupboard</div><pre>SECTION LIST:&#10;["A", "B", "C", "D", "E"]&#10;&#10;BLOCK LOOKUP:&#10;{&#10; "A": {"text":"SQL Injection", "page":1},&#10; "B": {"text":"A login form...", "page":1},&#10; "C": {"text":"Unsafe input...", "page":1},&#10; "D": {"text":"SELECT *...", "page":1, "code":true},&#10; "E": {"text":"An attacker may...", "page":2}&#10;}</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · temporary atoms</div><pre>[&#10; TextAtom(text="SQL Injection", page=1, id="A", code=false),&#10; TextAtom(text="A login form...", page=1, id="B", code=false),&#10; TextAtom(text="Unsafe input...", page=1, id="C", code=false),&#10; TextAtom(text="SELECT *...", page=1, id="D", code=true),&#10; TextAtom(text="An attacker may...", page=2, id="E", code=false)&#10;]</pre></div></div>
+          <div class="note">An atom is a labelled bag: <strong>text + page + original block ID + code flag</strong>. It is temporary.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">5</div><div><p class="micro">Child chunking</p><h3>Atoms are packed until the token box is full</h3><p class="">For this toy example, imagine a maximum of 20 tokens and overlap budget of 8. Your real technical profile uses 500 maximum and 75 overlap.</p></div></div>
+          <div class="chips"><span class="chip">get_chunk_profile()</span><span class="chip">approximate_token_count()</span><span class="chip">select_overlap_atoms()</span><span class="chip">chunk_atoms()</span></div>
+          <div class="chunk-map"><div class="chunk-row"><span>Original</span><div class="atoms"><i class="atom">A · 2</i><i class="atom">B · 8</i><i class="atom">C · 7</i><i class="atom">D · 8</i><i class="atom">E · 7</i></div></div><div class="chunk-row"><span>Child 1</span><div class="atoms"><i class="atom">A</i><i class="atom">B</i><i class="atom overlap">C</i></div></div><div class="chunk-row"><span>Child 2</span><div class="atoms"><i class="atom overlap">C</i><i class="atom overlap">D</i></div></div><div class="chunk-row"><span>Child 3</span><div class="atoms"><i class="atom overlap">D</i><i class="atom">E</i></div></div></div>
+          <div class="io"><div class="box"><div class="box-title">Input · ordered atoms</div><pre>maximum_tokens = 20&#10;overlap_tokens = 8&#10;&#10;A=2, B=8, C=7, D=8, E=7&#10;&#10;A+B+C = 17 ✓&#10;A+B+C+D = 25 ✗</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · child atom lists</div><pre>[&#10;  [A, B, C],&#10;  [C, D],&#10;  [D, E]&#10;]&#10;&#10;C connects child 1 and 2.&#10;D connects child 2 and 3.</pre></div></div>
+          <div class="note">Overlap copies <strong>whole atoms</strong>. If the last atom is larger than the overlap budget, actual overlap can be zero.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">6</div><div><p class="micro">Parent–child output</p><h3>Save the whole section and the small search pieces</h3><p class="">The parent preserves the complete section. Children are precise search targets. Every child carries the same <code>parent_id</code>.</p></div></div>
+          <div class="chips"><span class="chip">create_parent_record()</span><span class="chip">create_chunk_records()</span><span class="chip">build_embedding_text()</span><span class="chip">deduplicate_chunks()</span></div>
+          <div class="io"><div class="box"><div class="box-title">parents.jsonl · complete</div><pre>{&#10; "parent_id": "sample/0001-sql-injection",&#10; "title": "SQL Injection",&#10; "text": "A + B + C + D + E",&#10; "page_start": 1,&#10; "page_end": 2,&#10; "source_block_ids": ["A","B","C","D","E"]&#10;}</pre></div><div class="arrow"><span>+</span></div><div class="box"><div class="box-title">chunks.jsonl · searchable</div><pre>{&#10; "chunk_id": ".../chunk-002",&#10; "parent_id": "...sql-injection",&#10; "chunk_number": 2,&#10; "text": "C + D",&#10; "embedding_text": "Document: Sample / Section: SQL Injection / C + D",&#10; "page_start": 1,&#10; "page_end": 1,&#10; "source_block_ids": ["C","D"]&#10;}</pre></div></div>
+          <div class="note"><code>chunks.jsonl</code> is searched. <code>parents.jsonl</code> is a lookup store used only when more context is needed.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">7</div><div><p class="micro">Index construction</p><h3>Each child gets two search fingerprints</h3><p class="">EmbeddingGemma produces a dense list of meaning numbers. BM25 produces a sparse list of word IDs and weights. Qdrant stores both on the same child point.</p></div></div>
+          <div class="chips"><span class="chip">create_dense_text()</span><span class="chip">create_lexical_text()</span><span class="chip">encode_documents()</span><span class="chip">sparse_model.embed()</span><span class="chip">client.upsert()</span></div>
+          <div class="io"><div class="box"><div class="box-title">Input · one child</div><pre>DENSE INPUT:&#10;Document: Sample Security Book&#10;Section: SQL Injection&#10;Unsafe input can change the query...&#10;SELECT * FROM users...&#10;&#10;BM25 INPUT:&#10;SQL Injection SQL Injection&#10;Unsafe input can change the query...&#10;SELECT * FROM users...</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · one Qdrant point</div><pre>{&#10; "id": "stable-uuid",&#10; "vector": {&#10;   "dense": [0.021,-0.118,0.054,... 768],&#10;   "sparse": {&#10;     "indices": [104,881,3402,9104],&#10;     "values": [1.0,1.42,2.18,0.76]&#10;   }&#10; },&#10; "payload": {&#10;   "chunk_id": ".../chunk-002",&#10;   "parent_id": "...sql-injection",&#10;   "text": "C + D", "page_start": 1&#10; }&#10;}</pre></div></div>
+          <div class="note">The vectors are used for scoring. The payload is the labelled backpack returned with the hit: text, title, pages, block IDs, and parent ID.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">8</div><div><p class="micro">Hybrid query</p><h3>The question runs through both search paths</h3><p class="">The same question becomes one dense query vector and one sparse BM25 query vector. Qdrant searches twice, then RRF combines positions from both lists.</p></div></div>
+          <div class="chips"><span class="chip">encode_query()</span><span class="chip">sparse_model.query_embed()</span><span class="chip">Prefetch(dense)</span><span class="chip">Prefetch(sparse)</span><span class="chip">RrfQuery()</span></div>
+          <div class="io"><div class="box"><div class="box-title">Input · user question</div><pre>How can unsafe SQL input bypass a login?</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · fused child hits</div><pre>1. SQL Injection / child-003&#10;   found by dense + BM25&#10;&#10;2. SQL Injection / child-002&#10;   found strongly by BM25&#10;&#10;3. Authentication Testing / child-006&#10;   found by dense meaning&#10;&#10;Then keep at most 1–2 initial hits per parent.</pre></div></div>
+          <div class="note">RRF uses <strong>rank positions</strong>, not raw score addition. Dense cosine and BM25 scores live on different scales.</div>
+        </article>
+        <article class="panel step">
+          <div class="step-top"><div class="num">9</div><div><p class="micro">Context expansion</p><h3>Find small, then read enough</h3><p class="">A child gives precision. If its parent is short, load the parent. If the parent is large, load previous/current/next children. Remove repeated overlap and obey a token budget.</p></div></div>
+          <div class="chips"><span class="chip">diversify_results()</span><span class="chip">create_parent_context()</span><span class="chip">create_neighbour_context()</span><span class="chip">merge_chunk_texts()</span><span class="chip">apply_context_budget()</span></div>
+          <div class="io"><div class="box"><div class="box-title">Input · best hit</div><pre>{&#10; "chunk_id": ".../chunk-003",&#10; "parent_id": "...sql-injection",&#10; "score": 0.91,&#10; "text": "An attacker may make the condition true..."&#10;}&#10;&#10;parent_token_limit = 1400&#10;context_token_budget = 6000</pre></div><div class="arrow"><span>→</span></div><div class="box"><div class="box-title">Output · agent-ready evidence</div><pre>Document: Sample Security Book&#10;Section: SQL Injection&#10;Pages: 1–2&#10;&#10;A login form places input inside a database query. Unsafe input can alter the condition. An attacker may make it true and bypass authentication. Parameterized queries keep data separate from SQL instructions.</pre></div></div>
+          <div class="note">The retrieval layer—not the agent—handles overlap, parent lookup, neighbour selection, token limits, and citations.</div>
+        </article>
+      </div>
+    </section>
+    <section id="models" data-nav-section>
+      <div class="head"><div><p class="kicker">04 · What are these models?</p><h2>Dense understands meaning. Sparse remembers words.</h2></div><p>A model is a reusable machine that transforms input into output. EmbeddingGemma is learned from data. BM25 is a mathematical ranking algorithm, not an LLM.</p></div>
+      <div class="model-grid">
+        <article class="panel model">
+          <h3>Dense · EmbeddingGemma</h3>
+          <p>It reads the complete text and creates 768 numbers. Nearly every position has a value, so the vector is dense. Similar meanings point in similar directions.</p>
+          <div class="path"><span>“get around login”</span><b>→</b><span>EmbeddingGemma</span><b>→</b><span>[768 numbers]</span></div>
+          <div class="dense" aria-label="Illustrative dense vector"><i style="--v:.18"></i><i style="--v:.72"></i><i style="--v:.34"></i><i style="--v:.9"></i><i style="--v:.25"></i><i style="--v:.55"></i><i style="--v:.12"></i><i style="--v:.81"></i><i style="--v:.44"></i><i style="--v:.67"></i><i style="--v:.2"></i><i style="--v:.75"></i><i style="--v:.59"></i><i style="--v:.22"></i><i style="--v:.86"></i><i style="--v:.32"></i><i style="--v:.65"></i><i style="--v:.15"></i><i style="--v:.48"></i><i style="--v:.94"></i><i style="--v:.39"></i><i style="--v:.71"></i><i style="--v:.28"></i><i style="--v:.52"></i></div>
+          <p><strong>Best at:</strong> paraphrases, concepts, and differently worded natural-language questions.</p><p><strong>Weakness:</strong> it can miss the special importance of an exact flag, CVE, header, filename, or payload string.</p>
+        </article>
+        <article class="panel model sparse">
+          <h3>Sparse · BM25</h3>
+          <p>It keeps only terms present in the text. Missing terms are invisible zeros, so most possible positions are empty. Rare, repeated, focused terms get more importance.</p>
+          <div class="path"><span>“sqlmap --risk=3”</span><b>→</b><span>BM25</span><b>→</b><span>{term IDs: weights}</span></div>
+          <div class="bars"><div class="bar"><span>sqlmap</span><span class="track"><i style="--w:94%"></i></span><span>2.8</span></div><div class="bar"><span>risk</span><span class="track"><i style="--w:78%"></i></span><span>2.2</span></div><div class="bar"><span>injection</span><span class="track"><i style="--w:62%"></i></span><span>1.6</span></div><div class="bar"><span>security</span><span class="track"><i style="--w:18%"></i></span><span>0.3</span></div></div>
+          <p><strong>Best at:</strong> commands, CVEs, headers, tool names, filenames, options, and error messages.</p><p><strong>Weakness:</strong> it does not automatically know “get around login” and “authentication bypass” mean nearly the same thing.</p>
+        </article>
+      </div>
+      <div class="one-line" style="margin-top:21px"><div class="badge">+</div><div><strong>Why hybrid?</strong> Security questions contain human meaning and exact machine strings. Dense catches meaning; BM25 protects exact details; RRF lets both vote.</div></div>
+    </section>
+    <section id="simulator" data-nav-section>
+      <div class="head"><div><p class="kicker">05 · Click and watch</p><h2>Educational hybrid-search simulator</h2></div><p>This is a transparent teaching simulation, not a real model call. It shows why different questions favour dense search, BM25, or both.</p></div>
+      <div class="panel sim">
+        <div class="query-buttons" role="group" aria-label="Choose a sample query"><button class="query-button active" type="button" data-demo="semantic">Semantic wording</button><button class="query-button" type="button" data-demo="exact">Exact technical words</button><button class="query-button" type="button" data-demo="hybrid">Both together</button></div>
+        <div class="query-display"><b>?</b><span id="demo-query">How can someone get around a login form?</span></div>
+        <div class="rank-grid"><div class="rank-col"><h3>Dense ranking <span>meaning</span></h3><div id="dense-ranking"></div></div><div class="rank-col"><h3>BM25 ranking <span>exact words</span></h3><div id="sparse-ranking"></div></div><div class="rank-col"><h3>RRF ranking <span>combined vote</span></h3><div id="fusion-ranking"></div></div></div>
+        <div class="context"><h3>Final context decision</h3><p id="context-reason"></p><div id="context-text"></div></div>
+      </div>
+    </section>
+    <section id="function-dictionary" data-nav-section>
+      <div class="head"><div><p class="kicker">06 · Every function has one small job</p><h2>Function dictionary</h2></div><p>Read left to right: what enters, the -English job, and what comes out. Tiny helpers are included so nothing feels magical.</p></div>
+      <div class="flow-intro"><b>→</b><div><strong>How to read each SVG:</strong> start at the green input box, then scroll horizontally. Every blue card shows <em>INPUT → FUNCTION → SIMPLE ACTION → OUTPUT</em>. The yellow box is the final file or evidence produced by that stage. Helper functions can run inside larger functions, so this is a beginner-friendly processing map rather than a literal Python call stack.</div></div>
+      <div class="toolbar"><button class="small" id="expand-all" type="button">Expand all groups</button><button class="small" id="collapse-all" type="button">Collapse all groups</button></div>
+      <div id="function-groups"></div>
+    </section>
+    <section id="glossary" data-nav-section>
+      <div class="head"><div><p class="kicker">07 · No scary words left</p><h2> glossary</h2></div><p>Use these definitions whenever the pipeline starts to feel abstract.</p></div>
+      <div class="glossary">
+        <article class="term"><h3>Model</h3><p>A reusable machine that changes input into output. EmbeddingGemma changes text into numbers.</p></article>
+        <article class="term"><h3>Token</h3><p>A small text piece counted by a model: a word, word part, or punctuation.</p></article>
+        <article class="term"><h3>Vector</h3><p>An ordered list of numbers. Search compares vectors to estimate similarity.</p></article>
+        <article class="term"><h3>Embedding</h3><p>A vector made from text. It is a search fingerprint, not a written summary.</p></article>
+        <article class="term"><h3>Dense vector</h3><p>Nearly every position has a number. It represents overall meaning.</p></article>
+        <article class="term"><h3>Sparse vector</h3><p>Only terms present in the text have non-zero values. It represents vocabulary.</p></article>
+        <article class="term"><h3>BM25</h3><p>Keyword ranking using term frequency, rarity, and document length.</p></article>
+        <article class="term"><h3>Cosine similarity</h3><p>Compares dense-vector direction. Similar direction usually means similar meaning.</p></article>
+        <article class="term"><h3>RRF</h3><p>Reciprocal Rank Fusion. Results near the top of either list receive votes.</p></article>
+        <article class="term"><h3>Qdrant point</h3><p>One database record containing named vectors and a JSON payload.</p></article>
+        <article class="term"><h3>Payload</h3><p>Labels returned with a hit: text, title, pages, IDs, and flags.</p></article>
+        <article class="term"><h3>Top-K</h3><p>Return only the best K matches, such as the best eight chunks.</p></article>
+        <article class="term"><h3>Parent</h3><p>The complete detected section. It gives broad surrounding context.</p></article>
+        <article class="term"><h3>Child chunk</h3><p>A small part of a parent used as a precise search target.</p></article>
+        <article class="term"><h3>Metadata</h3><p>Information about the text: page, title, document ID, year, and source.</p></article>
+      </div>
+      <div class="panel" style="padding:21px;margin-top:21px"><h3 style="margin-top:0">Final truths to remember</h3><div class="truths">
+        <div class="truth"><b>✓</b><span>PyMuPDF creates the first <strong>visual</strong> blocks. It does not understand the security topic.</span></div>
+        <div class="truth"><b>✓</b><span>Section detection groups block IDs between headings. It does not replace extraction.</span></div>
+        <div class="truth"><b>✓</b><span>Chunking makes sections small enough to search. Parents preserve larger context.</span></div>
+        <div class="truth"><b>✓</b><span>Children are primary search points. Parents normally stay in a lookup store.</span></div>
+        <div class="truth"><b>✓</b><span>Dense and sparse are two representations of the same child, not two new documents.</span></div>
+        <div class="truth"><b>✓</b><span>The agent does not fetch every chunk. Retrieval returns a small ranked set.</span></div>
+        <div class="truth warn"><b>!</b><span>Your index can only contain existing <code>chunks.jsonl</code> records. Review the 69 excluded sections before final production indexing.</span></div>
+      </div></div>
+    </section>
+  </main>
+  <footer><div class="shell foot"><div><strong>Hybrid RAG Retrieval Map</strong><br>Built around your PDF → section → parent/child → Qdrant design.</div><div>Simulator values are illustrative. Measure real ranking quality with your own test questions.</div></div></footer>
+  <script>
+    const demos={
+      semantic:{query:"How can someone get around a login form?",dense:[["SQL Injection · child 3","0.92"],["SQL Injection · child 2","0.84"],["XSS · child 1","0.31"]],sparse:[["SQL Injection · child 1","5.7"],["SQL Injection · child 3","4.1"],["XSS · child 1","0.0"]],fusion:[["SQL Injection · child 3","#1"],["SQL Injection · child 1","#2"],["SQL Injection · child 2","#3"]],reason:"Dense understands that ‘get around login’ is close to ‘authentication bypass.’ BM25 still helps because ‘login’ appears in the section.",text:"Load the SQL Injection parent because it is short: the login form inserts input into a query; altered conditions may bypass authentication; parameterized queries keep data separate from SQL instructions. Pages 1–2."},
+      exact:{query:"SELECT FROM users parameterized query",dense:[["SQL Injection · child 2","0.86"],["SQL Injection · child 3","0.79"],["XSS · child 1","0.22"]],sparse:[["SQL Injection · child 2","9.8"],["SQL Injection · child 3","6.4"],["SQL Injection · child 1","1.1"]],fusion:[["SQL Injection · child 2","#1"],["SQL Injection · child 3","#2"],["SQL Injection · child 1","#3"]],reason:"BM25 strongly rewards the exact SQL words. Dense agrees that the surrounding explanation concerns database-query safety.",text:"Load child 2 plus child 3, remove repeated overlap, and return the SQL example together with the parameterized-query explanation. Pages 1–2."},
+      hybrid:{query:"Why does unsafe input change SQL authentication, and how is it prevented?",dense:[["SQL Injection · child 3","0.94"],["SQL Injection · child 2","0.91"],["XSS · child 1","0.35"]],sparse:[["SQL Injection · child 3","8.2"],["SQL Injection · child 2","7.9"],["SQL Injection · child 1","2.7"]],fusion:[["SQL Injection · child 3","#1"],["SQL Injection · child 2","#2"],["SQL Injection · child 1","#3"]],reason:"This question contains both meaning and exact domain words. Both retrievers vote for the same parent, so confidence is stronger.",text:"Two winning children share one parent. Load that parent once—not twice—and send the complete SQL Injection explanation with its document, section, and page citation."}
+    };
+
+    const flowEndpoints=[
+      {input:"PDF files + documents.yaml settings",output:"document.json + pages.jsonl + tables.jsonl + extraction report"},
+      {input:"pages.jsonl + document metadata + TOC/manual hints",output:"sections.jsonl + section-detection report"},
+      {input:"sections.jsonl + pages.jsonl + chunk settings",output:"parents.jsonl + chunks.jsonl + chunking report"},
+      {input:"chunks.jsonl + EmbeddingGemma + BM25 + Qdrant settings",output:"Qdrant collection containing dense vectors, sparse vectors, and payloads"},
+      {input:"User question + hybrid index + parent/child lookups",output:"Ranked, expanded, citation-ready evidence for the agent"}
+    ];
+
+    const flowExamples=[
+      {
+        input:[
+          "documents.yaml chooses this PDF:",
+          "{",
+          '  "document_id": "modern-web-penetration-testing-2016",',
+          '  "pdf_path": "data/raw/books/web-security/modern-web-penetration-testing-2016.pdf"',
+          "}",
+          "",
+          "Visible text on page 1:",
+          "SQL Injection",
+          "A login form places user input inside a database query."
+        ].join("\n"),
+        output:[
+          "pages.jsonl — one page record:",
+          "{",
+          '  "page_number": 1,',
+          '  "text_blocks": [{',
+          '    "block_id": "p0001-b0001",',
+          '    "text": "SQL Injection",',
+          '    "bbox": [72, 102, 230, 124],',
+          '    "max_font_size": 18,',
+          '    "is_code": false,',
+          '    "is_repeated_margin": false',
+          "  }]",
+          "}"
+        ].join("\n"),
+        result:"The visible heading is now a stable JSON block with an ID, position, font evidence, and page number."
+      },
+      {
+        input:[
+          "pages.jsonl supplies ordered blocks:",
+          "p0001-b0001 → SQL Injection",
+          "p0001-b0002 → A login form places...",
+          "p0001-b0003 → Unsafe input can change...",
+          "p0001-b0004 → SELECT * FROM users...",
+          "p0002-b0001 → An attacker may make...",
+          "p0002-b0002 → Cross-Site Scripting",
+          "",
+          "TOC hint: [1, \"SQL Injection\", 1]"
+        ].join("\n"),
+        output:[
+          "sections.jsonl — one detected section:",
+          "{",
+          '  "section_id": "modern-web.../sql-injection",',
+          '  "title": "SQL Injection",',
+          '  "heading_path": ["SQL Injection"],',
+          '  "start_page": 1,',
+          '  "end_page": 2,',
+          '  "source_block_ids": [',
+          '    "p0001-b0001", "p0001-b0002",',
+          '    "p0001-b0003", "p0001-b0004",',
+          '    "p0002-b0001"',
+          "  ],",
+          '  "is_indexable": true',
+          "}"
+        ].join("\n"),
+        result:"The section record does not duplicate the whole PDF. It says exactly which original block IDs belong to SQL Injection."
+      },
+      {
+        input:[
+          "Section + source block lookup:",
+          "{",
+          '  "section_id": ".../sql-injection",',
+          '  "source_block_ids": ["A", "B", "C", "D", "E"],',
+          '  "profile": {',
+          '    "maximum_tokens": 20,',
+          '    "overlap_tokens": 8',
+          "  }",
+          "}",
+          "",
+          "Atom sizes: A=2, B=8, C=7, D=8, E=7"
+        ].join("\n"),
+        output:[
+          "parents.jsonl:",
+          '{ "parent_id": ".../sql-injection",',
+          '  "pages": [1, 2],',
+          '  "child_ids": ["chunk-001", "chunk-002", "chunk-003"] }',
+          "",
+          "chunks.jsonl:",
+          "chunk-001 → atoms [A, B, C]",
+          "chunk-002 → atoms [C, D]",
+          "chunk-003 → atoms [D, E]",
+          "",
+          "C and D are intentional overlap.",
+          "Every child stores parent_id = .../sql-injection"
+        ].join("\n"),
+        result:"The complete section remains available as one parent, while three smaller children become accurate search targets."
+      },
+      {
+        input:[
+          "One chunks.jsonl record:",
+          "{",
+          '  "chunk_id": "chunk-003",',
+          '  "parent_id": ".../sql-injection",',
+          '  "heading_path": ["SQL Injection"],',
+          '  "text": "An attacker may make the condition true and bypass authentication. Parameterized queries keep data separate from SQL instructions.",',
+          '  "pages": [2]',
+          "}"
+        ].join("\n"),
+        output:[
+          "One Qdrant point:",
+          "{",
+          '  "id": "stable-id-for-chunk-003",',
+          '  "vector": {',
+          '    "dense": [0.12, -0.07, 0.31, "... 768 values"],',
+          '    "sparse": {',
+          '      "indices": [41, 802, 1904],',
+          '      "values": [1.7, 2.4, 3.1]',
+          "    }",
+          "  },",
+          '  "payload": {',
+          '    "chunk_id": "chunk-003",',
+          '    "parent_id": ".../sql-injection",',
+          '    "pages": [2]',
+          "  }",
+          "}"
+        ].join("\n"),
+        result:"Qdrant stores the same child in two searchable forms: dense numbers for meaning and sparse weights for exact terms."
+      },
+      {
+        input:[
+          "User request:",
+          "{",
+          '  "question": "How can unsafe input bypass a login, and how is it prevented?",',
+          '  "dense_candidates": 20,',
+          '  "sparse_candidates": 20,',
+          '  "final_top_k": 5,',
+          '  "context_token_budget": 6000',
+          "}",
+          "",
+          "Dense and BM25 search the same child collection."
+        ].join("\n"),
+        output:[
+          "Agent-ready retrieval result:",
+          "{",
+          '  "rank": 1,',
+          '  "matched_chunk": "chunk-003",',
+          '  "parent_id": ".../sql-injection",',
+          '  "section": "SQL Injection",',
+          '  "pages": [1, 2],',
+          '  "context_strategy": "parent",',
+          '  "context": "A login form places input inside a database query. Unsafe input can alter the condition. Parameterized queries keep data separate from SQL instructions."',
+          "}"
+        ].join("\n"),
+        result:"The agent receives readable evidence and citations—not vectors. It can now write an answer grounded in pages 1–2."
+      }
+    ];
+
+    const functionGroups=[
+      {title:"A · PDF extraction functions",subtitle:"PDF → pages.jsonl",rows:[
+        "utc_now()|Nothing|Ask the clock for current UTC time.|Timestamp for reports",
+        "calculate_sha256()|PDF file bytes|Make a stable fingerprint for the source file.|SHA-256 string",
+        "clean_text_value()|Messy extracted text|Normalize unwanted characters and spacing.|Cleaner text",
+        "bbox_to_list()|PyMuPDF rectangle|Turn coordinates into normal JSON numbers.|[x0, y0, x1, y1]",
+        "calculate_area()|Bounding box|Measure how much page space a region occupies.|Area number",
+        "load_manifest()|documents.yaml|Read PDF names, paths, and settings.|Document configurations",
+        "write_json()|One Python object|Save one readable JSON object safely.|.json file",
+        "write_jsonl()|Many records|Save one JSON record per line.|.jsonl file",
+        "look_like_command()|One text line|Check shell prompts, options, URLs, and command patterns.|True or false",
+        "extract_span()|One PyMuPDF span|Keep text, font, size, styles, colour, and position.|Clean span dictionary",
+        "extract_line()|Spans on one line|Join text and calculate monospaced and command clues.|Clean line dictionary",
+        "classify_code_block()|Clean lines|Use monospaced and command ratios to guess code.|Code flag + confidence",
+        "extract_text_blocks()|PyMuPDF page|Call get_text dict, keep type-0 text blocks, and clean them.|Text block list",
+        "extract_image_metadata()|Page images|Record image position and size without OCR or bytes.|Image metadata",
+        "extract_tables()|PyMuPDF page|Ask PyMuPDF for detected tables and cells.|Table records",
+        "extract_toc()|PDF outline|Read the built-in table of contents when present.|TOC entries",
+        "normalize_margin_signature()|Header/footer text|Remove changing page numbers and normalize spacing.|Comparable signature",
+        "get_margin_signature()|Block + page height|Consider only short text near the top or bottom.|Margin signature or nothing",
+        "find_repeated_margin_signatures()|All pages|Find margin text repeated across enough pages.|Repeated signature set",
+        "remove_repeated_margins()|Page records|Mark repeated headers/footers and rebuild clean page text.|Updated pages",
+        "extract_page()|One PDF page|Run block, image, and table extraction for one page.|One page record",
+        "build_extraction_report()|All extracted results|Count pages, empties, images, tables, code, TOC, and warnings.|Report object",
+        "extract_document()|One PDF config|Open the PDF, extract all pages, and write every output.|Extraction files",
+        "parse_arguments()|Command-line text|Read manifest and document options.|Argument object",
+        "main()|Arguments + manifest|Process every selected PDF and report failures.|Completed extraction"
+      ]},
+      {title:"B · Section-detection functions",subtitle:"pages.jsonl → sections.jsonl",rows:[
+        "load_json()/load_jsonl()|Extraction files|Read document, page, and TOC records.|Python objects",
+        "write_json()/write_jsonl()|Sections + report|Save section results safely.|Processed files",
+        "load_manifest()|documents.yaml|Read per-book section settings and manual hints.|Document configurations",
+        "collapse_whitespace()|Heading text|Turn repeated spaces and newlines into one space.|Comparable text",
+        "normalize_heading()|Heading text|Lowercase and normalize a heading for matching.|Normalized heading",
+        "heading_skeleton()|Heading text|Remove small variations so similar headings match.|Heading skeleton",
+        "slugify()|Section title|Create a safe ID piece such as sql-injection.|Slug string",
+        "create_title_variants()|TOC title|Create versions that may appear on the page.|Title alternatives",
+        "calculate_heading_similarity()|Expected + actual heading|Measure how closely the strings match.|Similarity score",
+        "collect_block_font_statistics()|Block spans|Measure largest font, bold ratio, and mono ratio.|Font statistics",
+        "flatten_pages()|Page records|Skip margins/empty blocks and create ordered units with IDs.|Units + page lookup",
+        "detect_body_font_size()|All units|Find the most common normal-text font size.|Body font size",
+        "is_numeric_chapter_marker()|Short text|Detect a lonely number or Roman numeral.|True or false",
+        "is_heading_candidate()|Unit + body font|Accept short chapter/large/bold text; reject prose and code.|True or false",
+        "infer_heading_level()|Heading unit|Guess chapter, section, or subsection level.|Level 1, 2, or 3",
+        "create_unit_page_map()|Ordered units|Remember which unit indexes live on each page.|Page-to-units map",
+        "find_toc_anchor()|TOC entry + page units|Find the page block best matching the TOC title.|Heading anchor",
+        "build_toc_events()|TOC + units|Turn TOC headings into ordered start events.|Heading events",
+        "find_manual_chapter_anchor()|Manual hint|Find a configured chapter start when TOC is absent.|Manual anchor",
+        "build_font_events()|Units + fonts|Create heading events from visual font evidence.|Font events",
+        "build_heading_path()|Event + parents|Build Chapter > Section > Subsection breadcrumbs.|Heading path",
+        "is_indexable_title()|Section title|Reject obvious navigation and noise titles.|True or false",
+        "collect_table_ids()|Section page range|Attach tables found on those pages.|Table IDs",
+        "build_sections_from_events()|Events + units|Slice from one heading to the next and keep all block IDs.|Section records",
+        "build_section_report()|Section records|Count indexable, short, fallback, low-confidence, and code sections.|Report object",
+        "process_document()|One document config|Load extraction, detect headings, build sections, write outputs.|Sections + report",
+        "parse_arguments()/main()|CLI + manifest|Select books and run section processing.|Completed section run"
+      ]},
+      {title:"C · Parent and child chunk functions",subtitle:"sections + pages → parents + chunks",rows:[
+        "approximate_token_count()|Text|Count words and punctuation with a simple regex estimate.|Approximate token number",
+        "normalize_for_hash()|Chunk text|Lowercase text and collapse spacing before fingerprinting.|Normalized text",
+        "calculate_text_hash()|Normalized text|Make a stable SHA-256 fingerprint for duplicate detection.|Content hash",
+        "load_json()/load_jsonl()|Section and page files|Read the earlier pipeline results.|Python objects",
+        "write_json()/write_jsonl()|Parents, chunks, report|Save each new result safely.|Processed files",
+        "load_manifest()|documents.yaml|Read chunk sizes and document settings.|Document configuration",
+        "build_source_block_lookup()|Extracted page records|Create a block-ID address book so sections can find original blocks.|Block lookup dictionary",
+        "get_chunk_profile()|Section type or document setting|Choose the target size, maximum size, and overlap size.|Chunk-size profile",
+        "split_text_by_token_budget()|One very large text atom|Break oversized text at sensible line or sentence boundaries.|Smaller atoms",
+        "build_section_atoms()|Section block IDs + block lookup|Fetch original blocks in order and turn each usable block into one atom.|Ordered TextAtom list",
+        "select_overlap_atoms()|Finished chunk atoms + overlap budget|Walk backward and copy only enough ending atoms into the next chunk.|Overlap atoms",
+        "chunk_atoms()|Section atoms + size profile|Pack atoms until the target is reached, then start a new chunk with overlap.|Atom groups",
+        "combine_atom_text()|Atoms in one group|Join their text in document order without losing code boundaries.|Readable chunk text",
+        "build_embedding_text()|Chunk + metadata|Prefix breadcrumbs such as book and section so the embedding has context.|Embedding-ready text",
+        "create_parent_record()|One indexable section|Store the complete section, metadata, source blocks, pages, and child IDs.|Parent record",
+        "create_chunk_records()|One parent + atom groups|Create small searchable children that all point back to the parent.|Child chunk records",
+        "deduplicate_chunks()|All child chunks|Use hashes to remove exact duplicate searchable text.|Unique chunks",
+        "build_chunk_report()|Parents + chunks|Count outputs, sizes, overlaps, skipped sections, and warnings.|Chunking report",
+        "process_document()|One processed book|Build lookup, atoms, parents, children, and output files.|parents.jsonl + chunks.jsonl",
+        "parse_arguments()/main()|CLI + manifest|Select books and run the chunking pipeline.|Completed chunk run"
+      ]},
+      {title:"D · Hybrid indexing functions",subtitle:"chunks.jsonl → dense + sparse vectors in Qdrant",rows:[
+        "load_corpus()|chunks.jsonl|Read every searchable child chunk.|Chunk records",
+        "validate_corpus()|Chunk records|Check IDs, text, parent links, and required metadata before indexing.|Validated corpus",
+        "create_dense_text()|One chunk|Combine section path and natural-language content for meaning search.|Dense input text",
+        "create_lexical_text()|One chunk|Keep exact words, commands, CVEs, parameters, and identifiers for BM25.|Sparse input text",
+        "calculate_average_document_length()|All lexical texts|Measure average token length needed by BM25 weighting.|Average length",
+        "load_dense_model()|Embedding model name|Load the model that turns meaning into a fixed-size number vector.|Dense encoder",
+        "load_sparse_model()|BM25 model/configuration|Load the tokenizer and BM25 weighting logic for exact terms.|Sparse encoder",
+        "encode_documents()|Dense and lexical texts|Create both vector types in batches.|Dense + sparse vectors",
+        "create_qdrant_client()|URL, API key, or local path|Connect to the vector database.|Qdrant client",
+        "stable_point_id()|Chunk ID|Turn the text ID into a repeatable database point ID.|Stable point ID",
+        "convert_sparse_vector()|Sparse model result|Convert non-zero token weights into Qdrant indexes and values.|Qdrant sparse vector",
+        "create_payload()|Chunk record|Attach parent ID, book, heading, pages, text, hash, and security metadata.|Searchable payload",
+        "build_hybrid_index()|Validated corpus + models|Create the collection and upload dense vector, sparse vector, and payload together.|Ready hybrid index"
+      ]},
+      {title:"E · Hybrid retrieval and context functions",subtitle:"question → ranked evidence for the agent",rows:[
+        "encode_query()|User question|Turn the question into one dense meaning vector.|Dense query vector",
+        "sparse_model.query_embed()|User question|Give exact query terms BM25-style sparse weights.|Sparse query vector",
+        "create_document_filter()|Optional book, topic, page, or source rules|Tell Qdrant which documents are allowed to compete.|Qdrant filter",
+        "create_rrf_query()|Dense + sparse searches|Ask Qdrant to run both searches and fuse their ranked lists.|Hybrid query",
+        "client.query_points()|Hybrid query + filter|Search the collection and return scored child chunks.|Candidate hits",
+        "diversify_results()|Ranked hits|Stop one parent or one book from filling every result slot.|Balanced hits",
+        "build_parent_lookup()|parents.jsonl|Create an address book from parent ID to full section.|Parent lookup",
+        "build_neighbour_lookup()|Ordered child chunks|Remember the previous and next child for local context.|Neighbour lookup",
+        "split_paragraphs()/normalize_paragraph()|Retrieved text|Create comparable paragraphs for clean merging.|Normalized paragraphs",
+        "merge_chunk_texts()|Overlapping child texts|Join them and remove repeated overlap paragraphs.|Merged evidence",
+        "create_child_context()|One winning child|Return only that focused child with citation metadata.|Child context",
+        "create_parent_context()|Winning child + parent lookup|Load the complete parent section when it fits the budget.|Parent context",
+        "create_neighbour_context()|Winning child + neighbours|Load nearby children when the parent is too large.|Neighbour-expanded context",
+        "truncate_to_token_budget()|Long context + limit|Cut at a safe boundary so it fits the model prompt.|Budget-safe context",
+        "apply_context_budget()|All proposed contexts|Spend the total budget on the best evidence first.|Final context list",
+        "build_expanded_contexts()|Diversified hits + lookups|Choose parent, neighbours, or child-only context for each result.|Expanded evidence",
+        "hybrid_search()|Question + retrieval settings|Run dense, sparse, fusion, diversity, and context expansion in order.|Final retrieval result",
+        "print_search_result()|Final result|Show ranks, sources, pages, scores, and context for debugging.|Readable terminal output",
+        "parse_arguments()/main()|CLI options|Accept a question and execute a complete search.|Answer-ready evidence"
+      ]}
+    ];
+
+    const escapeHtml=value=>String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    function wrapSvgWords(value,maxChars=34,maxLines=3){
+      const words=[];
+      String(value).trim().split(/\s+/).filter(Boolean).forEach(word=>{
+        if(word.length<=maxChars){words.push(word);return}
+        for(let i=0;i<word.length;i+=maxChars)words.push(word.slice(i,i+maxChars));
+      });
+      const lines=[];let current="";let consumed=0;
+      for(const word of words){
+        const candidate=current?current+" "+word:word;
+        if(candidate.length<=maxChars){current=candidate;consumed++;continue}
+        if(current){lines.push(current);current="";if(lines.length===maxLines)break}
+        current=word;consumed++;
+      }
+      if(current&&lines.length<maxLines)lines.push(current);
+      if(consumed<words.length&&lines.length){const last=lines.length-1;lines[last]=lines[last].slice(0,Math.max(1,maxChars-1)).replace(/[.,;:]$/,"")+"…"}
+      return lines.length?lines:["—"];
+    }
+    function svgMultiline(value,x,y,className,maxChars=34,maxLines=3,lineHeight=16,anchor="start"){
+      const lines=wrapSvgWords(value,maxChars,maxLines);
+      return '<text x="'+x+'" y="'+y+'" class="'+className+'" text-anchor="'+anchor+'">'+lines.map((line,i)=>'<tspan x="'+x+'" dy="'+(i===0?0:lineHeight)+'">'+escapeHtml(line)+'</tspan>').join("")+'</text>';
+    }
+    function buildFunctionFlowSvg(group,index){
+      const endpoint=flowEndpoints[index];
+      const rows=group.rows.map(raw=>raw.split("|"));
+      const startX=24,startW=240,nodeW=300,gap=74,firstX=startX+startW+gap,finalW=280;
+      const finalX=firstX+rows.length*(nodeW+gap),width=finalX+finalW+28,height=390,arrowY=195;
+      const markerId="flow-arrow-"+index,titleId="flow-title-"+index;
+      const arrow=(fromX,toX,label="NEXT")=>'<g><path d="M '+fromX+' '+arrowY+' L '+toX+' '+arrowY+'" fill="none" stroke="#62d7ff" stroke-width="2" marker-end="url(#'+markerId+')"/><text x="'+((fromX+toX)/2)+'" y="'+(arrowY-10)+'" class="flow-arrow-label" text-anchor="middle">'+label+'</text></g>';
+      let parts='<svg class="function-flow" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'" role="img" aria-labelledby="'+titleId+'" xmlns="http://www.w3.org/2000/svg"><title id="'+titleId+'">'+escapeHtml(group.title)+' horizontal input, function, and output flow</title><defs><marker id="'+markerId+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#62d7ff"/></marker></defs>';
+      parts+=arrow(startX+startW,firstX,"START");
+      rows.forEach((row,i)=>{const x=firstX+i*(nodeW+gap);if(i<rows.length-1)parts+=arrow(x+nodeW,x+nodeW+gap);});
+      parts+=arrow(finalX-gap,finalX,"FINISH");
+      parts+='<g><title>Stage input: '+escapeHtml(endpoint.input)+'</title><rect x="'+startX+'" y="85" width="'+startW+'" height="220" rx="20" fill="#0d2e27" stroke="#7ee2a8" stroke-width="2"/><rect x="'+(startX+18)+'" y="105" width="64" height="24" rx="12" fill="#7ee2a8"/><text x="'+(startX+50)+'" y="121" class="flow-step" text-anchor="middle">INPUT</text><text x="'+(startX+18)+'" y="153" class="flow-end-title" fill="#7ee2a8">STAGE STARTS WITH</text>'+svgMultiline(endpoint.input,startX+18,178,"flow-end-text",27,7,18)+"</g>";
+      rows.forEach((row,i)=>{
+        const x=firstX+i*(nodeW+gap),step=String(i+1).padStart(2,"0");
+        parts+='<g><title>Step '+step+': '+escapeHtml(row[0])+'. Input: '+escapeHtml(row[1])+'. Action: '+escapeHtml(row[2])+'. Output: '+escapeHtml(row[3])+'.</title><rect x="'+x+'" y="24" width="'+nodeW+'" height="342" rx="18" fill="#10253c" stroke="#315b80" stroke-width="1.5"/><rect x="'+(x+16)+'" y="39" width="38" height="24" rx="8" fill="#62d7ff"/><text x="'+(x+35)+'" y="55" class="flow-step" text-anchor="middle">'+step+'</text>'+svgMultiline(row[0],x+66,53,"flow-node-title",30,2,17)+'<line x1="'+(x+16)+'" y1="104" x2="'+(x+nodeW-16)+'" y2="104" stroke="#29435f"/><text x="'+(x+16)+'" y="124" class="flow-node-label" fill="#7ee2a8">INPUT</text>'+svgMultiline(row[1],x+16,144,"flow-node-text",40,3,16)+'<line x1="'+(x+16)+'" y1="185" x2="'+(x+nodeW-16)+'" y2="185" stroke="#29435f"/><text x="'+(x+16)+'" y="205" class="flow-node-label" fill="#62d7ff">FUNCTION DOES</text>'+svgMultiline(row[2],x+16,225,"flow-node-text",40,3,16)+'<line x1="'+(x+16)+'" y1="266" x2="'+(x+nodeW-16)+'" y2="266" stroke="#29435f"/><text x="'+(x+16)+'" y="286" class="flow-node-label" fill="#ffd379">OUTPUT</text>'+svgMultiline(row[3],x+16,306,"flow-node-text",40,3,16)+"</g>";
+      });
+      parts+='<g><title>Final stage output: '+escapeHtml(endpoint.output)+'</title><rect x="'+finalX+'" y="85" width="'+finalW+'" height="220" rx="20" fill="#302710" stroke="#ffd379" stroke-width="2"/><rect x="'+(finalX+18)+'" y="105" width="72" height="24" rx="12" fill="#ffd379"/><text x="'+(finalX+54)+'" y="121" class="flow-step" text-anchor="middle">OUTPUT</text><text x="'+(finalX+18)+'" y="153" class="flow-end-title" fill="#ffd379">FINAL RESULT</text>'+svgMultiline(endpoint.output,finalX+18,178,"flow-end-text",32,7,18)+"</g></svg>";
+      return parts;
+    }
+    function renderStageExample(index){
+      const example=flowExamples[index];
+      return '<div class="stage-example"><div class="box example-box"><div class="box-title">Concrete example input</div><pre>'+escapeHtml(example.input)+'</pre></div><div class="example-arrow" aria-hidden="true"><span>→</span></div><div class="box example-box"><div class="box-title">Concrete example output</div><pre>'+escapeHtml(example.output)+'</pre></div></div><div class="example-result"><strong>What changed?</strong> '+escapeHtml(example.result)+'</div>';
+    }
+    function rank(targetId,rows){document.getElementById(targetId).innerHTML=rows.map((row,i)=>'<div class="rank-item"><span class="rank-num">'+(i+1)+'</span><span>'+escapeHtml(row[0])+'</span><span class="score">'+escapeHtml(row[1])+'</span></div>').join("")}
+    function selectDemo(name){const d=demos[name];document.getElementById("demo-query").textContent=d.query;document.getElementById("context-reason").textContent=d.reason;document.getElementById("context-text").textContent=d.text;rank("dense-ranking",d.dense);rank("sparse-ranking",d.sparse);rank("fusion-ranking",d.fusion);document.querySelectorAll(".query-button").forEach(b=>b.classList.toggle("active",b.dataset.demo===name))}
+    document.querySelectorAll(".query-button").forEach(b=>b.addEventListener("click",()=>selectDemo(b.dataset.demo)));
+
+    function renderFunctions(){
+      const root=document.getElementById("function-groups");
+      root.innerHTML=functionGroups.map((group,index)=>
+        '<details class="fn-group" '+(index===0?'open':'')+'>'+ 
+          '<summary>'+escapeHtml(group.title)+' <span>'+escapeHtml(group.subtitle)+' · '+group.rows.length+' functions</span></summary>'+ 
+          '<div class="svg-flow-panel">'+
+            '<div class="svg-flow-head"><strong>Horizontal SVG processing flow</strong><span>Scroll left to right →</span></div>'+ 
+            '<div class="svg-scroller" tabindex="0" aria-label="Scrollable '+escapeHtml(group.title)+' function flow">'+buildFunctionFlowSvg(group,index)+'</div>'+ 
+            renderStageExample(index)+
+          '</div>'+ 
+          '<div class="table-wrap"><table class="fn-table"><thead><tr><th>Function</th><th>Input</th><th>-English job</th><th>Output</th></tr></thead><tbody>'+ 
+            group.rows.map(raw=>{const r=raw.split("|");return '<tr><td>'+escapeHtml(r[0])+'</td><td>'+escapeHtml(r[1])+'</td><td>'+escapeHtml(r[2])+'</td><td>'+escapeHtml(r[3])+'</td></tr>'}).join("")+ 
+          '</tbody></table></div>'+ 
+        '</details>'
+      ).join("");
+    }
+    function addCopyButtons(){document.querySelectorAll(".box").forEach(box=>{const title=box.querySelector(".box-title"),pre=box.querySelector("pre");if(!title||!pre)return;const b=document.createElement("button");b.type="button";b.className="copy";b.textContent="Copy";b.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(pre.textContent);b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1000)}catch{b.textContent="Select text"}});title.appendChild(b)})}
+    renderFunctions();selectDemo("semantic");addCopyButtons();
+    document.getElementById("expand-all").addEventListener("click",()=>document.querySelectorAll(".fn-group").forEach(x=>x.open=true));
+    document.getElementById("collapse-all").addEventListener("click",()=>document.querySelectorAll(".fn-group").forEach(x=>x.open=false));
+    const links=[...document.querySelectorAll(".nav a")];
+    const observer=new IntersectionObserver(entries=>{const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!visible)return;links.forEach(link=>link.classList.toggle("active",link.getAttribute("href")==="#"+visible.target.id))},{rootMargin:"-15% 0px -65% 0px",threshold:[.05,.2,.5]});
+    document.querySelectorAll("[data-nav-section]").forEach(section=>observer.observe(section));
+  </script>
+</body>
+</html>
